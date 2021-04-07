@@ -1,0 +1,123 @@
+<html>
+<body>
+<h3> What is this HIT about?</h3>
+										<p>We are trying to build a question-answering system which is able to retrieve
+											the
+											answer by reasoning over multiple facts. This is the way we human typically
+											use to
+											find an answer. For example, when this question is asked:</p>
+										<p><b>Has there always been a rivalry between Daffy Duck and Porky Pig?</b></p>
+										<p>We might find the answer by</p>
+										<ol>
+											<li>Searching Wikipedia for <a
+													href="https://en.wikipedia.org/wiki/Daffy_Duck"
+													target="_blank">Daffy Duck</a>.</li>
+											<li>"Daffy first appeared in <a
+													href="https://en.wikipedia.org/wiki/Porky%27s_Duck_Hunt"
+													target="_blank">Porky's Duck Hunt</a>, released on April 17, 1937."
+											</li>
+											<li>"Porky shoots the whiskey-filled barrel but Daffy escapes" or "Daffy
+												bites
+												Porky on the nose"</li>
+											<li>Conclude, <b>Yes, Daffy and Porky have been rivals since their first
+													appearance on screen.</b></li>
+										</ol>
+										<p>However, for now, if you search a question in a search engine like Google or
+											Bing,
+											you are mostly like to get the answer from only one snippet of text. They
+											don’t have
+											the ability to answer the above question because, as you can see, the answer
+											is
+											concluded by reasoning the facts from multiple resources. We believe that
+											this
+											reasoning ability can greatly improve the question-answering ability of
+											search
+											engines, so we create this Hitapp and asking help from you. Appreciate! </p>
+
+										<h3>The Format:</h3>
+										<p>Each hit starts with a group of a minimum of 4 text snippets provided by us.
+											These
+											are somehow related to each other by some common topics or common entities.
+											You may
+											use these 4 to formulate your questions and are encouraged to add more
+											related text
+											snippets if those are needed to formulate your question.</p>
+
+
+										<h3>A valid annotation should include:</h3>
+										<ol>
+											<li>Select two or more text snippets from the given group and/or the new
+												fact you
+												added.</li>
+											<li>For your convenience you can use the highlighting feature we provide to
+												highlight part of text/keywords in given facts. These should help you to
+												organize, capture and refer back main thoughts while formulating a
+												multi-hop
+												reasoning question. </li>
+											<li>Ask a question about the text snippets you select.</li>
+											<li>Write down the correct answer of your query. The answer should be
+												<b>concluded
+													from ALL</b> the text snippets you selected.
+											</li>
+
+										</ol>
+
+										<h3> Adding facts: </h3>
+										<p>Feel free to add new fact if the given facts are not enough to format new
+											question
+											and answer, but the following instruction should be followed:</p>
+										<ol>
+											<li>The new fact should be somehow related to the given one;</li>
+											<li>The new fact should be complicated enough, and the surrending text
+												should also
+												be included.</li>
+											<li>All new fact should be extract from webpage, please also provide the URL
+												to the
+												webpage in the given field.</li>
+											<li>Plase <b>DO NOT</b> make up any fact by yourself.</li>
+										</ol>
+
+										<h3>Some other requests:</h3>
+										<ol>
+											<li>
+												Shouldn’t be answered by only one fact:
+												<p>Facts:</p>
+												<ol>
+													<li>Hawa was born on December 16th, 1937 in Umarwas.</li>
+													<li>Hawa enrolled in the Indian Army in 1956, and became the
+														champion of the
+														Western Command in 1960 by defeating the defending champion,
+														Mohabbat
+														Singh.</li>
+												</ol>
+												<p><span style="color:red">Bad question:</span>When is Hawa’s
+													birthday.(can be
+													answer by the first fact)</p>
+												<p><span style="color:green">Good question:</span> How old was Hawa when
+													he
+													enrolled in the Indian Army? (need both facts)</p>
+											</li>
+											<li>Has definitive answer: The answer to your query cannot be too subjective
+												or
+												change from time to time.
+												<ul>
+													<li>How good is the view of Chicage from Willis Tower skydeck? (Too
+														subjective)</li>
+													<li>What is the weather in Manhattan? (Time sensitive)</li>
+												</ul>
+											</li>
+											<li>
+												Not about simple facts: The query cannot be answered blindly based on
+												common
+												sense (i.e. without using any of the text snippets).
+												<ul>
+													<li>Can a boat float on the water?</li>
+													<li>How many wheels does a car have?</li>
+												</ul>
+											</li>
+											<li>more...</li>
+										</ol>
+
+										<h3>Examples:</h3>>
+</body>
+</html>
