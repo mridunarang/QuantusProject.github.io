@@ -4,8 +4,8 @@
       please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
 <!-- You must include crowd-form so that your task submits answers to MTurk -->
 <crowd-form answer-format="flatten-objects" style="height:100%">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" rel="stylesheet" />
 	<section class="container">
 		<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'>
 		</script>
@@ -93,7 +93,6 @@
 
 			/******************* End of TextHighlighter *******************/
 		</script>
-
 		<!--/******************* Bootstrap *******************/-->
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
@@ -105,861 +104,910 @@
 			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
 			</script>
 		<!--/********************** AOS **********************/-->
-		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-		<script>
-			AOS.init({
-			})
+	</section>
+	<link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script>
+		AOS.init({
+		})
 
-		</script>
-		<link rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<script type="text/javascript">
-			function lengthCheck(confirmation_div_class) {
-				var confirmation_div = document.getElementsByClassName(confirmation_div_class);
-				for (var i = 0; i < confirmation_div.length; i++) {
-					var confirmations = confirmation_div[i].querySelectorAll("[class^=confirmation-]");
+	</script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	<script type="text/javascript">
+		function lengthCheck(confirmation_div_class) {
+			var confirmation_div = document.getElementsByClassName(confirmation_div_class);
+			for (var i = 0; i < confirmation_div.length; i++) {
+				var confirmations = confirmation_div[i].querySelectorAll("[class^=confirmation-]");
 
-					var lengthcheckmsgs = confirmation_div[i].querySelectorAll("[class*=lengthcheckmsg]");
-					for (var j = 0; j < lengthcheckmsgs.length; j++) {
-						if ($("." + confirmation_div_class + " .lengthcheckmsg" + j).is(":visible")) {
-							lengthcheckmsgs[j].animate({ opacity: "0.3" }, { duration: 200 });
-							lengthcheckmsgs[j].animate({ opacity: "1.0" }, { duration: 300 });
-						}
-					}
-
-					var alengthcheckmsgs = confirmation_div[i].querySelectorAll("[class^=alengthcheckmsg]");
-					for (var j = 0; j < alengthcheckmsgs.length; j++) {
-						if ($("." + confirmation_div_class + " .alengthcheckmsg" + j).is(":visible")) {
-							alengthcheckmsgs[j].animate({ opacity: "0.3" }, { duration: 200 });
-							alengthcheckmsgs[j].animate({ opacity: "1.0" }, { duration: 300 });
-						}
-					}
-
-					var annotations = document.querySelectorAll("[id^=Annotation_div_]");
-					var num_binary_yes = 0;
-					var num_binary_no = 0;
-					for (var j = 0; j < annotations.length; j++) {
-						var sol = annotations[j].querySelector("[class*=annotation-question]").value.length;
-						var anl = annotations[j].querySelector("[class*=annotation-answer]").value.length;
-						// query length must more then 10
-						if (sol < 10) {
-							confirmation_div[i].getElementsByClassName("confirmation-1")[0].checked = false;
-							confirmation_div[i].getElementsByClassName("lengthcheckmsg" + (j + 1))[0].innerHTML = "<font color=red><b>FYI:</b> Your question in the annotation <b>" + (j + 1) + "</b> block is pretty short, is it complicated enough?</font>";
-							confirmation_div[i].getElementsByClassName("lengthcheckmsg" + (j + 1))[0].style.display = "inline-block";
-						}
-						else {
-							confirmation_div[i].getElementsByClassName("lengthcheckmsg" + (j + 1))[0].style.display = "none";
-						}
-
-						// answer length must more than 1
-						if (anl < 1) {
-							confirmation_div[i].getElementsByClassName("confirmation-1")[0].checked = false;
-							confirmation_div[i].getElementsByClassName("alengthcheckmsg" + (j + 1))[0].innerHTML = "<font color=red><b>FYI:</b> Your answer in the annotation <b>" + (j + 1) + "</b> block is pretty short, is it complicated enough?</font>";
-							confirmation_div[i].getElementsByClassName("alengthcheckmsg" + (j + 1))[0].style.display = "inline-block";
-						} else {
-							confirmation_div[i].getElementsByClassName("alengthcheckmsg" + (j + 1))[0].style.display = "none";
-						}
-
-						// the total number of yes/no answer should no more than 1
-						var lower_case_answer = annotations[j].getElementsByClassName("annotation-answer")[0].value.toLowerCase();
-						if (lower_case_answer.substring(0, 3).includes("yes")) {
-							num_binary_yes += 1;
-						}
-						if (lower_case_answer.substring(0, 2).includes("no")) {
-							num_binary_no += 1;
-						}
-
-						var total = num_binary_no + num_binary_yes;
-						if (total > 1) {
-							confirmation_div[i].getElementsByClassName("confirmation-1")[0].checked = false;
-							confirmation_div[i].getElementsByClassName("binary_yes")[0].innerHTML = "<font color=red><b>FYI:</b> It seems that " + num_binary_yes + " of your annotations are binary with the answer 'yes' or 'no'. Try to convert one of them into non-binary.</font>"
-							confirmation_div[i].getElementsByClassName("binary_yes")[0].style.display = "inline-block";
-						}
-						else {
-							confirmation_div[i].getElementsByClassName("binary_yes")[0].style.display = "none";
-						}
-					}
-
-				}
-
-			}
-
-			function ResetLengthCheck(confirmation_div_class, lengthcheckmsg_class) {
-				$("." + confirmation_div_class + " .confirmation-1").prop('checked', false);
-				$("." + confirmation_div_class + " ." + lengthcheckmsg_class).hide();
-			}
-
-			function ResetAnswerCheck(confirmation_div_class) {
-				$("." + confirmation_div_class + " .confirmation-1").prop('checked', false);
-				$("." + confirmation_div_class + " .binary_yes").hide();
-				$("." + confirmation_div_class + " .binary_no").hide();
-			}
-
-			function count_selected_img(Annotation_div_class) {
-				var c = 0;
-
-				var anotation_div = document.getElementById(Annotation_div_class);
-				var selections = anotation_div.querySelectorAll("[class*=image-selection-]");
-				for (var i = 0; i < selections.length; i++) {
-					if (selections[i].checked) {
-						c += 1;
+				var lengthcheckmsgs = confirmation_div[i].querySelectorAll("[class*=lengthcheckmsg]");
+				for (var j = 0; j < lengthcheckmsgs.length; j++) {
+					if ($("." + confirmation_div_class + " .lengthcheckmsg" + j).is(":visible")) {
+						lengthcheckmsgs[j].animate({ opacity: "0.3" }, { duration: 200 });
+						lengthcheckmsgs[j].animate({ opacity: "1.0" }, { duration: 300 });
 					}
 				}
 
-				return c;
-			}
-
-			function provide_fact_check(Annotation_div_class, provide_num = 4) {
-				var result = false;
-				var anotation_div = document.getElementById(Annotation_div_class);
-				var selections = anotation_div.querySelectorAll("[class*=image-selection-]");
-				for (var i = 0; i < provide_num; i++) {
-					if (selections[i].checked) {
-						result = true;
-						break;
+				var alengthcheckmsgs = confirmation_div[i].querySelectorAll("[class^=alengthcheckmsg]");
+				for (var j = 0; j < alengthcheckmsgs.length; j++) {
+					if ($("." + confirmation_div_class + " .alengthcheckmsg" + j).is(":visible")) {
+						alengthcheckmsgs[j].animate({ opacity: "0.3" }, { duration: 200 });
+						alengthcheckmsgs[j].animate({ opacity: "1.0" }, { duration: 300 });
 					}
 				}
-				return result;
-			}
 
-			function find_selected_img(Annotation_div_class) {
-				// displaying the text aside
-				// get the number of facts:
-				var fact_count = document.getElementById("facts_main").getElementsByClassName("col").length;
-				var c = Array(fact_count).fill(-10);
-				id = 0
-				var anotation_div = document.getElementById(Annotation_div_class);
-				var selections = anotation_div.querySelectorAll("[class*=image-selection-]");
-				for (var i = 0; i < selections.length; i++) {
-					if (selections[i].checked) {
-						c[id] = i + 1;
-						id += 1;
+				var annotations = document.querySelectorAll("[id^=Annotation_div_]");
+				var num_binary_yes = 0;
+				var num_binary_no = 0;
+				for (var j = 0; j < annotations.length; j++) {
+					var sol = annotations[j].querySelector("[class*=annotation-question]").value.length;
+					var anl = annotations[j].querySelector("[class*=annotation-answer]").value.length;
+					// query length must more then 10
+					if (sol < 10) {
+						confirmation_div[i].getElementsByClassName("confirmation-1")[0].checked = false;
+						confirmation_div[i].getElementsByClassName("lengthcheckmsg" + (j + 1))[0].innerHTML = "<font color=red><b>FYI:</b> Your question in the annotation <b>" + (j + 1) + "</b> block is pretty short, is it complicated enough?</font>";
+						confirmation_div[i].getElementsByClassName("lengthcheckmsg" + (j + 1))[0].style.display = "inline-block";
+					}
+					else {
+						confirmation_div[i].getElementsByClassName("lengthcheckmsg" + (j + 1))[0].style.display = "none";
+					}
+
+					// answer length must more than 1
+					if (anl < 1) {
+						confirmation_div[i].getElementsByClassName("confirmation-1")[0].checked = false;
+						confirmation_div[i].getElementsByClassName("alengthcheckmsg" + (j + 1))[0].innerHTML = "<font color=red><b>FYI:</b> Your answer in the annotation <b>" + (j + 1) + "</b> block is pretty short, is it complicated enough?</font>";
+						confirmation_div[i].getElementsByClassName("alengthcheckmsg" + (j + 1))[0].style.display = "inline-block";
+					} else {
+						confirmation_div[i].getElementsByClassName("alengthcheckmsg" + (j + 1))[0].style.display = "none";
+					}
+
+					// the total number of yes/no answer should no more than 1
+					var lower_case_answer = annotations[j].getElementsByClassName("annotation-answer")[0].value.toLowerCase();
+					if (lower_case_answer.substring(0, 3).includes("yes")) {
+						num_binary_yes += 1;
+					}
+					if (lower_case_answer.substring(0, 2).includes("no")) {
+						num_binary_no += 1;
+					}
+
+					var total = num_binary_no + num_binary_yes;
+					if (total > 1) {
+						confirmation_div[i].getElementsByClassName("confirmation-1")[0].checked = false;
+						confirmation_div[i].getElementsByClassName("binary_yes")[0].innerHTML = "<font color=red><b>FYI:</b> It seems that " + num_binary_yes + " of your annotations are binary with the answer 'yes' or 'no'. Try to convert one of them into non-binary.</font>"
+						confirmation_div[i].getElementsByClassName("binary_yes")[0].style.display = "inline-block";
+					}
+					else {
+						confirmation_div[i].getElementsByClassName("binary_yes")[0].style.display = "none";
 					}
 				}
-				return c;
-			}
-
-			function mul_img_Check(Annotation_div_class, confirmation_div_class) {
-
-				var ischecked = $("." + confirmation_div_class + " .confirmation-3").is(':checked');
-				if ($("." + confirmation_div_class + " .count3").is(":visible")) {
-					$("." + confirmation_div_class + " .count3").animate({ opacity: "0.3" }, { duration: 200 });
-					$("." + confirmation_div_class + " .count3").animate({ opacity: "1.0" }, { duration: 300 });
-				}
-				var c = count_selected_img(Annotation_div_class);
-				var provide_checked = provide_fact_check(Annotation_div_class, 4);
-				if (c < 2) {
-					$("." + confirmation_div_class + " .confirmation-3").prop('checked', false);
-					$("." + confirmation_div_class + " .count3").html("<font color=red><b>FYI:</b> You need to select <b>at least two</b> text snippets in the <b>Text Selection</b> step before checking this checkbox</font>");
-					$("." + confirmation_div_class + " .count3").show();
-				}
-				else if (!provide_checked) {
-					$("." + confirmation_div_class + " .confirmation-3").prop('checked', false);
-					$("." + confirmation_div_class + " .count3").html("<font color=red><b>FYI:</b> You need to select <b>at least one</b> text snippets provided by us</font>");
-					$("." + confirmation_div_class + " .count3").show();
-				}
-				else {
-					$("." + confirmation_div_class + " .count3").hide();
-				}
-
 
 			}
 
-			function ResetConfirmation(confirmation_div_class, Annotation_div_class, idx) {
-				console.log("reset!");
-				var c = count_selected_img(Annotation_div_class);
-				$("." + Annotation_div_class + " .img_selection_limit").hide();
-				$("." + confirmation_div_class + " .confirmation-2").prop('checked', false);
+		}
+
+		function ResetLengthCheck(confirmation_div_class, lengthcheckmsg_class) {
+			$("." + confirmation_div_class + " .confirmation-1").prop('checked', false);
+			$("." + confirmation_div_class + " ." + lengthcheckmsg_class).hide();
+		}
+
+		function ResetAnswerCheck(confirmation_div_class) {
+			$("." + confirmation_div_class + " .confirmation-1").prop('checked', false);
+			$("." + confirmation_div_class + " .binary_yes").hide();
+			$("." + confirmation_div_class + " .binary_no").hide();
+		}
+
+		function count_selected_img(Annotation_div_class) {
+			var c = 0;
+
+			var anotation_div = document.getElementById(Annotation_div_class);
+			var selections = anotation_div.querySelectorAll("[class*=image-selection-]");
+			for (var i = 0; i < selections.length; i++) {
+				if (selections[i].checked) {
+					c += 1;
+				}
+			}
+
+			return c;
+		}
+
+		function provide_fact_check(Annotation_div_class, provide_num = 4) {
+			var result = false;
+			var anotation_div = document.getElementById(Annotation_div_class);
+			var selections = anotation_div.querySelectorAll("[class*=image-selection-]");
+			for (var i = 0; i < provide_num; i++) {
+				if (selections[i].checked) {
+					result = true;
+					break;
+				}
+			}
+			return result;
+		}
+
+		function find_selected_img(Annotation_div_class) {
+			// displaying the text aside
+			// get the number of facts:
+			var fact_count = document.getElementById("facts_main").getElementsByClassName("col").length;
+			var c = Array(fact_count).fill(-10);
+			id = 0
+			var anotation_div = document.getElementById(Annotation_div_class);
+			var selections = anotation_div.querySelectorAll("[class*=image-selection-]");
+			for (var i = 0; i < selections.length; i++) {
+				if (selections[i].checked) {
+					c[id] = i + 1;
+					id += 1;
+				}
+			}
+			return c;
+		}
+
+		function mul_img_Check(Annotation_div_class, confirmation_div_class) {
+
+			var ischecked = $("." + confirmation_div_class + " .confirmation-3").is(':checked');
+			if ($("." + confirmation_div_class + " .count3").is(":visible")) {
+				$("." + confirmation_div_class + " .count3").animate({ opacity: "0.3" }, { duration: 200 });
+				$("." + confirmation_div_class + " .count3").animate({ opacity: "1.0" }, { duration: 300 });
+			}
+			var c = count_selected_img(Annotation_div_class);
+			var provide_checked = provide_fact_check(Annotation_div_class, 4);
+			if (c < 2) {
 				$("." + confirmation_div_class + " .confirmation-3").prop('checked', false);
-				$("." + confirmation_div_class + " .count2").hide();
+				$("." + confirmation_div_class + " .count3").html("<font color=red><b>FYI:</b> You need to select <b>at least two</b> text snippets in the <b>Text Selection</b> step before checking this checkbox</font>");
+				$("." + confirmation_div_class + " .count3").show();
+			}
+			else if (!provide_checked) {
+				$("." + confirmation_div_class + " .confirmation-3").prop('checked', false);
+				$("." + confirmation_div_class + " .count3").html("<font color=red><b>FYI:</b> You need to select <b>at least one</b> text snippets provided by us</font>");
+				$("." + confirmation_div_class + " .count3").show();
+			}
+			else {
 				$("." + confirmation_div_class + " .count3").hide();
-				reload_img_thumbnail(Annotation_div_class);
-			}
-
-			function reload_img_thumbnail(Annotation_div_class) {
-				var c = find_selected_img(Annotation_div_class);
-				var annotation_class = document.getElementById(Annotation_div_class);
-				var all_HTML = "";
-				for (var i = 0; i < c.length; i++) {
-					if (c[i] > 0) {
-						all_HTML += get_text_snippet(c[i]);
-					}
-				}
-				all_HTML_pre = `
-				<table class="text_placeholder" onclick="highlight_update()">
-					<tr>
-						<th> </td>
-						<th> <b>Text Snippet</b> </th>
-						<th> <b>Link</b> </th>
-					</tr>
-				`;
-				all_HTML = all_HTML == "" ? all_HTML : all_HTML_pre + all_HTML + "</table>"
-				annotation_class.getElementsByClassName("snippets_placeholder")[0].innerHTML = all_HTML;
-				console.log("reload thumbnail");
-				setuphighlight();
-			}
-
-			function copy_span(element) {
-				var spanElement = element;
-				while (spanElement.className != "highlighted") {
-					spanElement = spanElement.nextSibling;
-				}
-				var copy_text = spanElement.innerText;
-				const el = document.createElement('textarea');
-				el.value = copy_text;
-				document.body.appendChild(el);
-				el.select();
-				document.execCommand('copy');
-				document.body.removeChild(el);
-
-				var all_square = document.getElementsByClassName("fa-square");
-				for (var i = 0; i < all_square.length; i++) {
-					all_square[i].classList.add("fa-inverse");
-				}
-				var all_copy = document.getElementsByClassName("fa-copy");
-				for (var i = 0; i < all_copy.length; i++) {
-					all_copy[i].classList.remove("fa-inverse");
-				}
-				element.getElementsByClassName("fa-square")[0].classList.remove("fa-inverse");
-				element.getElementsByClassName("fa-copy")[0].classList.add("fa-inverse");
-
-			}
-
-			function get_text_snippet(index) {
-				var bucket = $("#use_backup").is(':checked') ? "backup" : "main";
-				var fact_card_template = `
-				<tr>
-					<td> {1} </td>
-					<td class="textThumbnail" id="thumbnail_{5}" onclick="sync_back_highlight(this)"> {2} </td>
-					<td> <a class="text-muted url" href="{3}" target="_blank">{4}</a> </td>
-				</tr>
-				`;
-				var fact_card = document.getElementById(bucket + "_fact_card_" + index);
-				var text = fact_card.getElementsByClassName("fact")[0].innerHTML;
-				//texttext = $('<div>').text(text).html()
-				var url = fact_card.getElementsByClassName("url")[0].href;
-				var title = fact_card.getElementsByClassName("url")[0].innerText;
-				return replace(fact_card_template, index, text, url, title, fact_card.id);
-			}
-
-			function sync_back_highlight(element) {
-				var fact_card = document.getElementById(element.id.substring(10));
-				fact_card.getElementsByClassName("fact")[0].innerHTML = element.innerHTML;
-				update_highlight_placeholder();
 			}
 
 
-			function toggle_set(v) {
-				$('#ori_set').toggle();
-				$('#backup_set').toggle();
-				if (v) { $("#use_backup").prop('checked', !$("#use_backup").is(':checked')); }
-				reset_selection_options();
+		}
 
-				// reset the selections display
-				var all_annotations = document.querySelectorAll('[id^="Annotation_div_"]')
-				for (var i = 0; i < all_annotations.length; i++) {
-					reload_img_thumbnail(all_annotations[i].id);
+		function ResetConfirmation(confirmation_div_class, Annotation_div_class, idx) {
+			console.log("reset!");
+			var c = count_selected_img(Annotation_div_class);
+			$("." + Annotation_div_class + " .img_selection_limit").hide();
+			$("." + confirmation_div_class + " .confirmation-2").prop('checked', false);
+			$("." + confirmation_div_class + " .confirmation-3").prop('checked', false);
+			$("." + confirmation_div_class + " .count2").hide();
+			$("." + confirmation_div_class + " .count3").hide();
+			reload_img_thumbnail(Annotation_div_class);
+		}
+
+		function reload_img_thumbnail(Annotation_div_class) {
+			var c = find_selected_img(Annotation_div_class);
+			var annotation_class = document.getElementById(Annotation_div_class);
+			var all_HTML = "";
+			for (var i = 0; i < c.length; i++) {
+				if (c[i] > 0) {
+					all_HTML += get_text_snippet(c[i]);
 				}
 			}
+			all_HTML_pre = `
+						<table class="text_placeholder" onclick="highlight_update()">
+							<tr>
+								<th> </td>
+								<th> <b>Text Snippet</b> </th>
+								<th> <b>Link</b> </th>
+							</tr>
+						`;
+			all_HTML = all_HTML == "" ? all_HTML : all_HTML_pre + all_HTML + "</table>"
+			annotation_class.getElementsByClassName("snippets_placeholder")[0].innerHTML = all_HTML;
+			console.log("reload thumbnail");
+			setuphighlight();
+		}
 
-			function reset_selection_options() {
-				var selection_template = `
-				<label class="text-selection">
-					<input class="image-selection-{1}" name="image-selection{1}" onclick="ResetConfirmation('confirmation_div_{2}', 'Annotation_div_{2}', '{1}');" type="checkbox" value="{2}" /> 
-					{1} 
-				</label> 
-				`;
-				var using_backup = $("#use_backup").is(':checked');
-				var fact_count = using_backup ?
-					document.getElementById("facts_backup").getElementsByClassName("col").length :
-					document.getElementById("facts_main").getElementsByClassName("col").length;
+		function copy_span(element) {
+			var spanElement = element;
+			while (spanElement.className != "highlighted") {
+				spanElement = spanElement.nextSibling;
+			}
+			var copy_text = spanElement.innerText;
+			const el = document.createElement('textarea');
+			el.value = copy_text;
+			document.body.appendChild(el);
+			el.select();
+			document.execCommand('copy');
+			document.body.removeChild(el);
 
-				var all_selection_placeholder = document.getElementsByClassName("image-select-placeholder");
-				for (var i = 0; i < all_selection_placeholder.length; i++) {
-					var selections_HTML = "";
-					for (var j = 0; j < fact_count; j++) {
-						//if (j % 4 == 0) { selections_HTML += "<br>"; }
-						selections_HTML += replace(selection_template, j + 1, i + 1);
+			var all_square = document.getElementsByClassName("fa-square");
+			for (var i = 0; i < all_square.length; i++) {
+				all_square[i].classList.add("fa-inverse");
+			}
+			var all_copy = document.getElementsByClassName("fa-copy");
+			for (var i = 0; i < all_copy.length; i++) {
+				all_copy[i].classList.remove("fa-inverse");
+			}
+			element.getElementsByClassName("fa-square")[0].classList.remove("fa-inverse");
+			element.getElementsByClassName("fa-copy")[0].classList.add("fa-inverse");
 
-					}
-					all_selection_placeholder[i].innerHTML = selections_HTML;
+		}
+
+		function get_text_snippet(index) {
+			var bucket = $("#use_backup").is(':checked') ? "backup" : "main";
+			var fact_card_template = `
+						<tr>
+							<td> {1} </td>
+							<td class="textThumbnail" id="thumbnail_{5}" onclick="sync_back_highlight(this)"> {2} </td>
+							<td> <a class="text-muted url" href="{3}" target="_blank">{4}</a> </td>
+						</tr>
+						`;
+			var fact_card = document.getElementById(bucket + "_fact_card_" + index);
+			var text = fact_card.getElementsByClassName("fact")[0].innerHTML;
+			//texttext = $('<div>').text(text).html()
+			var url = fact_card.getElementsByClassName("url")[0].href;
+			var title = fact_card.getElementsByClassName("url")[0].innerText;
+			return replace(fact_card_template, index, text, url, title, fact_card.id);
+		}
+
+		function sync_back_highlight(element) {
+			var fact_card = document.getElementById(element.id.substring(10));
+			fact_card.getElementsByClassName("fact")[0].innerHTML = element.innerHTML;
+			update_highlight_placeholder();
+		}
+
+
+		function toggle_set(v) {
+			$('#ori_set').toggle();
+			$('#backup_set').toggle();
+			if (v) { $("#use_backup").prop('checked', !$("#use_backup").is(':checked')); }
+			reset_selection_options();
+
+			// reset the selections display
+			var all_annotations = document.querySelectorAll('[id^="Annotation_div_"]')
+			for (var i = 0; i < all_annotations.length; i++) {
+				reload_img_thumbnail(all_annotations[i].id);
+			}
+		}
+
+
+		function reset_selection_options() {
+			// adding it to some where
+			var selection_template = `
+						<label class="text-selection">
+							<input class="image-selection-{1}" name="image-selection{1}" onclick="ResetConfirmation('confirmation_div_{2}', 'Annotation_div_{2}', '{1}');" type="checkbox" value="{2}" /> 
+							{1} 
+						</label> 
+						`;
+			var using_backup = $("#use_backup").is(':checked');
+			var facts = using_backup? 
+				document.getElementById("facts_backup").getElementsByClassName("col"):
+				document.getElementById("facts_main").getElementsByClassName("col");
+			var fact_count = 0;
+			for (var i=0; i< facts.length; i++)
+			{
+				if(facts[i].style.display != "none")
+				{
+					fact_count += 1;
 				}
 
 			}
+			// var fact_count = using_backup ?
+			// 	document.getElementById("facts_backup").getElementsByClassName("col").length :
+			// 	document.getElementById("facts_main").getElementsByClassName("col").length;
 
-			function clean_str(s) {
-				return s.replace("_", " ");
+			var all_selection_placeholder = document.getElementsByClassName("image-select-placeholder");
+			for (var i = 0; i < all_selection_placeholder.length; i++) {
+				var selections_HTML = "";
+				for (var j = 0; j < fact_count; j++) {
+					selections_HTML += replace(selection_template, j + 1, i + 1);
+
+				}
+				all_selection_placeholder[i].innerHTML = selections_HTML;
 			}
 
+		}
 
-		</script>
+		function clean_str(s) {
+			return s.replace("_", " ");
+		}
 
-		<script type="text/javascript">
 
-			$(window).load(function () {
-				var i;
-				for (i = 1; i < 13; i++) {
-					var s = $("#title-query" + i.toString()).html();
-					$("#title-query" + i.toString()).html(clean_str(s));
-				}
+	</script>
+	<script type="text/javascript">
 
+		$(window).load(function () {
+			var i;
+			for (i = 1; i < 13; i++) {
+				var s = $("#title-query" + i.toString()).html();
+				$("#title-query" + i.toString()).html(clean_str(s));
+			}
+
+		});
+
+		$(document).ready(function () {
+			alert("Triggered");
+			url_elements = document.getElementsByClassName("url");
+			for (var i = 0; i < url_elements.length; i++) {
+				var url_href = url_elements[i].href;
+				url_elements[i].innerHTML = getDomain(url_href);
+			}
+		});
+
+		function replace(str) {
+			var args = arguments;
+			return str.replace(/{(\d+)}/g, function (match, number) {
+				return typeof args[number] != 'undefined'
+					? args[number]
+					: match
+					;
 			});
+		}
 
-			$(document).ready(function () {
-				alert("Triggered");
-				url_elements = document.getElementsByClassName("url");
-				for (var i = 0; i < url_elements.length; i++) {
-					var url_href = url_elements[i].href;
-					url_elements[i].innerHTML = getDomain(url_href);
-				}
-			});
+		function deleteNewFact(bucket, num) {
+			var fact_card = document.getElementsByName("card_" + bucket + "_new_fact_" + num)[0];
+			var fact_input = document.getElementsByName(bucket + "_new_fact_" + num)[0];
+			var url_input = document.getElementsByName(bucket + "_new_url_" + num)[0];
+			fact_card.remove();
+			fact_input.remove();
+			url_input.remove();
+			reset_selection_options();
+		}
 
-			function replace(str) {
-				var args = arguments;
-				return str.replace(/{(\d+)}/g, function (match, number) {
-					return typeof args[number] != 'undefined'
-						? args[number]
-						: match
-						;
-				});
-			}
-
-			function deleteNewFact(bucket, num) {
-				var fact_card = document.getElementsByName("card_" + bucket + "_new_fact_" + num)[0];
-				var fact_input = document.getElementsByName(bucket + "_new_fact_" + num)[0];
-				var url_input = document.getElementsByName(bucket + "_new_url_" + num)[0];
-				fact_card.remove();
-				fact_input.remove();
-				url_input.remove();
-				reset_selection_options();
-			}
-
-			function insertNewFact() {
-				var fact_template = `
-				<!-- Text Snippet {1}-->
-				<div class="col" style="min-width:23%" name="card_{7}">
-					<div class="card mb-3" style="max-width: 30rem;"  id="{6}_fact_card_{1}">
-
-						<div class="card-header bg-transparent" style="padding-left:0;padding-right:0;">
-							<div class="container" style="padding:0;">
-								<div style="text-align:center;position:relative;";
-									<span >Text Snippet {1}:</span>
-									<button class="btn" style="position:absolute;right:0;top: 50%; transform: translateY(-50%);" type="button"  onclick="deleteNewFact('{6}', {1})">
-										<span>x</span>
-									</button>
+		function insertNewFact() {
+			var fact_template = `
+						<!-- Text Snippet {1}-->
+						<div class="col" style="min-width:23%" name="card_{7}">
+							<div class="card mb-3" style="max-width: 30rem;"  id="{6}_fact_card_{1}">
+		
+								<div class="card-header bg-transparent" style="padding-left:0;padding-right:0;">
+									<div class="container" style="padding:0;">
+										<div style="text-align:center;position:relative;";
+											<span >Text Snippet {1}:</span>
+											<button class="btn" style="position:absolute;right:0;top: 50%; transform: translateY(-50%);" type="button"  onclick="deleteNewFact('{6}', {1})">
+												<span>x</span>
+											</button>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<p class="card-text fact" id="text{4}">{2}</p>
+								</div>
+								<div class="card-footer">
+									<a class="text-muted url" href="{3}" id="url{4}" target="_blank">{5}</a>
 								</div>
 							</div>
 						</div>
-						<div class="card-body">
-							<p class="card-text fact" id="text{4}">{2}</p>
-						</div>
-						<div class="card-footer">
-							<a class="text-muted url" href="{3}" id="url{4}" target="_blank">{5}</a>
-						</div>
-					</div>
-				</div>
+		
+						`;
 
-				`;
-
-				var input_hide_template = `
-					<crowd-input name="{1}" required value="{2}" style="display:none;"></crowd-input>
-				`;
+			var input_hide_template = `
+							<crowd-input name="{1}" required value="{2}" style="display:none;"></crowd-input>
+						`;
 
 
-				var new_fact = document.getElementById("newFact").value;
-				new_fact = $('<div>').text(new_fact).html();
-				new_fact = new_fact.replace(/\"/gi, '%22');
-				var new_url = document.getElementById("newUrl").value;
+			var new_fact = document.getElementById("newFact").value;
+			new_fact = $('<div>').text(new_fact).html();
+			new_fact = new_fact.replace(/\"/gi, '%22');
+			var new_url = document.getElementById("newUrl").value;
 
-				if (new_fact.trim().length <= 40 || new_fact.split(" ").length <= 20) {
-					alert("The fact is not complicated enough, please paste text with at least 20 words!");
-					return;
+			if (new_fact.trim().length <= 40 || new_fact.split(" ").length <= 20) {
+				alert("The fact is not complicated enough, please paste text with at least 20 words!");
+				return;
+			}
+
+			if (new_url.trim().length <= 10) {
+				alert("The URL is not valid, please paste the new fact into the URL textbox!");
+				return;
+			}
+
+			var domain = getDomain(new_url);
+			if (domain.trim().length == 0) {
+				alert("The URL is invalid, please double check.");
+				return;
+			}
+
+			if (domain == "www.bing.com" || domain == "www.google.com") {
+				alert("Please do not paste things from search engine.");
+				return;
+			}
+
+			var using_backup = $("#use_backup").is(':checked');
+			// get the fact count based on the bucket
+			var fact_count = using_backup ?
+				document.getElementById("facts_backup").getElementsByClassName("col").length :
+				document.getElementById("facts_main").getElementsByClassName("col").length;
+
+			// insert the fact into the bucket
+			if (using_backup) {
+				document.getElementById("facts_backup").innerHTML += replace(fact_template, fact_count + 1, new_fact, new_url, (fact_count) * 2 + 1, domain, "backup", "backup_new_fact_" + (fact_count + 1));
+			}
+			else {
+				document.getElementById("facts_main").innerHTML += replace(fact_template, fact_count + 1, new_fact, new_url, fact_count + 1, domain, "main", "main_new_fact_" + (fact_count + 1));
+				var facts_backup = document.getElementById("facts_backup");
+				var urls_div = facts_backup.getElementsByClassName("url");
+				for (var i = 0; i < urls_div.length; i++) {
+					// fact_count +1 = the number of facts in main section
+					// i+ = index off set
+					var index = fact_count + i + 2;
+					urls_div[i].id = "url" + index;
 				}
-				if (new_fact.trim().length > 700)
-				{
-					alert("The fact is too long, please make sure it has less than 700 characters!");
-					return;
+
+				var facts_div = facts_backup.getElementsByClassName("fact");
+				for (var i = 0; i < facts_div.length; i++) {
+					var index = fact_count + i + 2;
+					facts_div[i].id = "text" + index;
 				}
+			}
 
-				if (new_url.trim().length <= 10) {
-					alert("The URL is not valid, please paste the new fact into the URL textbox!");
-					return;
+			// adding to selection 
+			reset_selection_options()
+
+			// adding to submission
+			var submit_prefix = using_backup ? "backup" : "main";
+			var new_fact_input = replace(input_hide_template, submit_prefix + "_new_fact_" + (fact_count + 1), new_fact);
+			var new_url_input = replace(input_hide_template, submit_prefix + "_new_url_" + (fact_count + 1), new_url);
+			var hide_div = document.getElementById("submission_hide_placeholder");
+			hide_div.innerHTML += new_fact_input;
+			hide_div.innerHTML += new_url_input;
+
+
+			// reset the insert area:
+			document.getElementById("newFact").value = null;
+			document.getElementById("newUrl").value = null;
+			document.getElementById("newFactCollapse").classList.remove("show");
+
+			var all_annotations = document.querySelectorAll('[id^="Annotation_div_"]')
+			for (var i = 0; i < all_annotations.length; i++) {
+				reload_img_thumbnail(all_annotations[i].id);
+			}
+
+			setuphighlight();
+		}
+
+		function getDomain(url) {
+			var domain
+			try {
+				domain = (new URL(url));
+			}
+			catch (e) {
+				alert("The url is not valid. Please check your input!");
+			}
+			return domain.hostname;
+		}
+
+		function mergeNeighborHighlights(nonword) {
+			var childNodes = $(".highlighted")[0].parentNode.childNodes;
+			var i = 0;
+			while (i < childNodes.length - 2) {
+				if (childNodes[i].className !== "highlighted") {
+					i++;
+					continue;
 				}
-
-				var domain = getDomain(new_url);
-				if (domain.trim().length == 0) {
-					alert("The URL is invalid, please double check.");
-					return;
-				}
-
-				if (domain == "www.bing.com" || domain == "www.google.com") {
-					alert("Please do not paste things from search engine.");
-					return;
-				}
-
-				var using_backup = $("#use_backup").is(':checked');
-				// get the fact count based on the bucket
-				var fact_count = using_backup ?
-					document.getElementById("facts_backup").getElementsByClassName("col").length :
-					document.getElementById("facts_main").getElementsByClassName("col").length;
-
-				// insert the fact into the bucket
-				if (using_backup) {
-					document.getElementById("facts_backup").innerHTML += replace(fact_template, fact_count + 1, new_fact, new_url, (fact_count) * 2 + 1, domain, "backup", "backup_new_fact_" + (fact_count + 1));
+				var re = new RegExp(nonword, 'g');
+				var match = re.exec(childNodes[i + 1].textContent);
+				if (match && match.index == 0 && match[0].length == childNodes[i + 1].textContent.length) {
+					// Merge
+					childNodes[i].textContent += childNodes[i + 1].textContent + childNodes[i + 2].textContent;
+					childNodes[i + 1].parentNode.removeChild(childNodes[i + 1]);
+					childNodes[i + 1].parentNode.removeChild(childNodes[i + 1]);
+					// childNodes[i+1].remove();
+					continue;
 				}
 				else {
-					document.getElementById("facts_main").innerHTML += replace(fact_template, fact_count + 1, new_fact, new_url, fact_count + 1, domain, "main", "main_new_fact_" + (fact_count + 1));
-					var facts_backup = document.getElementById("facts_backup");
-					var urls_div = facts_backup.getElementsByClassName("url");
-					for (var i = 0; i < urls_div.length; i++) {
-						// fact_count +1 = the number of facts in main section
-						// i+ = index off set
-						var index = fact_count + i + 2;
-						urls_div[i].id = "url" + index;
-					}
-
-					var facts_div = facts_backup.getElementsByClassName("fact");
-					for (var i = 0; i < facts_div.length; i++) {
-						var index = fact_count + i + 2;
-						facts_div[i].id = "text" + index;
-					}
+					i++;
 				}
-
-				// adding to selection 
-				reset_selection_options()
-
-				// adding to submission
-				var submit_prefix = using_backup ? "backup" : "main";
-				var new_fact_input = replace(input_hide_template, submit_prefix + "_new_fact_" + (fact_count + 1), new_fact);
-				var new_url_input = replace(input_hide_template, submit_prefix + "_new_url_" + (fact_count + 1), new_url);
-				var hide_div = document.getElementById("submission_hide_placeholder");
-				hide_div.innerHTML += new_fact_input;
-				hide_div.innerHTML += new_url_input;
-
-
-				// reset the insert area:
-				document.getElementById("newFact").value = null;
-				document.getElementById("newUrl").value = null;
-				document.getElementById("newFactCollapse").classList.remove("show");
-
-				var all_annotations = document.querySelectorAll('[id^="Annotation_div_"]')
-				for (var i = 0; i < all_annotations.length; i++) {
-					reload_img_thumbnail(all_annotations[i].id);
-				}
-
-				setuphighlight();
 			}
+		}
 
-			function getDomain(url) {
-				var domain
-				try {
-					domain = (new URL(url));
-				}
-				catch (e) {
-					alert("The url is not valid. Please check your input!");
-				}
-				return domain.hostname;
-			}
+		function check_nav() {
 
-			function mergeNeighborHighlights(nonword) {
-				var childNodes = $(".highlighted")[0].parentNode.childNodes;
-				var i = 0;
-				while (i < childNodes.length - 2) {
-					if (childNodes[i].className !== "highlighted") {
-						i++;
-						continue;
-					}
-					var re = new RegExp(nonword, 'g');
-					var match = re.exec(childNodes[i + 1].textContent);
-					if (match && match.index == 0 && match[0].length == childNodes[i + 1].textContent.length) {
-						// Merge
-						childNodes[i].textContent += childNodes[i + 1].textContent + childNodes[i + 2].textContent;
-						childNodes[i + 1].parentNode.removeChild(childNodes[i + 1]);
-						childNodes[i + 1].parentNode.removeChild(childNodes[i + 1]);
-						// childNodes[i+1].remove();
-						continue;
-					}
-					else {
-						i++;
-					}
+			var all_nav = document.querySelectorAll("[id^=id-navbar-]");
+			for (var i = 0; i < all_nav.length; i++) {
+				var collap = document.querySelector("[class^=" + all_nav[i].id + "]");
+				if (collap == null) { continue; }
+				if (all_nav[i].classList.contains("active")) {
+					collap.classList.add("show");
+				}
+				else {
+					collap.classList.remove("show");
 				}
 			}
 
-			function check_nav() {
+		}
 
-				var all_nav = document.querySelectorAll("[id^=id-navbar-]");
-				for (var i = 0; i < all_nav.length; i++) {
-					var collap = document.querySelector("[class^=" + all_nav[i].id + "]");
-					if (collap == null) { continue; }
-					if (all_nav[i].classList.contains("active")) {
-						collap.classList.add("show");
-					}
-					else {
-						collap.classList.remove("show");
-					}
-				}
-
+		function remove_copybutton(element) {
+			if (element.previousElementSibling == null) {
+				return;
 			}
-
-			function remove_copybutton(element) {
-				if (element.previousElementSibling == null) {
-					return;
+			while (element.previousSibling != element.previousElementSibling) {
+				if (element.previousSibling.nodeName == "#text" && element.previousSibling.textContent.trim() == "") {
+					element.previousSibling.remove();
 				}
-				while (element.previousSibling != element.previousElementSibling) {
-					if (element.previousSibling.nodeName == "#text" && element.previousSibling.textContent.trim() == "") {
-						element.previousSibling.remove();
-					}
-					else {
-						element = element.previousSibling;
-					}
-				}
-				if (element.previousElementSibling.classList.contains("copy")) {
-					element.previousElementSibling.remove();
+				else {
+					element = element.previousSibling;
 				}
 			}
+			if (element.previousElementSibling.classList.contains("copy")) {
+				element.previousElementSibling.remove();
+			}
+		}
 
-			function setuphighlight() {
-				var nonword = /[ |-]+|[,\.]+(?!\d) */;
-				nonword = nonword.source;
-				var prompt = document.getElementById("promot");
-				//var texts = prompt.getElementsByClassName("fact");
-				var allitems = [];
-				allitems = Array.prototype.concat.apply(allitems, prompt.getElementsByClassName("fact"));
-				allitems = Array.prototype.concat.apply(allitems, document.getElementsByClassName("textThumbnail"));
+		function setuphighlight() {
+			var nonword = /[ |-]+|[,\.]+(?!\d) */;
+			nonword = nonword.source;
+			var prompt = document.getElementById("promot");
+			//var texts = prompt.getElementsByClassName("fact");
+			var allitems = [];
+			allitems = Array.prototype.concat.apply(allitems, prompt.getElementsByClassName("fact"));
+			allitems = Array.prototype.concat.apply(allitems, document.getElementsByClassName("textThumbnail"));
 
-				//var thumbnails = document.getElementsByClassName("textThumbnail");
-				//texts = texts.concat(thumbnails);
-				for (var m = 0; m < allitems.length; m++) {
-					var hltr = new TextHighlighter(allitems[m],
-						{
-							onAfterHighlight: function (range) {
-								var new_range = range.commonAncestorContainer;
-								while (new_range.tagName == "SPAN") {
-									new_range = new_range.parentNode;
-								}
-								var highlighted_elements = new_range.getElementsByClassName("highlighted");
+			//var thumbnails = document.getElementsByClassName("textThumbnail");
+			//texts = texts.concat(thumbnails);
+			for (var m = 0; m < allitems.length; m++) {
+				var hltr = new TextHighlighter(allitems[m],
+					{
+						onAfterHighlight: function (range) {
+							var new_range = range.commonAncestorContainer;
+							while (new_range.tagName == "SPAN") {
+								new_range = new_range.parentNode;
+							}
+							var highlighted_elements = new_range.getElementsByClassName("highlighted");
 
-								if (highlighted_elements.length == 0) {
-									// Still no highlight after highlights
-									return;
-								}
+							if (highlighted_elements.length == 0) {
+								// Still no highlight after highlights
+								return;
+							}
 
-								for (var i = 0; i < highlighted_elements.length; i++) {
-									highlighted_elements[i].addEventListener("click", function (event) {
-										console.log("calling from after click highlight");
-										remove_copybutton(event.currentTarget);
-										hltr.removeHighlights(event.currentTarget);
-									});
-								}
+							for (var i = 0; i < highlighted_elements.length; i++) {
+								highlighted_elements[i].addEventListener("click", function (event) {
+									console.log("calling from after click highlight");
+									remove_copybutton(event.currentTarget);
+									hltr.removeHighlights(event.currentTarget);
+								});
+							}
 
-								var highlighted = new_range.getElementsByClassName("highlighted");
-								for (var j = 0; j < highlighted.length; j++) {
-									childNodes = highlighted[j].parentNode.childNodes;
+							var highlighted = new_range.getElementsByClassName("highlighted");
+							for (var j = 0; j < highlighted.length; j++) {
+								childNodes = highlighted[j].parentNode.childNodes;
 
-									var re = null;
-									var firstMatch = null;
-									var lastMatch = null;
-									var res = null;
-									for (var i = 0; i < childNodes.length; ++i) {
-										if (childNodes[i] && childNodes[i].className === "highlighted") {
-											if (i > 0) {  // text segment on the left
-												// 1. highlighted starts with a word boundary
-												//    push the boundary to text on the left
-												//console.log("left");
-												firstMatch = null;
-												lastMatch = null;
+								var re = null;
+								var firstMatch = null;
+								var lastMatch = null;
+								var res = null;
+								for (var i = 0; i < childNodes.length; ++i) {
+									if (childNodes[i] && childNodes[i].className === "highlighted") {
+										if (i > 0) {  // text segment on the left
+											// 1. highlighted starts with a word boundary
+											//    push the boundary to text on the left
+											//console.log("left");
+											firstMatch = null;
+											lastMatch = null;
+											re = new RegExp(nonword, 'g');
+											firstMatch = re.exec(childNodes[i].textContent);
+											if (firstMatch && firstMatch.index == 0) {
+												childNodes[i - 1].textContent += firstMatch[0];
+												childNodes[i].textContent = childNodes[i].textContent.slice(firstMatch[0].length);
+											}
+											else {
+												// 2. if previous text does not end with a word boundary
+												//    push the last partial word to highlighted phrase
 												re = new RegExp(nonword, 'g');
-												firstMatch = re.exec(childNodes[i].textContent);
-												if (firstMatch && firstMatch.index == 0) {
-													childNodes[i - 1].textContent += firstMatch[0];
-													childNodes[i].textContent = childNodes[i].textContent.slice(firstMatch[0].length);
+												while ((res = re.exec(childNodes[i - 1].textContent)) != null) { lastMatch = res; }
+												if (lastMatch && lastMatch.index + lastMatch[0].length !== childNodes[i - 1].textContent.length) {
+													childNodes[i].textContent =
+														childNodes[i - 1].textContent.slice(lastMatch.index + lastMatch[0].length) + childNodes[i].textContent;
+													childNodes[i - 1].textContent = childNodes[i - 1].textContent.slice(0, lastMatch.index + lastMatch[0].length);
 												}
-												else {
-													// 2. if previous text does not end with a word boundary
-													//    push the last partial word to highlighted phrase
-													re = new RegExp(nonword, 'g');
-													while ((res = re.exec(childNodes[i - 1].textContent)) != null) { lastMatch = res; }
-													if (lastMatch && lastMatch.index + lastMatch[0].length !== childNodes[i - 1].textContent.length) {
-														childNodes[i].textContent =
-															childNodes[i - 1].textContent.slice(lastMatch.index + lastMatch[0].length) + childNodes[i].textContent;
-														childNodes[i - 1].textContent = childNodes[i - 1].textContent.slice(0, lastMatch.index + lastMatch[0].length);
-													}
-													else if (lastMatch === null && i == 1) {  // boundary case, leftmost text contains no word boundaries but needs to be merged.
-														childNodes[i].textContent = childNodes[i - 1].textContent + childNodes[i].textContent;
-														childNodes[i - 1].textContent = "";
-													}
+												else if (lastMatch === null && i == 1) {  // boundary case, leftmost text contains no word boundaries but needs to be merged.
+													childNodes[i].textContent = childNodes[i - 1].textContent + childNodes[i].textContent;
+													childNodes[i - 1].textContent = "";
 												}
 											}
-											// Fix right end
-											if (i < childNodes.length) {  // text segment on the right
-												// 1. highlighted ends with a word boundary
-												//    push the boundary to text on the right
-												//console.log("right");
-												firstMatch = null;
-												lastMatch = null;
-												re = new RegExp(nonword, 'g');
-												while ((res = re.exec(childNodes[i].textContent)) !== null) { lastMatch = res; }
-												if (lastMatch && lastMatch.index + lastMatch[0].length === childNodes[i].textContent.length) {
-													if (i == childNodes.length - 1) {  // highlight at the end of text. Push nonwords outside highlights if any
-														var textNode = document.createTextNode(lastMatch[0]);         // Create a text node
-														childNodes[i].parentNode.appendChild(textNode);
-													}
-													else {
-														childNodes[i + 1].textContent = lastMatch[0] + childNodes[i + 1].textContent;
-													}
-													childNodes[i].textContent = childNodes[i].textContent.slice(0, lastMatch.index);
+										}
+										// Fix right end
+										if (i < childNodes.length) {  // text segment on the right
+											// 1. highlighted ends with a word boundary
+											//    push the boundary to text on the right
+											//console.log("right");
+											firstMatch = null;
+											lastMatch = null;
+											re = new RegExp(nonword, 'g');
+											while ((res = re.exec(childNodes[i].textContent)) !== null) { lastMatch = res; }
+											if (lastMatch && lastMatch.index + lastMatch[0].length === childNodes[i].textContent.length) {
+												if (i == childNodes.length - 1) {  // highlight at the end of text. Push nonwords outside highlights if any
+													var textNode = document.createTextNode(lastMatch[0]);         // Create a text node
+													childNodes[i].parentNode.appendChild(textNode);
 												}
 												else {
-													// 2. if next text does not begin with a word boundary
-													//    push the first partial word in the next text to highlighted phrase
-													if (i == childNodes.length - 1) {  // highlight at the end of text. No next text so break.
-														break;
-													}
-													re = new RegExp(nonword, 'g');
-													firstMatch = re.exec(childNodes[i + 1].textContent);
-													if (firstMatch && firstMatch.index != 0) {
-														childNodes[i].textContent += childNodes[i + 1].textContent.slice(0, firstMatch.index);
-														childNodes[i + 1].textContent = childNodes[i + 1].textContent.slice(firstMatch.index);
-													}
-													else if (firstMatch === null && i == childNodes.length - 2) {
-														childNodes[i].textContent += childNodes[i + 1].textContent;
-														childNodes[i + 1].textContent = "";
-													}
+													childNodes[i + 1].textContent = lastMatch[0] + childNodes[i + 1].textContent;
+												}
+												childNodes[i].textContent = childNodes[i].textContent.slice(0, lastMatch.index);
+											}
+											else {
+												// 2. if next text does not begin with a word boundary
+												//    push the first partial word in the next text to highlighted phrase
+												if (i == childNodes.length - 1) {  // highlight at the end of text. No next text so break.
+													break;
+												}
+												re = new RegExp(nonword, 'g');
+												firstMatch = re.exec(childNodes[i + 1].textContent);
+												if (firstMatch && firstMatch.index != 0) {
+													childNodes[i].textContent += childNodes[i + 1].textContent.slice(0, firstMatch.index);
+													childNodes[i + 1].textContent = childNodes[i + 1].textContent.slice(firstMatch.index);
+												}
+												else if (firstMatch === null && i == childNodes.length - 2) {
+													childNodes[i].textContent += childNodes[i + 1].textContent;
+													childNodes[i + 1].textContent = "";
 												}
 											}
 										}
 									}
 								}
-
-
-								// Modify highlight boundaries
-
-								// Merge adjacent highlight areas if only separated by "non-word"
-								mergeNeighborHighlights(nonword);
-
-								var highlighted = new_range.getElementsByClassName("highlighted");
-
-								for (var j = 0; j < highlighted.length; j++) {
-									console.log("calling from resetting");
-									remove_copybutton(highlighted[j]);
-								}
-
-								console.log("remove done");
-								try {
-									add_copybutton(new_range);
-								}
-								catch (e) {
-									console.log(e);
-								}
-
-							},
-							// Do nothing before highlighting
-							onBeforeHighlight: function (range) {
-								return true;
-
-							},
-
-							// Do nothing before removing highlights
-							onRemoveHighlight: function (hlt) {
-								return true;
 							}
-						}
-					);
-
-					var span_element = hltr.el.getElementsByClassName("highlighted");
-					//console.log(span_element);
-					for (var i = 0; i < span_element.length; i++) {
-						span_element[i].addEventListener("click", function (event) {
-							console.log("removing highlited and copy button");
-							console.log("calling from after setup highlight");
-							remove_copybutton(event.currentTarget);
-
-							hltr.removeHighlights(event.currentTarget);
-
-						})
-					}
-				}
-
-			}
 
 
-			function highlight_update() {
+							// Modify highlight boundaries
 
-				var all_annotations = document.querySelectorAll('[id^="Annotation_div_"]')
-				for (var i = 0; i < all_annotations.length; i++) {
-					reload_img_thumbnail(all_annotations[i].id);
-				}
-				update_highlight_placeholder();
+							// Merge adjacent highlight areas if only separated by "non-word"
+							mergeNeighborHighlights(nonword);
 
-			}
+							var highlighted = new_range.getElementsByClassName("highlighted");
 
-			function add_copybutton(element) {
-				var highlighted = element.getElementsByClassName("highlighted");
-				var copy_template = `<span class="fa-stack copy" onclick="copy_span(this)" name="{1}" style="font-size:10px;">
-  					<i class="fa fa-square fa-stack-2x fa-inverse"></i>
-  					<i class="fa fa-copy fa-stack-1x"></i>
-				</span>`
-				for (var i = 0; i < highlighted.length; i++) {
-					var copy_buttons = element.getElementsByClassName('copy');
-					var copy_button = [];
-					for (var i = 0; i < copy_buttons.length; i++) {
-						if (copy_buttons[i].name == highlighted[i].dataset.timestamp) {
-							copy_button.add(copy_buttons[i]);
+							for (var j = 0; j < highlighted.length; j++) {
+								console.log("calling from resetting");
+								remove_copybutton(highlighted[j]);
+							}
+
+							console.log("remove done");
+							try {
+								add_copybutton(new_range);
+							}
+							catch (e) {
+								console.log(e);
+							}
+
+						},
+						// Do nothing before highlighting
+						onBeforeHighlight: function (range) {
+							return true;
+
+						},
+
+						// Do nothing before removing highlights
+						onRemoveHighlight: function (hlt) {
+							return true;
 						}
 					}
-					if (copy_button.length == 0) {
-						highlighted[i].outerHTML = replace(copy_template, highlighted[i].dataset.timestamp) + highlighted[i].outerHTML;
+				);
+
+				var span_element = hltr.el.getElementsByClassName("highlighted");
+				//console.log(span_element);
+				for (var i = 0; i < span_element.length; i++) {
+					span_element[i].addEventListener("click", function (event) {
+						console.log("removing highlited and copy button");
+						console.log("calling from after setup highlight");
+						remove_copybutton(event.currentTarget);
+
+						hltr.removeHighlights(event.currentTarget);
+
+					})
+				}
+			}
+
+		}
+
+
+		function highlight_update() {
+
+			var all_annotations = document.querySelectorAll('[id^="Annotation_div_"]')
+			for (var i = 0; i < all_annotations.length; i++) {
+				reload_img_thumbnail(all_annotations[i].id);
+			}
+			update_highlight_placeholder();
+
+		}
+
+		function add_copybutton(element) {
+			var highlighted = element.getElementsByClassName("highlighted");
+			var copy_template = `<span class="fa-stack copy" onclick="copy_span(this)" name="{1}" style="font-size:10px;">
+							  <i class="fa fa-square fa-stack-2x fa-inverse"></i>
+							  <i class="fa fa-copy fa-stack-1x"></i>
+						</span>`
+			for (var i = 0; i < highlighted.length; i++) {
+				var copy_buttons = element.getElementsByClassName('copy');
+				var copy_button = [];
+				for (var i = 0; i < copy_buttons.length; i++) {
+					if (copy_buttons[i].name == highlighted[i].dataset.timestamp) {
+						copy_button.add(copy_buttons[i]);
 					}
+				}
+				if (copy_button.length == 0) {
+					highlighted[i].outerHTML = replace(copy_template, highlighted[i].dataset.timestamp) + highlighted[i].outerHTML;
+				}
 
+			}
+		}
+
+		function update_highlight_placeholder() {
+			var input_hide_template = `
+							<crowd-input name="{1}" required value="{2}" style="display:none;"></crowd-input>
+						`;
+			var all_highlights = document.querySelectorAll('[id*=_fact_card_]')
+			var all_highlights_HTML = "";
+			for (var i = 0; i < all_highlights.length; i++) {
+				if (all_highlights[i].id.startsWith("main") || all_highlights[i].id.startsWith("backup")) {
+					var name = all_highlights[i].id;
+					var value = all_highlights[i].getElementsByClassName("fact")[0].innerHTML;
+					value = $('<div>').text(value).html();
+					value = value.replace(/\"/gi, '%22');
+					all_highlights_HTML += replace(input_hide_template, name, value);
 				}
 			}
+			document.getElementById("highlight_hide_placeholder").innerHTML = all_highlights_HTML;
+		}
 
-			function update_highlight_placeholder() {
-				var input_hide_template = `
-					<crowd-input name="{1}" required value="{2}" style="display:none;"></crowd-input>
-				`;
-				var all_highlights = document.querySelectorAll('[id*=_fact_card_]')
-				var all_highlights_HTML = "";
-				for (var i = 0; i < all_highlights.length; i++) {
-					if (all_highlights[i].id.startsWith("main") || all_highlights[i].id.startsWith("backup")) {
-						var name = all_highlights[i].id;
-						var value = all_highlights[i].getElementsByClassName("fact")[0].innerHTML;
-						value = $('<div>').text(value).html();
-						value = value.replace(/\"/gi, '%22');
-						all_highlights_HTML += replace(input_hide_template, name, value);
-					}
-				}
-				document.getElementById("highlight_hide_placeholder").innerHTML = all_highlights_HTML;
+		function check_session() {
+			var count = sessionStorage.getItem("number_hits");
+			count = count == null ? 0 : parseInt(count);
+			console.log(count);
+			if (count < 3) {
+				$('#InstructionModel').modal('show');
 			}
+			sessionStorage.setItem("number_hits", count + 1);
+		}
 
-			function check_session() {
-				var count = sessionStorage.getItem("number_hits");
-				count = count == null ? 0 : parseInt(count);
-				console.log(count);
-				if (count < 3) {
-					$('#InstructionModel').modal('show');
-				}
-				sessionStorage.setItem("number_hits", count + 1);
+		function parse_input() {
+			// 1: bucket
+			// 2: bucket-index
+			// 3: whole-index
+			// 4: fact
+			// 5: url
+			// 6: title
+			// 7: display
+			console.log("start parsing.....");
+			var card_template =`<div class="col" style="min-width:20%;display:{}">
+				<div class="card mb-3" id="{1}_fact_card_{2}" style="max-width: 30rem;">
+					<div class="card-header bg-transparent">Text Snippet {2}:</div>
+						<div class="card-body">
+							<p class="card-text fact" id="text{3}">{4}</p>
+						</div>
+					<div class="card-footer"><a class="text-muted url" href="{5}" id="url{3}" target="_blank">{6}</a></div>
+				</div>
+			</div>`;
+			// use ${base64} instead of the actual base 64 string
+			var base64 = "eyJtYWluIjogW3siZmFjdCI6ICJUaGUgc2hvdyB3aWxsIGRlYnV0IGluIEphbnVhcnkgMjAyMCBhbmQgd2lsbCBhaXIgb24gc3RhdGlvbnMgdGhhdCBjdXJyZW50bHkgY2FycnkgVGhlIFJpY2tleSBTbWlsZXkgTW9ybmluZyBTaG93LiBTbWlsZXkgd2lsbCBtb3ZlIG92ZXIgdG8gVXJiYW4gQWR1bHQgQ29udGVtcG9yYXJ5IHJhZGlvIGFuZCB0YWtlIG92ZXIgZm9yIFRvbSBKb3luZXIgb24gSmFudWFyeSAybmQuIFJpY2tleSBhbm5vdW5jZWQgdGhlIGRlcGFydHVyZSBvZiBIZWFka3JhY2sgZnJvbSBoaXMgc2hvdyBkdXJpbmcgaGlzIGFubm91bmNlbWVudCB0byBzdWNjZWVkIHRoZSBUSk1TLiIsICJ1cmwiOiAiaHR0cDovL3d3dy51cmJhbnJhZGlvbmF0aW9uLmNvbS8yMDE5LzA3L2hlYWRrcmFjay1hbmQtbW9ybmluZy1odXN0bGUtY29taW5nLmh0bWwiLCAidGl0bGUiOiAiSGVhZGtyYWNrIGFuZCBUaGUgTW9ybmluZyBIdXN0bGUgQ29taW5nIEphbnVhcnkgMjAyMCAtIFVyYmFuIFJhZGlvIE5hdGlvbiAifSwgeyJmYWN0IjogIlJpY2tleSBTbWlsZXkgaXMgYSBjb21lZGlhbiwgdGVsZXZpc2lvbiBob3N0LCBhbmQgbmF0aW9uYWxseSBzeW5kaWNhdGVkIHJhZGlvIHBlcnNvbmFsaXR5LiBUaGUgbWFuIGJvcm4gQnJvZGVyaWNrIFNtaWxleSBoYXMgcHJhY3RpY2FsbHkgZG9uZSBpdCBhbGwuIFRoZSBBbGFiYW1hIG5hdGl2ZSBnb3QgaGlzIHN0YXJ0IGluIDIwMDAgYXMgdGhlIGhvc3Qgb2YgQkVUXHUyMDE5cyBDb21pY1ZpZXcsIHBlciBBbGxNdXNpYy4gRnJvbSB0aGVyZSwgaGlzIGNhcmVlciB0b29rIG9mZiBsaWtlIGEgcm9ja2V0LiIsICJ1cmwiOiAiaHR0cHM6Ly9ob2xseXdvb2RsaWZlLmNvbS9mZWF0dXJlL3doby1pcy1yaWNrZXktc21pbGV5LTQxMjUzNDMvIiwgInRpdGxlIjogIldobyBJcyBSaWNrZXkgU21pbGV5OiBSYWRpbyBIb3N0IFNheXMgRGF1Z2h0ZXIgV2FzIFNob3QgVGhyZWUgVGltZXMgXHUyMDEzIEhvbGx5d29vZCBMaWZlIn0sIHsiZmFjdCI6ICJMaWtlIG1vc3QgY29tZWRpYW5zLCB0aG91Z2gsIGhlIGdvdCBoaXMgc3RhcnQgYXQgYW4gb3BlbiBtaWMgYXQgdGhlIFRoZSBDb21lZHkgQ2x1YiBvbiBHcmVlbiBTcHJpbmdzIEhpZ2h3YXksIHdoaWNoIGNsb3NlZCBhZnRlciBhIGZpcmUgaW4gTWFyY2ggMTk5My4gU21pbGV5IGFjY29tcGFuaWVkIGEgZnJpZW5kIGFuZCBmZWxsb3cgY29tZWRpYW4sIENodWNreSBKZW5raW5zLCB0byB0aGUgdmVudWUgYW5kIGRlY2lkZWQgdG8gZ2l2ZSB0aGUgc3RhZ2UgYSB0cnkuIiwgInVybCI6ICJodHRwczovL3d3dy5iaXJtaW5naGFtdGltZXMuY29tLzIwMTgvMDcvYmlybWluZ2hhbXMtcmlja2V5LXNtaWxleS10aGUtcmlzZS1vZi1jb21lZHlzLXNoaW5pbmctc3Rhci8iLCAidGl0bGUiOiAiQmlybWluZ2hhbVx1MjAxOXMgUmlja2V5IFNtaWxleTogVGhlIFJpc2Ugb2YgQ29tZWR5XHUyMDE5cyBTaGluaW5nIFN0YXIgIn0sIHsiZmFjdCI6ICJCcm9kZXJpY2sgRG9ybmVsbCBTbWlsZXkgKGJvcm4gQXVndXN0IDEwLCAxOTY4KSBpcyBhbiBBbWVyaWNhbiBzdGFuZC11cCBjb21lZGlhbiwgdGVsZXZpc2lvbiBob3N0LCBhY3RvciwgYW5kIHJhZGlvIHBlcnNvbmFsaXR5LCBrbm93biBmb3IgaGlzIHByYW5rIHBob25lIGNhbGxzLiBUaGUgY2FsbHMgZmVhdHVyZSBTbWlsZXkgZGlzZ3Vpc2luZyBoaXMgdm9pY2UgYW5kIGNhcnJ5aW5nIG9uIGEgY29udmVyc2F0aW9uIHdpdGggdGhlIHJlY2lwaWVudCBvZiB0aGUgY2FsbC4iLCAidXJsIjogImh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL1JpY2tleV9TbWlsZXkiLCAidGl0bGUiOiAiUmlja2V5IFNtaWxleSAtIFdpa2lwZWRpYSJ9XSwgImJhY2t1cCI6IFt7ImZhY3QiOiAiMS4gT25lIHRoYXQgaXMgdHJhbnNpZW50LCBlc3BlY2lhbGx5IGEgaG90ZWwgZ3Vlc3Qgb3IgYm9hcmRlciB3aG8gc3RheXMgZm9yIG9ubHkgYSBicmllZiB0aW1lLiAyLiBQaHlzaWNzIEEgdHJhbnNpZW50IHBoZW5vbWVub24gb3IgcHJvcGVydHksIGVzcGVjaWFsbHkgYSB0cmFuc2llbnQgZWxlY3RyaWMgY3VycmVudC4gW0FsdGVyYXRpb24gb2YgTGF0aW4gdHJcdTAxMDFuc2lcdTAxMTNucywgdHJcdTAxMDFuc2V1bnQtLCBwcmVzZW50IHBhcnRpY2lwbGUgb2YgdHJcdTAxMDFuc1x1MDEyYnJlLCB0byBnbyBvdmVyIDogdHJcdTAxMDFucy0sIG92ZXI7IHNlZSB0cmFucy0gKyBcdTAxMmJyZSwgdG8gZ287IHNlZSBlaS0gaW4gSW5kby1FdXJvcGVhbiByb290cyAuXSIsICJ1cmwiOiAiaHR0cHM6Ly93d3cudGhlZnJlZWRpY3Rpb25hcnkuY29tL1RyYW5zaWVudHMiLCAidGl0bGUiOiAiVHJhbnNpZW50cyAtIGRlZmluaXRpb24gb2YgVHJhbnNpZW50cyBieSBUaGUgRnJlZSBEaWN0aW9uYXJ5In0sIHsiZmFjdCI6ICIxIExhc3Rpbmcgb25seSBmb3IgYSBzaG9ydCB0aW1lOyBpbXBlcm1hbmVudC4gXHUyMDE4VGhlIHBpY3R1cmVzIHJlZmxlY3QgYW4gaW50ZXJlc3QgaW4gdGhlIGVwaGVtZXJhbCwgaW1wZXJtYW5lbnQsIHRyYW5zaWVudCBuYXR1cmUgb2YgdGhlIHdvcmxkLlx1MjAxOSBcdTIwMThBcyBJIGxvb2tlZCBhdCB0aGlzIGNvbnRyYXN0IGJldHdlZW4gbGl2aW5nLCB0cmFuc2llbnQgYmVhdXR5IGFuZCBjb2xkIG1vcnRhbGl0eSwgSSB0aG91Z2h0OiBcdTIwMThFdCBpbiBBcmNhZGlhLCBlZ29cdTIwMTkuXHUyMDE5IFx1MjAxOFNoZSB3YXMgcGFudGluZzogaGVyIGJyZWF0aCBmb3JtaW5nIHN0cmluZ3Mgb2YgdHJhbnNpZW50IHB1ZmZzIGluIHRoZSBjb2xkIGFpci5cdTIwMTkiLCAidXJsIjogImh0dHBzOi8vd3d3LmxleGljby5jb20vZGVmaW5pdGlvbi90cmFuc2llbnQiLCAidGl0bGUiOiAiVFJBTlNJRU5UICJ9LCB7ImZhY3QiOiAiVGhlIG1vc3QgaW1wb3J0YW50IHBhcmFtZXRlcnMgZm9yIHRoZSBtYWduaXR1ZGUgb2YgdHJhbnNpZW50IHByZXNzdXJlcyBhcmU6ICNWZWxvY2l0eSBjaGFuZ2UgaW4gdGltZSwgXHUwMzk0diAobS9zKSAob3IgcG9zc2libHkgdGhlIHByZXNzdXJlIGVxdWl2YWxlbnQpIEFjb3VzdGljIHdhdmUgc3BlZWQsIGMgKG0vcykgUGlwZSBwZXJpb2QsIFQgKHMpIEpvdWtvd3NreSBwcmVzc3VyZSwgXHUwMzk0cCAoUGEpIEVsZXZhdGlvbiBwcm9maWxlIiwgInVybCI6ICJodHRwczovL3d3dy5pbnRlY2hvcGVuLmNvbS9ib29rcy93YXRlci1zdXBwbHktc3lzdGVtLWFuYWx5c2lzLXNlbGVjdGVkLXRvcGljcy9ndWlkZWxpbmVzLWZvci10cmFuc2llbnQtYW5hbHlzaXMtaW4td2F0ZXItdHJhbnNtaXNzaW9uLWFuZC1kaXN0cmlidXRpb24tc3lzdGVtcyIsICJ0aXRsZSI6ICJHdWlkZWxpbmVzIGZvciBUcmFuc2llbnQgQW5hbHlzaXMgaW4gV2F0ZXIgVHJhbnNtaXNzaW9uIGFuZCBEaXN0cmlidXRpb24gU3lzdGVtcyAifSwgeyJmYWN0IjogIlBvbHltZXJpYyBtYXRlcmlhbHMgYXJlIGVzcGVjaWFsbHkgcG9pc2VkIHRvIHJlYWxpemUgc3RyZXRjaGFibGUgYW5kIHRyYW5zaWVudCBlbGVjdHJvbmljcy4gSW4gdGhpcyBhcnRpY2xlLCBzdHJhdGVnaWVzIGFyZSByZXZpZXdlZCBmb3Igc3ludGhlc2l6aW5nIGFuZCB1dGlsaXppbmcgYmlvZGVncmFkYWJsZSBhbmQgZWxhc3RvbWVyaWMgb3JnYW5pYyBtYXRlcmlhbHMsIGZvbGxvd2VkIGJ5IGNvbXBvbmVudC1zcGVjaWZpIGMgbWF0ZXJpYWxzIGFwcHJvYWNoZXMgYW5kIGV4YW1wbGVzIG9mIGFzc2VtYmxlZCBzdHJldGNoYWJsZSBhbmQgdHJhbnNpZW50IHN5c3RlbXMuIiwgInVybCI6ICJodHRwczovL3d3dy5jYW1icmlkZ2Uub3JnL2NvcmUvc2VydmljZXMvYW9wLWNhbWJyaWRnZS1jb3JlL2NvbnRlbnQvdmlldy9DOUQwMTQwNTVDRUU1QzZGRDczNTMzMDhDNURDRERDRi9TMDg4Mzc2OTQyMDAwMDI0WGEucGRmL2Jpb2RlZ3JhZGFibGVfYW5kX3N0cmV0Y2hhYmxlX3BvbHltZXJpY19tYXRlcmlhbHNfZm9yX3RyYW5zaWVudF9lbGVjdHJvbmljX2RldmljZXMucGRmIiwgInRpdGxlIjogInd3dy5jYW1icmlkZ2Uub3JnIn1dfQ==";
+			var obj = JSON.parse(atob(base64));
+			var main_bucket = obj["main"];
+			var backup_bucket = obj["backup"]
+			var main_HTML = ""
+			var backup_HTML = ""
+			for(var i=0; i<main_bucket.length; i++)
+			{
+				var display = i>=4?"none":"block";
+				var card_HTML = replace(card_template,"main",i+1,i+1,main_bucket[i]["fact"],main_bucket[i]["url"],main_bucket[i]["title"], display);
+				main_HTML += card_HTML;
 			}
-		</script>
+			var facts_main = document.getElementById("facts_main");
+			facts_main.innerHTML = main_HTML;
 
-	</section>
+			for(var i=0; i<backup_bucket.length; i++)
+			{
+				var display = i>=4?"none":"block";
+				var card_HTML = replace(card_template,"backup",i+1,i+1+main_bucket.length,backup_bucket[i]["fact"],backup_bucket[i]["url"],main_bucket[i]["title"], display)
+				backup_HTML += card_HTML;
+			}
+			var facts_backup = document.getElementById("facts_backup");
+			facts_backup.innerHTML = backup_HTML;
 
+			highlight_update();
+
+		}
+
+		function toggle_more(){
+			reset_selection_options();
+		}
+		
+	</script>
 	<div class="container-fluid" style="height:100vh">
 		<h1 style="margin:5px;height:5vh;white-space: nowrap;">Writing textual queries whose answer can be derived from
 			multiple distinct facts</h1>
+
 		<div class="row" style="height:100%">
 			<div class="col-2" style="padding:10px;">
 				<!-- Modal onmouseover="highlight();" -->
 				<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Instruction">
-					Instruction
-				</button>
+							Instruction
+						</button>
+		
+						
+						 -->
+				<nav class="avbar navbar-light bg-light" id="navbar">
+					<nav class="nav nav-pills flex-column" style="padding:10px;"><a
+							class="nav-link btn btn-outline-secondary" data-target="#InstructionModel"
+							data-toggle="modal" id="id-navbar-instruction" style="margin:10px;">Instructions</a>
 
-				
-				 -->
-				<nav id="navbar" class="avbar navbar-light bg-light">
-					<a class="navbar-brand" href="#"></a>
-					<nav class="nav nav-pills flex-column" style="padding:10px;">
-						<a class="nav-link btn btn-outline-secondary" data-toggle="modal"
-							data-target="#InstructionModel" id="id-navbar-instruction"
-							style="margin:10px;">Instructions</a>
-						<div class="modal fade" id="InstructionModel" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalCenterTitle" aria-hidden="true" height="1200">
+						<div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade"
+							height="1200" id="InstructionModel" role="dialog" tabindex="-1">
 							<div class="modal-dialog modal-xl" height="100%">
 								<div class="modal-content" style="height:90%;">
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLongTitle">Instructions</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
+										<button aria-label="Close" class="close" data-dismiss="modal"
+											type="button"><span aria-hidden="true">&times;</span></button>
 									</div>
-									<div class="modal-body" height="100%">
 
-										<iframe frameborder="0" height="100%" width="100%"
-											src="https://quantusproject.github.io/mutli_reasoning_facts_instructions.html"></iframe>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">Close</button>
+									<div class="modal-body" height="100%"><iframe frameborder="0" height="100%"
+											src="https://quantusproject.github.io/mutli_reasoning_facts_instructions.html"
+											width="100%"></iframe></div>
 
-									</div>
+									<div class="modal-footer"><button class="btn btn-secondary" data-dismiss="modal"
+											type="button">Close</button></div>
 								</div>
 							</div>
 						</div>
 						<a class="nav-link active" href="#Facts" id="id-navbar-facts">Facts</a>
+
 						<div class="id-navbar-facts collapse show" id="navbar-collapse-facts">
 							<div style="font-size:13px;padding:15px;margin:10px;">
 								<h5>Highlight facts</h5>
+
 								<p>For your convenience you can use the highlighting feature we provide to highlight
 									part of text/keywords in given facts:</p>
+
 								<ol>
 									<li><b style="color:green">Highlight a fact:</b> select the text you want to
-										highlight;</lili>
-									<li><b style="color:red">Remove highlight:</b> click on the highlighted
-										text.</li>
+										highlight;</li>
+									<li><b style="color:red">Remove highlight:</b> click on the highlighted text.</li>
 									<li><b style="color:darkgoldenrod">Copy highlight:</b>You can only copy highlighted
-										text. simple click on the <span class="fa fa-copy"></span> before the
-										highlighted text.</li>
+										text. simple click on the before the highlighted text.</li>
 								</ol>
 
 								<h5>Insert new fact</h5>
+
 								<p>Feel free to add new fact if the given facts are not enough to format new question
 									and answer. Follow the following instruction</p>
+
 								<ol>
 									<li>The new fact should be somehow <b>related to the given one</b>;</li>
 									<li>The new fact should be <b>complicated enough</b>, and the <b>surrending text</b>
-										should also
-										be included.</li>
+										should also be included.</li>
 									<li>All new fact should be <b>extract from webpage</b>, please also provide the URL
-										to the
-										webpage in the given field.</li>
+										to the webpage in the given field.</li>
 									<li>Plase <b>DO NOT</b> make up any fact by yourself.</li>
 								</ol>
 							</div>
 						</div>
 						<a class="nav-link" href="#Annotations" id="id-navbar-annotations">Annotations</a>
+
 						<div class="id-navbar-annotations collapse" id="navbar-collapse-annotation">
 							<div style="font-size:13px;padding:15px;margin:10px;">
 								<h5>A valid annotation should include:</h5>
+
 								<ol>
-									<li>Select <b style="color:red">two or more text snippets</b> fom the given group
-										. This should include any new facts that you may have added.</li>
+									<li>Select <b style="color:red">two or more text snippets</b> fom the given group .
+										This should include any new facts that you may have added.</li>
 									<li>For your convenience you can use the highlighting feature we provide to
 										highlight part of text/keywords in given facts. These should help you to
 										organize, capture and refer back main thoughts while formulating a multi-hop
-										reasoning question. </li>
+										reasoning question.</li>
 									<li>Ask a question about the <b style="color:red">text snippets you select</b>. To
 										get the answer to question must <b style="color:green">need distinct info from
 											multiple facts</b>.</li>
 									<li>Write down the <b style="color:red">correct answer of your query</b>. The answer
-										should be <b>concluded
-											from ALL</b> text snippets you selected.</li>
-
+										should be <b>concluded from ALL</b> text snippets you selected.</li>
 								</ol>
 							</div>
 						</div>
 					</nav>
 				</nav>
-
 			</div>
-			<div class="col-10" data-spy="scroll" data-target="#navbar" data-offset="10" tabindex="0"
-				style="overflow-y: scroll; height:93vh; padding:10; width:100%;" onscroll="setTimeout(check_nav,100);"
-				onmove="console.log('on move')">
 
+			<div class="col-10" data-offset="10" data-spy="scroll" data-target="#navbar" onmove="console.log('on move')"
+				onscroll="setTimeout(check_nav,100);" style="overflow-y: scroll; height:93vh; padding:10; width:100%;"
+				tabindex="0">
 				<!-- ================================================== Announce Section =============================================================-->
-				<section class="row" id="Facts">
-					<iframe frameborder="0" style="width:100%;height:150;"
-						src="https://quantusproject.github.io/multi-reasoning-announce.html"></iframe>
-				</section>
+				<section class="row" id="Facts"><iframe frameborder="0"
+						src="https://quantusproject.github.io/multi-reasoning-announce.html"
+						style="width:100%;height:150;"></iframe></section>
+
 				<section class="row">
 					<!-- ================================================== Annotation  Section ============================================================== -->
-					<div class="col-12"><br />
+					<div class="col-12">&nbsp;
 						<div>
 							<div id="promot" onclick="highlight_update()">
-
-
-
 								<center>
 									<div class="card" id="ori_set">
 										<h3>
@@ -967,63 +1015,61 @@
 										</h3>
 										<!-- TODO, do we have fixed number of Prompt:  onmousemove="highlight()"-->
 										<div class="row row-cols-md-3 g-4" id="facts_main" style="max-width: 100%;">
-											<!-- Text Snippet 1-->
-											<div class="col" style="min-width:20%">
-												<div class="card mb-3" style="max-width: 30rem;" id="main_fact_card_1">
+											
+											<!-- <div class="col" style="min-width:20%">
+												<div class="card mb-3" id="main_fact_card_1" style="max-width: 30rem;">
 													<div class="card-header bg-transparent">Text Snippet 1:</div>
+
 													<div class="card-body">
 														<p class="card-text fact" id="text1">${fact01}</p>
 													</div>
-													<div class="card-footer">
-														<a class="text-muted url" href="${url01}" id="url1"
-															target="_blank">${title01}</a>
-													</div>
+
+													<div class="card-footer"><a class="text-muted url" href="${url01}"
+															id="url1" target="_blank">${title01}</a></div>
 												</div>
 											</div>
+											
 
-											<!-- Text Snippet 2-->
 											<div class="col" style="min-width:23%">
-												<div class="card mb-3" style="max-width: 30rem;" id="main_fact_card_2">
+												<div class="card mb-3" id="main_fact_card_2" style="max-width: 30rem;">
 													<div class="card-header bg-transparent">Text Snippet 2:</div>
+
 													<div class="card-body">
 														<p class="card-text fact" id="text2">${fact02}</p>
 													</div>
-													<div class="card-footer">
-														<a class="text-muted url" href="${url02}" id="url2"
-															target="_blank">
-															${title02}</a>
-													</div>
+
+													<div class="card-footer"><a class="text-muted url" href="${url02}"
+															id="url2" target="_blank">${title02}</a></div>
 												</div>
 											</div>
+											
 
-											<!-- Text Snippet 3-->
 											<div class="col" style="min-width:23%">
-												<div class="card mb-3" style="max-width: 30rem;" id="main_fact_card_3">
+												<div class="card mb-3" id="main_fact_card_3" style="max-width: 30rem;">
 													<div class="card-header bg-transparent">Text Snippet 3:</div>
+
 													<div class="card-body">
 														<p class="card-text fact" id="text3">${fact03}</p>
 													</div>
-													<div class="card-footer">
-														<a class="text-muted url" href="${url03}" id="url3"
-															target="_blank">${title03}</a>
-													</div>
+
+													<div class="card-footer"><a class="text-muted url" href="${url03}"
+															id="url3" target="_blank">${title03}</a></div>
 												</div>
 											</div>
+											
 
-											<!-- Text Snippet 4-->
 											<div class="col" style="min-width:23%">
-												<div class="card mb-3" style="max-width: 30rem;" id="main_fact_card_4">
+												<div class="card mb-3" id="main_fact_card_4" style="max-width: 30rem;">
 													<div class="card-header bg-transparent">Text Snippet 4:</div>
+
 													<div class="card-body">
 														<p class="card-text fact" id="text4">${fact04}</p>
 													</div>
-													<div class="card-footer">
-														<a class="text-muted url" href="${url04}" id="url4"
-															target="_blank">${title04}</a>
-													</div>
-												</div>
-											</div>
 
+													<div class="card-footer"><a class="text-muted url" href="${url04}"
+															id="url4" target="_blank">${title04}</a></div>
+												</div>
+											</div> -->
 										</div>
 									</div>
 								</center>
@@ -1037,100 +1083,98 @@
 										<center>
 											<div class="row row-cols-md-3 g-4" id="facts_backup"
 												style="max-width: 100%;">
-												<!-- Text Snippet 1-->
-												<div class="col" style="min-width:23%">
-													<div class="card mb-3" style="max-width: 30rem;"
-														id="backup_fact_card_1">
+												
+												<!-- <div class="col" style="min-width:23%">
+													<div class="card mb-3" id="backup_fact_card_1"
+														style="max-width: 30rem;">
 														<div class="card-header bg-transparent">Text Snippet 1:</div>
+
 														<div class="card-body">
 															<p class="card-text fact" id="text5">${fact05}</p>
 														</div>
-														<div class="card-footer">
-															<a class="text-muted url" href="${url05}" id="url5"
-																target="_blank">${title05}</a>
+
+														<div class="card-footer"><a class="text-muted url"
+																href="${url05}" id="url5" target="_blank">${title05}</a>
 														</div>
 													</div>
 												</div>
+												
 
-												<!-- Text Snippet 2-->
 												<div class="col" style="min-width:23%">
-													<div class="card mb-3" style="max-width: 30rem;"
-														id="backup_fact_card_2">
+													<div class="card mb-3" id="backup_fact_card_2"
+														style="max-width: 30rem;">
 														<div class="card-header bg-transparent">Text Snippet 2:</div>
+
 														<div class="card-body">
 															<p class="card-text fact" id="text6">${fact06}</p>
 														</div>
-														<div class="card-footer">
-															<a class="text-muted url" href="${url06}" id="url6"
-																target="_blank">${title06}</a>
+
+														<div class="card-footer"><a class="text-muted url"
+																href="${url06}" id="url6" target="_blank">${title06}</a>
 														</div>
 													</div>
 												</div>
+												
 
-												<!-- Text Snippet 3-->
 												<div class="col" style="min-width:23%">
-													<div class="card mb-3" style="max-width: 30rem;"
-														id="backup_fact_card_3">
+													<div class="card mb-3" id="backup_fact_card_3"
+														style="max-width: 30rem;">
 														<div class="card-header bg-transparent">Text Snippet 3:</div>
+
 														<div class="card-body">
 															<p class="card-text fact" id="text7">${fact07}</p>
 														</div>
-														<div class="card-footer">
-															<a class="text-muted url" href="${url07}" id="url7"
-																target="_blank">${title07}</a>
+
+														<div class="card-footer"><a class="text-muted url"
+																href="${url07}" id="url7" target="_blank">${title07}</a>
 														</div>
 													</div>
 												</div>
+												
 
-												<!-- Text Snippet 4-->
 												<div class="col" style="min-width:23%">
-													<div class="card mb-3" style="max-width: 30rem;"
-														id="backup_fact_card_4">
+													<div class="card mb-3" id="backup_fact_card_4"
+														style="max-width: 30rem;">
 														<div class="card-header bg-transparent">Text Snippet 4:</div>
+
 														<div class="card-body">
 															<p class="card-text fact" id="text8">${fact08}</p>
 														</div>
-														<div class="card-footer">
-															<a class="text-muted url" href="${url08}" id="url8"
-																target="_blank">${title08}</a>
+
+														<div class="card-footer"><a class="text-muted url"
+																href="${url08}" id="url8" target="_blank">${title08}</a>
 														</div>
 													</div>
-												</div>
+												</div> -->
 											</div>
 										</center>
 									</div>
 								</center>
+								<button type="button" class="btn btn-primary" onclick="toggle_more()">show more</button>
 							</div>
 							<br />
 							<label><input id="use_backup" name="use_backup" onclick="toggle_set(false);"
-									type="checkbox" />
-								I&#39;m using the backup set
-							</label>
-							<p>
+									type="checkbox" /> I&#39;m using the backup set </label>
 
-								<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-									data-bs-target="#newFactCollapse" aria-expanded="false"
-									aria-controls="newFactCollapse">
-									Insert new fact
-								</button>
-							</p>
+							<p><button aria-controls="newFactCollapse" aria-expanded="false" class="btn btn-primary"
+									data-bs-target="#newFactCollapse" data-bs-toggle="collapse" type="button">Insert new
+									fact</button></p>
+
 							<div class="collapse" id="newFactCollapse">
 								<div class="card card-body">
-									<div class="form-group">
-										<label>Fact</label>
-										<textarea type="text" class="form-control" id="newFact"
-											placeholder="please copy and paste the new fact here"></textarea>
-									</div>
-									<div class="form-group">
-										<label for="new Url">Url</label>
-										<input type="text" class="form-control" id="newUrl"
-											placeholder="please paste the corrspoding url here">
-									</div>
-									<button type="button" class="btn btn-primary" style="width:200px"
-										onclick="insertNewFact()">Add</button>
+									<div class="form-group"><label>Fact</label><textarea class="form-control"
+											id="newFact" placeholder="please copy and paste the new fact here"
+											type="text"></textarea></div>
+
+									<div class="form-group"><label for="new Url">Url</label> <input class="form-control"
+											id="newUrl" placeholder="please paste the corrspoding url here"
+											type="text" /></div>
+									<button class="btn btn-primary" onclick="insertNewFact()" style="width:200px"
+										type="button">Add</button>
 								</div>
 							</div>
 						</div>
+
 						<div id="Annotations">
 							<div style="margin-top:30px; margin-bottom:10px;">
 								<font size="4"><b>Steps</b></font>
@@ -1160,34 +1204,30 @@
 										<td width="10%"><b>
 												<font color="green">Text Selection</font>
 											</b></td>
-										<td style="text-align: center;" width="16%" class="image-select-placeholder">
+										<td class="image-select-placeholder" style="text-align: center;" width="16%">
 											<label class="text-selection"><input class="image-selection-1"
 													name="image-selection1"
 													onclick="ResetConfirmation('confirmation_div_1', 'Annotation_div_1', '1');"
-													type="checkbox" value="1" /> 1 </label>
-											<label class="text-selection"><input class="image-selection-2"
+													type="checkbox" value="1" /> 1 </label> <label
+												class="text-selection"><input class="image-selection-2"
 													name="image-selection2"
 													onclick="ResetConfirmation('confirmation_div_1', 'Annotation_div_1', '2');"
-													type="checkbox" value="1" /> 2 </label>
-											<label class="text-selection"><input class="image-selection-3"
+													type="checkbox" value="1" /> 2 </label> <label
+												class="text-selection"><input class="image-selection-3"
 													name="image-selection3"
 													onclick="ResetConfirmation('confirmation_div_1', 'Annotation_div_1', '3');"
-													type="checkbox" value="1" /> 3 </label>
-											<label class="text-selection"><input class="image-selection-4"
+													type="checkbox" value="1" /> 3 </label> <label
+												class="text-selection"><input class="image-selection-4"
 													name="image-selection4"
 													onclick="ResetConfirmation('confirmation_div_1', 'Annotation_div_1', '4');"
-													type="checkbox" value="1" /> 4 </label>
-										</td>
+													type="checkbox" value="1" /> 4 </label></td>
 										<td width="20%">
 											<div class="img_selection_limit" style="display:none;"><span
 													style="color:red">Please select at least 2 text snippets.</span>
 											</div>
 										</td>
 										<td rowspan="7" width="100%">
-											<div class="card-group snippets_placeholder">
-
-											</div>
-
+											<div class="card-group snippets_placeholder">&nbsp;</div>
 										</td>
 									</tr>
 									<tr>
@@ -1211,27 +1251,19 @@
 								</tbody>
 							</table>
 
-							<div class="alert alert-warning alert-dismissable" role="alert"><b>Search Engine</b>: Is
-								the
+							<div class="alert alert-warning alert-dismissable" role="alert"><b>Search Engine</b>: Is the
 								answer already found by current search engines?</div>
 
-							<div class="alert alert-warning alert-dismissable" role="alert">
-								<strong>Multi-hop</strong>:
-								We
-								are paticularly interested in questions that requires reasoning over two different
-								text snippets.
-							</div>
+							<div class="alert alert-warning alert-dismissable" role="alert"><strong>Multi-hop</strong>:
+								We are paticularly interested in questions that requires reasoning over two different
+								text snippets.</div>
 
 							<div class="col-12 confirmation_div_1" id="confirmation_div_1" style="margin-bottom:50px;">
 								<br />
 								<label><input class="confirmation-3" name="mul_img_confirmation"
 										onclick="mul_img_Check('Annotation_div_1', 'confirmation_div_1');"
-										type="checkbox" required="true" value="1" /> My question requires
-									information
-									pieces coming from at
-									least two
-									different
-									text snippets </label>
+										required="true" type="checkbox" value="1" /> My question requires information
+									pieces coming from at least two different text snippets </label>
 
 								<div class="count2" style="display:none;">&nbsp;</div>
 
@@ -1239,6 +1271,7 @@
 							</div>
 							<!-- ....................................... Annotation 2  ............................................... -->
 							<!-- TODO -->
+
 							<div style="margin-bottom:10px;">
 								<font size="4"><b>Annotation 2</b></font>
 							</div>
@@ -1250,34 +1283,30 @@
 										<td width="10%"><b>
 												<font color="green">Text Selection</font>
 											</b></td>
-										<td style="text-align: center; " class="image-select-placeholder" width="16%">
+										<td class="image-select-placeholder" style="text-align: center; " width="16%">
 											<label class="text-selection"><input class="image-selection-1"
 													name="image-selection1"
 													onclick="ResetConfirmation('confirmation_div_2', 'Annotation_div_2', '1');"
-													type="checkbox" value="2" /> 1 </label>
-											<label class="text-selection"><input class="image-selection-2"
+													type="checkbox" value="2" /> 1 </label> <label
+												class="text-selection"><input class="image-selection-2"
 													name="image-selection2"
 													onclick="ResetConfirmation('confirmation_div_2', 'Annotation_div_2', '2');"
-													type="checkbox" value="2" /> 2 </label>
-											<label class="text-selection"><input class="image-selection-3"
+													type="checkbox" value="2" /> 2 </label> <label
+												class="text-selection"><input class="image-selection-3"
 													name="image-selection3"
 													onclick="ResetConfirmation('confirmation_div_2', 'Annotation_div_2', '3');"
-													type="checkbox" value="2" /> 3 </label>
-											<label class="text-selection"><input class="image-selection-4"
+													type="checkbox" value="2" /> 3 </label> <label
+												class="text-selection"><input class="image-selection-4"
 													name="image-selection4"
 													onclick="ResetConfirmation('confirmation_div_2', 'Annotation_div_2', '4');"
-													type="checkbox" value="2" /> 4 </label>
-										</td>
+													type="checkbox" value="2" /> 4 </label></td>
 										<td width="20%">
 											<div class="img_selection_limit" style="display:none;"><span
 													style="color:red">Please select at least 2 text snippets.</span>
 											</div>
 										</td>
 										<td rowspan="7" width="70%">
-											<div class="card-group snippets_placeholder">
-
-											</div>
-
+											<div class="card-group snippets_placeholder">&nbsp;</div>
 										</td>
 									</tr>
 									<tr>
@@ -1301,27 +1330,19 @@
 								</tbody>
 							</table>
 
-							<div class="alert alert-warning alert-dismissable" role="alert"><b>Search Engine</b>: Is
-								the
+							<div class="alert alert-warning alert-dismissable" role="alert"><b>Search Engine</b>: Is the
 								answer already found by current search engines?</div>
 
-							<div class="alert alert-warning alert-dismissable" role="alert">
-								<strong>Multi-hop</strong>:
-								We
-								are paticularly interested in questions that requires reasoning over two different
-								text snippets.
-							</div>
+							<div class="alert alert-warning alert-dismissable" role="alert"><strong>Multi-hop</strong>:
+								We are paticularly interested in questions that requires reasoning over two different
+								text snippets.</div>
 
 							<div class="col-12 confirmation_div_2" id="confirmation_div_2" style="margin-bottom:50px;">
 								<br />
 								<label><input class="confirmation-3" name="mul_img_confirmation"
 										onclick="mul_img_Check('Annotation_div_2', 'confirmation_div_2');"
-										type="checkbox" required="true" value="2" /> My question requires
-									information
-									pieces coming from at
-									least two
-									different
-									text snippets </label>
+										required="true" type="checkbox" value="2" /> My question requires information
+									pieces coming from at least two different text snippets </label>
 
 								<div class="count2" style="display:none;">&nbsp;</div>
 
@@ -1342,7 +1363,7 @@
 								onclick="lengthCheck('confirmation');" required="" type="checkbox" /> My questions
 							aren&#39;t answered by Bing/Google&#39;s text search </label>
 					</div>
-					<br>
+					&nbsp;
 
 					<div class="lengthcheckmsg1" style="display:none;width: 100%;">&nbsp;</div>
 
@@ -1352,24 +1373,21 @@
 
 					<div class="alengthcheckmsg2" style="display:none;width: 100%;">&nbsp;</div>
 
-
 					<div class="binary_yes" style="display:none;width: 100%;">&nbsp;</div>
 
 					<div class="binary_no" style="display:none;width: 100%;">&nbsp;</div>
 
 					<div style="margin: 20px auto; text-align: center;"><input class="btn btn-primary" id="submitButton"
 							type="submit" value="Submit" /></div>
-					<div id="submission_hide_placeholder">
 
-					</div>
-					<div id="highlight_hide_placeholder">
+					<div id="submission_hide_placeholder">&nbsp;</div>
 
-					</div>
+					<div id="highlight_hide_placeholder">&nbsp;</div>
 				</section>
 				<!-- End input from Worker -->
 			</div>
-			<div class="col-2" </div>
-			</div>
+
+			<div class="col-2" div="">&nbsp;</div>
 		</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
@@ -1466,6 +1484,7 @@
 	</style>
 	<script type="text/javascript">
 		setuphighlight();
-		check_session()
+		check_session();
+		parse_input();
 	</script>
 </crowd-form>
