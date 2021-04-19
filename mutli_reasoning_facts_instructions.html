@@ -1,17 +1,41 @@
 <html>
-<style>
-	.example {
-		text-indent: 15px;
-		;
-	}
 
-	li.selected span {
-		background-color: lightgreen;
-		width: auto;
-	}
-</style>
+<head>
+	<style>
+		.example {
+			text-indent: 15px;
+			;
+		}
+
+		li.selected span {
+			background-color: lightgreen;
+			width: auto;
+		}
+	</style>
+
+	<script type="text/javascript">
+		function iframeLoaded() {
+			try {
+				var iframe = document.getElementById("faq_iframe");
+				if (iframe) {
+					iframe.height = "";
+					iframe.height == iframe.contentWindow.document.body.scrollHeight + "px";
+				}
+
+			}
+			catch(error)
+			{
+				console.log(error);
+			}
+			}
+	</script>
+</head>
+
 
 <body>
+	<section id="FAQ">
+		<iframe src="./FAQ.html" width="100%" id="faq_iframe" onload="iframeLoaded()"></iframe>
+	</section>
 	<h3> What is this HIT about?</h3>
 	<p>We are trying to build a question-answering system which is able to retrieve
 		the
