@@ -1,0 +1,189 @@
+<p>We are trying to build a question-answering system which is able to retrieve one or more images
+	to answer a user&#39;s query.</p>
+
+<p>To explore this problem, we collected <span style="color:blue;">Questions</span>, <span
+		style="color:IndianRed;">Answers</span> to those <span style="color:blue;">Questions</span>,
+	and <span style="color:green;">Images</span> that imply those <span
+		style="color:IndianRed;">Answers</span>. Now we want you to tell us a few things about each
+	<span style="color:blue;">Question</span> and <span style="color:blue;">Answer</span>:</p>
+
+<ol>
+	<li>Can you understand the <span style="color:blue;">Question</span> <b>without</b> looking at
+		an <span style="color:green;">Image</span>?</li>
+	<li>Is this <span style="color:Indianred;">Answer</span> really a valid and correct answer?</li>
+	<li>Can this <span style="color:Indianred;">Answer</span> be inferred from the <span
+			style="color:green;">Image</span>(s)?</li>
+	<li>Are at least two <span style="color:green;">Images</span> <b>necessary</b> to answer the
+		<span style="color:blue;">Question</span>?</li>
+	<li>Do you think there is a mismatch between <span style="color:green;">Image(s)</span> and the
+		<span style="color:blue;">Question</span>-<span style="color:Indianred;">Answer</span> pair,
+		which might be caused by wrong index selection?
+		<div class="tool-tip"><strong><i>i</i></strong> <span class="tooltiptext">In our annotation
+				task, we asked Turkers to select one or two image(s) from a group of images and then
+				provide a question-answer pair based on the selected image(s). However, occasionally
+				the image index(es) could be wrongly selected, which result in us losing track of
+				the correct image(s). If you find that the question-answer pair is valid, but it
+				seems so weird because the question-answer pair has nothing to with the image(s),
+				then there might be a mismatch problem caused by wrong index selection. Select
+				&#39;True&#39; if you think there IS such a problem.</span></div>
+	</li>
+</ol>
+<!-- ================================================== Example Section ===========================================================-->
+
+<div class="card mb-1">
+	<div class="card-header" style="height: 40px;padding:5">
+		<h4 class="card-sm-title"><b>Examples</b><a aria-controls="example-body"
+				aria-expanded="false" class="btn-sm-primary text-dark" data-toggle="collapse"
+				href="#example-body" style="float:right; text-decoration:none;"> <b>+-</b> </a></h4>
+	</div>
+
+	<div class="card-body collapse" id="example-body"><img
+			src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Mickey%27s_Fun_Wheel_%285464510618%29.jpg/800px-Mickey%27s_Fun_Wheel_%285464510618%29.jpg"
+			width="300" /> <img
+			src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Toy_Story_Midway_Mania.JPG/800px-Toy_Story_Midway_Mania.JPG"
+			width="300" /><br />
+		&nbsp;
+		<ol class="example-list">
+			<li>Can you understand the Question without looking at an Image?<br />
+				Question: Do both Toy Story Midway Mania and Mickey&#39;s Fun Wheel have a mouse
+				head displayed on them? --&gt; <span style="color:green;">True (Yes, I
+					can)</span><br />
+				Question: What cartoon figure is displayed on this ferris wheel? --&gt; <span
+					style="color:red;">False (No, I can&#39;t)</span></li>
+			<li>Is this Answer really a valid and correct answer?<br />
+				Question: Do both Toy Story Midway Mania and Mickey&#39;s Fun Wheel have a mouse
+				head displayed on them? Answer: Yes. --&gt; <span style="color:green;">True (valid
+					and correct)</span><br />
+				Question: Do both Toy Story Midway Mania and Mickey&#39;s Fun Wheel have a mouse
+				head displayed on them? Answer: Mickey Mouse&#39;s head. --&gt; <span
+					style="color:red;">False (not valid or not correct)</span></li>
+			<li>Can this Answer be inferred from the Image(s)?<br />
+				Question: Do both Toy Story Midway Mania and Mickey&#39;s Fun Wheel have a mouse
+				head displayed on them? Answer: Yes. --&gt; <span style="color:green;">True (Answer
+					can be inferred from Image(s))</span><br />
+				Question: Which city is Mickey&#39;s Fun Wheel located in? Answer: Amaheim. --&gt;
+				<span style="color:red;">False (Answer cannot be inferred from Image(s))</span></li>
+			<li>Are at least two Images necessary to answer the Question? (Select &quot;False&quot;
+				if this is a &quot;fake multi-image question&quot;)<br />
+				Question: Do both Toy Story Midway Mania and Mickey&#39;s Fun Wheel have a mouse
+				head displayed on them? --&gt; <span style="color:green;">True (At least two images
+					are necessary)</span><br />
+				Question: Is Mickey&#39;s Fun Wheel lower than the roller coaster beside it? --&gt;
+				<span style="color:red;">False (One image is enough)</span></li>
+		</ol>
+		<br />
+		<br />
+		<br />
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Walk_of_fame%2C_Hollywood_-_panoramio.jpg/800px-Walk_of_fame%2C_Hollywood_-_panoramio.jpg"
+			width="300" /> <img
+			src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/LA_Fitness_-_panoramio.jpg/768px-LA_Fitness_-_panoramio.jpg"
+			width="300" /><br />
+		&nbsp;
+		<ol class="example-list">
+			<li>Can you understand the Question without looking at an Image?<br />
+				Question: Is it true that stars line up in two rows all the way along the Hollywood
+				Walk of Fame? --&gt; <span style="color:green;">True (Yes, I can)</span><br />
+				Question: How many benches are there under the tree? --&gt; <span
+					style="color:red;">False (No, I can&#39;t)</span></li>
+			<li>Is this Answer really a valid and correct answer?<br />
+				Question: Is it true that stars line up in two rows all the way along the Hollywood
+				Walk of Fame? Answer: No. --&gt; <span style="color:green;">True (valid and
+					correct)</span><br />
+				Question: Is it true that stars line up in two rows all the way along the Hollywood
+				Walk of Fame? Answer: Yes. --&gt; <span style="color:red;">False (not valid or not
+					correct)</span></li>
+			<li>Can this Answer be inferred from the Image(s)?<br />
+				Question: Is it true that stars line up in two rows all the way along the Hollywood
+				Walk of Fame? Answer: No. --&gt; <span style="color:green;">True (Answer can be
+					inferred from Image(s))</span><br />
+				Question: How many stars are there on the Hollywood Walk of Fame? Answer: 2690.
+				--&gt; <span style="color:red;">False (Answer cannot be inferred from
+					Image(s))</span></li>
+			<li>Are at least two Images necessary to answer the Question?<br />
+				Question: Is it true that stars line up in two rows all the way along the Hollywood
+				Walk of Fame? --&gt; <span style="color:green;">True (At least two images are
+					necessary)</span><br />
+				Question: What color are the stars on the Hollywood Walk of Fame? --&gt; <span
+					style="color:red;">False (One image is enough)</span></li>
+		</ol>
+	</div>
+</div>
+<!-- ==================================================== FAQ Section =============================================================-->
+
+<div class="card mb-1">
+	<div class="card-header" style="height: 40px;padding:5">
+		<h4 class="card-sm-title"><b>FAQ</b><a aria-controls="faq-body" aria-expanded="false"
+				class="btn-sm-primary text-dark" data-toggle="collapse" href="#faq-body"
+				style="float:right; text-decoration:none;"> <b>+-</b> </a></h4>
+	</div>
+
+	<div class="card-body collapse" id="faq-body">
+		<ol>
+			<li>Can I do more than one assignment? Yes please!</li>
+			<li>Is this related to your previous HITs? Yes! We are going to validate data collected
+				from previous HITs and then figure out a way to scale things up :)</li>
+			<li>Will my responses be compared to others? Yes! We are looking for agreement on these.
+			</li>
+		</ol>
+	</div>
+</div>
+<!-- Horizontal delimitor-->
+
+<div style="width: 100%; height: 15px; border-bottom: 3px dashed #f7eabf; text-align: center">&nbsp;
+</div>
+
+<div class="alert alert-secondary alert-dismissable" role="alert"><strong><big>[NEW!] &nbsp;
+	Clarifications incorporating previous feedback:</big> </strong>
+
+<ul>
+<li style="padding-top:15px;"><span
+		style="background-color:rgb(255, 249, 133); color:black;"><b>No</b> tolerance to
+		spelling mistakes</span><br />
+	Capitalization error is fine. Underscores are allowed in names.</li>
+<li style="padding-top:5px;"><span
+		style="background-color:rgb(255, 249, 133); color:black;">Questions must be
+		<b>interrogative</b></span><br />
+	De-qualify questions that are written as a declarative statement. Interrogative sentence
+	with a missing question mark is fine.</li>
+<li style="padding-top:5px;"><span
+		style="background-color:rgb(255, 249, 133); color:black;">If question is invalid,
+		then there is no need to do the remaining validation for the same
+		sample.</span><br />
+	In this case, the remaining selections will be automatically set to &quot;False&quot;.
+</li>
+<li style="padding-top:5px;"><span
+		style="background-color:rgb(255, 249, 133); color:black;">Answer lies in metadata
+		&ne; inferred from image</span><br />
+	You can assume that the meta-data is there to help identify or locate the object of
+	interest, as long as the identity or geographic information is not directly asked in the
+	question. However, the property from which we directly draw the answer must be presented
+	by some visual element in the image.</li>
+<li style="padding-top:5px;"><span
+		style="background-color:rgb(255, 249, 133); color:black;">Select &quot;False&quot;
+		when <b>img does not load</b></span><br />
+	It rarely happens that some image sources have been deleted, so we need your help to
+	filter out broken image links!</li>
+<li style="padding-top:5px;"><span
+		style="background-color:rgb(255, 249, 133); color:black;">Be aware of <b>fake
+			multi-img</b> questions</span><br />
+	For a valid multi-hop sample, the images should be <strong>complementary</strong> rather
+	than substitutes for each other. In other words, both images should contain some
+	information that the other does not contain. Questions that fail to satisfy this would
+	fall into the single-hop bucket.</li>
+<li style="padding-top:5px;"><span
+		style="background-color:rgb(255, 249, 133); color:black;">De-qualify questions that
+		are easily answered by Google/about commonsense/too trivial</span><br />
+	Examples of such unqualified questions are like &quot;Are there sidewalks in xxx
+	city&quot;, &quot;Are there buses on xxx street&quot;, etc.</li>
+<li style="padding-top:5px;"><span
+		style="background-color:rgb(255, 249, 133); color:black;">De-qualify incoherent
+		questions</span><br />
+	Questions that seem like two separate ones are not allowed.</li>
+<li style="padding-top:5px;"><span
+		style="background-color:rgb(255, 249, 133); color:black;">How to handle binary
+		questions with answers beyond a single &quot;Yes/No&quot;?</span><br />
+	The extra explanation beyond &quot;Yes/No&quot; will not by itself determine the
+	validity of the answer. Essentially you can ignore the extra explanation and score the
+	answer based on its &quot;Yes/No&quot;</li>
+</ul>
+</div>

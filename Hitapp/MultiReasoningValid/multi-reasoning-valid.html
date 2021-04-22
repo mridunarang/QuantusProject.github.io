@@ -1,0 +1,507 @@
+<link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
+<!-- You must include this JavaScript file -->
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+	</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+	</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+	</script>
+<script>
+	function loading_data() {
+		// 1: question
+		// 2: facts html
+		// 3: answer
+		// 4: index , 1 based
+		var row_template = `
+		<tr class="item">
+			<td width="200">{1}</td>
+			<td width="490">Can you understand what is being asked without reading the facts?
+				<select class="form-control form-control-lg" id="validquestion{4}"
+					name="validquestion{4}" onchange="InvalidQ('{4}');" required="">
+					<option disabled="disabled" hidden="" selected="selected" value="">Select a
+						response</option>
+					<option value="True">True</option>
+					<option value="False">False</option>
+				</select>
+				<div class="form-group"><br />
+					<label for="Qjustification{4}" style="font-weight: 500;">I select False because of
+						other problems: </label>
+					<div class="predefined_Qjustification"
+						onclick="AddQjustification('{4}', 'Commonsense/Too trivial')">Commonsense/Too
+						trivial</div>
+
+					<div class="predefined_Qjustification"
+						onclick="AddQjustification('{4}', 'Spelling mistakes')">Spelling mistakes
+					</div>
+
+					<div class="tool-tip"><strong><i>i</i></strong> <span
+							class="QJtooltiptext">Underscores are allowed in names. </span></div>
+
+					<div class="predefined_Qjustification"
+						onclick="AddQjustification('{4}', 'Not specific enough/Ambiguous')">Not
+						specific enough/Ambiguous</div>
+
+					<div class="predefined_Qjustification"
+						onclick="AddQjustification('{4}', 'Wrong grammar')">Wrong grammar</div>
+
+					<div class="predefined_Qjustification"
+						onclick="AddQjustification('{4}', 'Opinionated/Too subjective')">
+						Opinionated/Too subjective</div>
+
+					<div class="predefined_Qjustification"
+						onclick="AddQjustification('{4}', 'Time sensitive')">Time sensitive</div>
+
+					<div class="predefined_Qjustification"
+						onclick="AddQjustification('{4}', 'Too easy for single fact')">Too easy to be answered by single fact</div>
+
+
+					<div class="predefined_Qjustification"
+						onclick="AddQjustification('{4}', 'Declarative rather than interrogative')">
+						Declarative rather than interrogative</div>
+
+					<div class="tool-tip"><strong><i>i</i></strong> <span
+							class="QJtooltiptext">Missing question mark is fine.</span></div>
+
+					<div class="predefined_Qjustification"
+						onclick="AddQjustification('{4}', 'Technically correct but looks like garbage')">
+						Technically correct but looks like garbage</div>
+					<textarea class="form-control" cols="300" id="Qjustification{4}"
+						name="Qjustification{4}" rows="4"></textarea>
+				</div>
+			</td>
+			<td>
+				<table rules="none">
+					<tbody class="facts" id="facts{4}">
+						{2}
+					</tbody>
+				</table>
+			</td>
+			<td width="300">{3}</td>
+			<td width="390">Is this answer really a valid and correct answer? <select
+					class="form-control form-control-lg" id="validanswer{4}" name="validanswer{4}"
+					required="">
+					<option disabled="disabled" hidden="" selected="selected" value="">Select a
+						response</option>
+					<option value="True">True</option>
+					<option value="False">False</option>
+				</select><br />
+				Can this answer be inferred from the facts? <select
+					class="form-control form-control-lg" id="inferred{4}" name="inferred{4}"
+					required="">
+					<option disabled="disabled" hidden="" selected="selected" value="">Select a
+						response</option>
+					<option value="True">True</option>
+					<option value="False">False</option>
+				</select><br />
+				Are all facts necessary to answer the question? <select
+					class="form-control form-control-lg" id="multihop{4}" name="multihop{4}"
+					required="">
+					<option disabled="disabled" hidden="" selected="selected" value="">Select a
+						response</option>
+					<option value="True">True</option>
+					<option value="False">False</option>
+				</select><br />
+				Do you think there is a mismatch between the facts and the question-answer pair,
+				which might be caused by wrong index selection?
+				<div class="tool-tip"><strong><i>i</i></strong> <span class="tooltiptext">In our
+						annotation task, we asked Turkers to select at least two facts from a group
+						of facts and then provide a question-answer pair based on the selected
+						facts. However, occasionally the fact index could be incorrectly
+						selected, which result in us losing track of the correct facts. If you
+						find that the question-answer pair is valid, but it seems so weird because
+						the question-answer pair has nothing to with the facts, then there might
+						be a mismatch problem caused by wrong index selection. Select &#39;True&#39;
+						if you think there IS such a problem.</span></div>
+				<select class="form-control form-control-lg" id="index{4}" name="index{4}" required="">
+					<option disabled="disabled" hidden="" selected="selected" value="">Select a
+						response</option>
+					<option value="True">True</option>
+					<option value="False">False</option>
+				</select>
+			</td>
+		</tr>
+		`;
+		// 1: fact_content
+		// 2: fact_url
+		// 3: fact_title
+		// 4: index, 1 based
+		var fact_row_template = `
+		<tr>
+			<td>
+				<span style="font-size: 11px; color:grey; vertical-align: baseline;">[{4}]</span> {1} - <a href="{2}" target="_blank" style="font-size:13px;">{3}</a>
+			</td>
+		</tr>
+		`;
+		var input = "${fact01}";
+		const sample_data = "W3siUXVlc3Rpb24iOiJUaGlzIGlzIGFuIHNhbXBsZSBRdWVzdGlvbiIsIkFuc3dlciI6IlRoaXMgaXMgYW4gc2FtcGxlIEFuc3dlciIsIkZhY3RzIjpbeyJmYWN0IjoidGhpcyBpcyBhbiBzYW1wbGUgZmFjdCB0ZXh0IiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSJ9LHsiZmFjdCI6InRoaXMgaXMgdGhlIHNlY29uZCBzYW1wbGUgZmFjdCIsImxpbmsiOiJodHRwczovL3JlcXVlc3RlcnNhbmRib3gubXR1cmsuY29tL2JhdGNoZXMvMzE3MDk1IiwidGl0bGUiOiJUaGlzIGlzIHRoZSBzZWNvbmQgdGl0bGUifV19LHsiUXVlc3Rpb24iOiJUaGlzIGlzIHRoZSBzZWNvbmQgc2FtcGxlIFF1ZXN0aW9uIiwiQW5zd2VyIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBBbnN3ZXIiLCJGYWN0cyI6W3siZmFjdCI6InRoaXMgaXMgYW4gc2FtcGxlIGZhY3QgdGV4dCBvZiB0aGUgc2Vjb25kIHF1ZXN0aW9uIiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSBvZiB0aGUgc2Vjb25kIHF1ZXN0aW9uIn0seyJmYWN0IjoidGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBmYWN0IG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24iLCJsaW5rIjoiaHR0cHM6Ly9yZXF1ZXN0ZXJzYW5kYm94Lm10dXJrLmNvbS9iYXRjaGVzLzMxNzA5NSIsInRpdGxlIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHRpdGxlIG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24ifV19XQ==";
+		var data;
+		try
+		{
+			data = JSON.parse(atob(input));
+		}
+		catch{
+			data = JSON.parse(atob(sample_data));
+		}
+		var all_annotations = "";
+		for (var i = 0; i < data.length; i++) {
+			var question = data[i]["Question"];
+			var answer = data[i]["Answer"]
+			var all_fact_html = "";
+			for (var j = 0; j < data[i]["Facts"].length; j++) {
+				var fact_html = replace(fact_row_template, data[i]["Facts"][j]["fact"], data[i]["Facts"][j]["link"], data[i]["Facts"][j]["title"], j + 1);
+				all_fact_html += fact_html;
+			}
+			all_annotations += replace(row_template, question, all_fact_html, answer, i + 1);
+
+		}
+		document.getElementById("annotation-body").innerHTML = all_annotations;
+
+	}
+
+	function replace(str) {
+		var args = arguments;
+		return str.replace(/{(\d+)}/g, function (match, number) {
+			return typeof args[number] != 'undefined'
+				? args[number]
+				: match
+				;
+		});
+	}
+</script>
+<crowd-form answer-format="flatten-objects">
+	<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet" />
+	<section class="container-fluid" id="Other"
+		style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:1.2em;">
+		<div class="row col-xs-12 col-md-12" onload="checkIfPopulated();">
+			<!-- Instructions -->
+			<div class="panel panel-primary">
+				<div class="panel-body" style="font-size:14px;">
+					<h1>[Validation] Writing queries whose answer must be derived from multiple distinct facts</h1>
+					&nbsp;
+
+					<div class="alert alert-warning alert-dismissable" role="alert" style="font-size:14px;">
+						<button aria-label="Close" class="close" data-dismiss="alert" type="button">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<iframe frameborder="0" height="210" src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/Announce.html"
+							width="100%">Latest info also available
+							aturl</iframe>
+					</div>
+					&nbsp;
+
+					<!-- ==================================================== Annotation Section =============================================================-->
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<button type="button" class="btn btn-secondary btn-lg" style="min-width:150px;"
+									data-target="#InstructionModel" data-toggle="modal"
+									id="id-navbar-instruction">Instructions</button>
+
+								<div aria-hidden="true" aria-labelledby="InstructionsTitle" class="modal fade"
+									height="1200" id="InstructionModel" role="dialog" tabindex="-1">
+									<div class="modal-dialog modal-xl" height="100%">
+										<div class="modal-content" style="height:90%;">
+											<div class="modal-header">
+												<h5 class="modal-title" id="InstructionsTitle">Instructions</h5>
+												<button aria-label="Close" class="close" data-dismiss="modal"
+													type="button"><span aria-hidden="true">&times;</span></button>
+											</div>
+
+											<div class="modal-body" height="100%"><iframe frameborder="0" height="100%"
+													src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/Instruction.html"
+													width="100%"></iframe></div>
+
+											<div class="modal-footer"><button class="btn btn-secondary"
+													data-dismiss="modal" type="button">Close</button></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col">
+								<button type="button" class="btn btn-secondary btn-lg" style="min-width:150px;"
+									data-target="#ExamplesModel" data-toggle="modal"
+									id="id-navbar-Examples">Examples</button>
+
+								<div aria-hidden="true" aria-labelledby="ExamplesTitle" class="modal fade" height="1200"
+									id="ExamplesModel" role="dialog" tabindex="-1">
+									<div class="modal-dialog modal-xl" height="100%">
+										<div class="modal-content" style="height:90%;">
+											<div class="modal-header">
+												<h5 class="modal-title" id="ExamplesTitle">Examples</h5>
+												<button aria-label="Close" class="close" data-dismiss="modal"
+													type="button"><span aria-hidden="true">&times;</span></button>
+											</div>
+
+											<div class="modal-body" height="100%"><iframe frameborder="0" height="100%"
+													src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/Examples.html"
+													width="100%"></iframe></div>
+
+											<div class="modal-footer"><button class="btn btn-secondary"
+													data-dismiss="modal" type="button">Close</button></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<button type="button" class="btn btn-secondary btn-lg" style="min-width:150px;"
+									data-target="#FAQsModel" data-toggle="modal" id="id-navbar-FAQs">FAQs</button>
+
+								<div aria-hidden="true" aria-labelledby="FAQsTitle" class="modal fade" height="1200"
+									id="FAQsModel" role="dialog" tabindex="-1">
+									<div class="modal-dialog modal-xl" height="100%">
+										<div class="modal-content" style="height:90%;">
+											<div class="modal-header">
+												<h5 class="modal-title" id="FAQsTitle">FAQs</h5>
+												<button aria-label="Close" class="close" data-dismiss="modal"
+													type="button"><span aria-hidden="true">&times;</span></button>
+											</div>
+
+											<div class="modal-body" height="100%"><iframe frameborder="0" height="100%"
+													src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/FAQs.html"
+													width="100%"></iframe></div>
+
+											<div class="modal-footer"><button class="btn btn-secondary"
+													data-dismiss="modal" type="button">Close</button></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<button type="button" class="btn btn-secondary btn-lg" style="min-width:150px;"
+									data-target="#AnnouncementsModel" data-toggle="modal"
+									id="id-navbar-Announcements">Announcements</button>
+
+								<div aria-hidden="true" aria-labelledby="AnnouncementsTitle" class="modal fade"
+									height="1200" id="AnnouncementsModel" role="dialog" tabindex="-1">
+									<div class="modal-dialog modal-xl" height="100%">
+										<div class="modal-content" style="height:90%;">
+											<div class="modal-header">
+												<h5 class="modal-title" id="AnnouncementsTitle">Announcements</h5>
+												<button aria-label="Close" class="close" data-dismiss="modal"
+													type="button"><span aria-hidden="true">&times;</span></button>
+											</div>
+
+											<div class="modal-body" height="100%"><iframe frameborder="0" height="100%"
+													src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/Announcements.html"
+													width="100%"></iframe></div>
+
+											<div class="modal-footer"><button class="btn btn-secondary"
+													data-dismiss="modal" type="button">Close</button></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<center>
+						<p style="font-size:15px; font-weight:bold; margin-top:50px;">Annotation Task: For each case
+							below, please answer all of these questions.</p>
+
+						<p>We have 10 cases in each assignment. In very rare cases there are less than 10.</p>
+
+					</center>
+					&nbsp;
+
+					<table class="table table-fixed" id="tbl">
+						<thead>
+							<tr>
+								<th scope="col">Question</th>
+								<th scope="col">*Tell us about this Question*</th>
+								<th scope="col">Facts</th>
+								<th scope="col">Answer</th>
+								<th scope="col">*Tell us about this Answer*</th>
+							</tr>
+						</thead>
+						<tbody id="annotation-body">
+							<!--Data placeholder-->
+						</tbody>
+					</table>
+
+					<div class="form-group"><label for="feedback">Optional Feedback</label><textarea
+							class="form-control" cols="300" id="feedback" name="feedback" rows="2"></textarea></div>
+					<input class="btn btn-primary btn-lg pull-right" id="submitButton" type="submit" value="Submit" />
+				</div>
+				<style type="text/css">
+					option {
+						font-size: 15px;
+					}
+
+					ol.example-list li {
+						margin-bottom: 10px;
+					}
+
+					div.tool-tip {
+						margin-top: 5px;
+						margin-bottom: 5px;
+						height: 22px;
+						text-align: center;
+						vertical-align: middle;
+						width: 22px;
+						border-radius: 50%;
+						background-color: rgb(178, 216, 240);
+						color: white;
+						border: none;
+					}
+
+					/* Tool-tip container */
+					.tool-tip {
+						position: relative;
+						display: inline-block;
+						border-bottom: 1px dotted black;
+						/* If you want dots under the hoverable text */
+					}
+
+					/* Tool-tip text */
+					.tool-tip .tooltiptext {
+						visibility: hidden;
+						width: 500px;
+						background-color: rgb(229, 244, 253);
+						color: black;
+						padding: 10px 15px;
+						border-radius: 6px;
+						text-align: justify;
+						position: absolute;
+						left: -510px;
+						top: -100px;
+						z-index: 999;
+					}
+
+					.tool-tip .imgtooltiptext {
+						visibility: hidden;
+						width: 250px;
+						background-color: rgb(229, 244, 253);
+						color: black;
+						padding: 10px 15px;
+						border-radius: 6px;
+						text-align: justify;
+						/* Position the tool-tip text - see examples below! */
+						position: absolute;
+						left: -300px;
+						top: 30px;
+						z-index: 1;
+					}
+
+					.tool-tip .QJtooltiptext {
+						visibility: hidden;
+						width: 300px;
+						background-color: rgb(229, 244, 253);
+						color: black;
+						padding: 10px 15px;
+						border-radius: 6px;
+						text-align: justify;
+						/* Position the tool-tip text - see examples below! */
+						position: absolute;
+						left: -150px;
+						top: 30px;
+						z-index: 1;
+					}
+
+					/* Show the tool-tip text when you mouse over the tool-tip container */
+					.tool-tip:hover .tooltiptext {
+						visibility: visible;
+					}
+
+					.tool-tip:hover .imgtooltiptext {
+						visibility: visible;
+					}
+
+					.tool-tip:hover .QJtooltiptext {
+						visibility: visible;
+					}
+
+					.predefined_Qjustification {
+						display: inline-block;
+						border-radius: 15px;
+						padding: 1px 15px;
+						margin: 5px;
+						border: solid;
+						font-size: 14px;
+						background-color: #FEFEFE;
+						border-color: #bbb #ddd #eee #ccc;
+						border-width: 1px;
+					}
+
+					.predefined_Qjustification:hover {
+						background-color: #efefef;
+						color: #000;
+						cursor: pointer;
+					}
+
+					img:hover {
+						position: relative;
+						transform: scale(2);
+						display: block;
+						z-index: 1;
+						cursor: pointer;
+						-webkit-transition-property: all;
+						-webkiy-transition-duration: 0.3s;
+						-webkit-transition-timing-function: ease;
+					}
+				</style>
+			</div>
+		</div>
+	</section>
+</crowd-form>
+
+<p>&nbsp;</p>
+
+<p>
+	<script>
+		$(".row").each(function () {
+			if ($(this).children().eq(0).children().eq(0).text().trim() == "None") {
+				this.remove();
+			}
+		});
+		$("tr.item").each(function () {
+			if ($(this).children().eq(0).text().trim() == "None") {
+				this.remove();
+			}
+		});
+
+		$("tr.item").each(function () {
+			$(this).css("border", "1");
+		});
+
+		$(".image_tbody").each(function () {
+			$(this).css("border", "0");
+		});
+
+		function hideImg(hideid) {
+			document.getElementById(hideid).style.display = "none";
+		}
+
+		function InvalidQ(idx) {
+			if ($('#validquestion' + idx).val() == "False") {
+				$('#validanswer' + idx).val("False");
+				$('#inferred' + idx).val("False");
+				$('#multihop' + idx).val("False");
+				$('#index' + idx).val("False");
+			} else {
+				$('#validanswer' + idx).val("");
+				$('#inferred' + idx).val("");
+				$('#multihop' + idx).val("");
+				$('#index' + idx).val("");
+			}
+		}
+
+		function AddQjustification(idx, content) {
+			var cur_content = $("#Qjustification" + idx).val();
+			if (cur_content.length > 0) { cur_content += "; "; }
+			$("#Qjustification" + idx).val(cur_content + content);
+		}
+
+		loading_data();
+
+
+	</script>
+</p>
+
+<p>&nbsp;</p>

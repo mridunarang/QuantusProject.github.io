@@ -1,0 +1,101 @@
+<tr class="item">
+	<td width="200">${Q01}</td>
+	<td width="490">Can you understand what is being asked without reading the facts?
+		<select class="form-control form-control-lg" id="validquestion1" name="validquestion1" onchange="InvalidQ('1');"
+			required="">
+			<option disabled="disabled" hidden="" selected="selected" value="">Select a
+				response</option>
+			<option value="True">True</option>
+			<option value="False">False</option>
+		</select>
+		<div class="form-group"><br />
+			<label for="Qjustification1" style="font-weight: 500;">I select False because of
+				other problems: </label>
+			<div class="predefined_Qjustification" onclick="AddQjustification('1', 'Commonsense/Too trivial')">
+				Commonsense/Too
+				trivial</div>
+
+			<div class="predefined_Qjustification" onclick="AddQjustification('1', 'Spelling mistakes')">Spelling
+				mistakes
+			</div>
+
+			<div class="tool-tip"><strong><i>i</i></strong> <span class="QJtooltiptext">Underscores are allowed in
+					names. </span></div>
+
+			<div class="predefined_Qjustification" onclick="AddQjustification('1', 'Not specific enough/Ambiguous')">Not
+				specific enough/Ambiguous</div>
+
+			<div class="predefined_Qjustification" onclick="AddQjustification('1', 'Wrong grammar')">Wrong grammar</div>
+
+			<div class="predefined_Qjustification" onclick="AddQjustification('1', 'Opinionated/Too subjective')">
+				Opinionated/Too subjective</div>
+
+			<div class="predefined_Qjustification" onclick="AddQjustification('1', 'Time sensitive')">Time sensitive
+			</div>
+
+			<div class="predefined_Qjustification" onclick="AddQjustification('1', 'Too easy for single fact')">Too easy
+				to be
+				answered by single fact</div>
+
+
+			<div class="predefined_Qjustification"
+				onclick="AddQjustification('1', 'Declarative rather than interrogative')">
+				Declarative rather than interrogative</div>
+
+			<div class="tool-tip"><strong><i>i</i></strong> <span class="QJtooltiptext">Missing
+					question mark is fine.</span></div>
+
+			<div class="predefined_Qjustification"
+				onclick="AddQjustification('1', 'Technically correct but looks like garbage')">
+				Technically correct but looks like garbage</div>
+			<textarea class="form-control" cols="300" id="Qjustification1" name="Qjustification1" rows="4"></textarea>
+		</div>
+	</td>
+	<td>
+		<table rules="none">
+			<tbody class="facts" id="facts1">
+				{2}
+			</tbody>
+		</table>
+	</td>
+	<td width="300">${A01}</td>
+	<td width="390">Is this answer really a valid and correct answer? <select class="form-control form-control-lg"
+			id="validanswer1" name="validanswer1" required="">
+			<option disabled="disabled" hidden="" selected="selected" value="">Select a
+				response</option>
+			<option value="True">True</option>
+			<option value="False">False</option>
+		</select><br />
+		Can this answer be inferred from the image(s)? <select class="form-control form-control-lg" id="inferred1"
+			name="inferred1" required="">
+			<option disabled="disabled" hidden="" selected="selected" value="">Select a
+				response</option>
+			<option value="True">True</option>
+			<option value="False">False</option>
+		</select><br />
+		Are at least two images necessary to answer the question? <select class="form-control form-control-lg"
+			id="multihop1" name="multihop1" required="">
+			<option disabled="disabled" hidden="" selected="selected" value="">Select a
+				response</option>
+			<option value="True">True</option>
+			<option value="False">False</option>
+		</select><br />
+		Do you think there is a mismatch between the image(s) and the question-answer pair,
+		which might be caused by wrong index selection?
+		<div class="tool-tip"><strong><i>i</i></strong> <span class="tooltiptext">In our
+				annotation task, we asked Turkers to select one or two image(s) from a group
+				of images and then provide a question-answer pair based on the selected
+				image(s). However, occasionally the image index could be incorrectly
+				selected, which result in us losing track of the correct image(s). If you
+				find that the question-answer pair is valid, but it seems so weird because
+				the question-answer pair has nothing to with the image(s), then there might
+				be a mismatch problem caused by wrong index selection. Select &#39;True&#39;
+				if you think there IS such a problem.</span></div>
+		<select class="form-control form-control-lg" id="index1" name="index1" required="">
+			<option disabled="disabled" hidden="" selected="selected" value="">Select a
+				response</option>
+			<option value="True">True</option>
+			<option value="False">False</option>
+		</select>
+	</td>
+</tr>
