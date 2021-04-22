@@ -173,6 +173,16 @@
 				;
 		});
 	}
+
+	function check_session() {
+				var count = sessionStorage.getItem("number_hits");
+				count = count == null ? 0 : parseInt(count);
+				console.log(count);
+				if (count < 3) {
+					$('#InstructionModel').modal('show');
+				}
+				sessionStorage.setItem("number_hits", count + 1);
+			}
 </script>
 <crowd-form answer-format="flatten-objects">
 	<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -190,7 +200,7 @@
 						<button aria-label="Close" class="close" data-dismiss="alert" type="button">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<iframe frameborder="0" height="210" src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/Announce.html"
+						<iframe frameborder="0" height="210" src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/Announcements.html"
 							width="100%">Latest info also available
 							aturl</iframe>
 					</div>
@@ -265,7 +275,7 @@
 											</div>
 
 											<div class="modal-body" height="100%"><iframe frameborder="0" height="100%"
-													src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/FAQs.html"
+													src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/FAQ.html"
 													width="100%"></iframe></div>
 
 											<div class="modal-footer"><button class="btn btn-secondary"
@@ -499,6 +509,7 @@
 		}
 
 		loading_data();
+		check_session();
 
 
 	</script>
