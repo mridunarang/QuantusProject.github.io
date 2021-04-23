@@ -21,7 +21,8 @@
 		var row_template = `
 		<tr class="item">
 			<td width="200">{1}</td>
-			<td width="490">Can you understand what is being asked without reading the facts?
+			<td width="490"><p>About this question:</p> 
+				Can you understand what is being asked without reading the facts?
 				<select class="form-control form-control-lg" id="validquestion{4}"
 					name="validquestion{4}" onchange="InvalidQ('{4}');" required="">
 					<option disabled="disabled" hidden="" selected="selected" value="">Select a
@@ -75,7 +76,7 @@
 						name="Qjustification{4}" rows="4"></textarea>
 				</div>
 			</td>
-			<td>
+			<td style="min-width:400px;">
 				<table rules="none">
 					<tbody class="facts" id="facts{4}">
 						{2}
@@ -83,7 +84,9 @@
 				</table>
 			</td>
 			<td width="300">{3}</td>
-			<td width="390">Is this answer really a valid and correct answer? <select
+			<td width="390">
+					<p>About this answer: </p>
+					Is this answer really a valid and correct answer? <select
 					class="form-control form-control-lg" id="validanswer{4}" name="validanswer{4}"
 					required="">
 					<option disabled="disabled" hidden="" selected="selected" value="">Select a
@@ -138,7 +141,7 @@
 			</td>
 		</tr>
 		`;
-		var input = "${fact01}";
+		var input = "${base64}";
 		const sample_data = "W3siUXVlc3Rpb24iOiJUaGlzIGlzIGFuIHNhbXBsZSBRdWVzdGlvbiIsIkFuc3dlciI6IlRoaXMgaXMgYW4gc2FtcGxlIEFuc3dlciIsIkZhY3RzIjpbeyJmYWN0IjoidGhpcyBpcyBhbiBzYW1wbGUgZmFjdCB0ZXh0IiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSJ9LHsiZmFjdCI6InRoaXMgaXMgdGhlIHNlY29uZCBzYW1wbGUgZmFjdCIsImxpbmsiOiJodHRwczovL3JlcXVlc3RlcnNhbmRib3gubXR1cmsuY29tL2JhdGNoZXMvMzE3MDk1IiwidGl0bGUiOiJUaGlzIGlzIHRoZSBzZWNvbmQgdGl0bGUifV19LHsiUXVlc3Rpb24iOiJUaGlzIGlzIHRoZSBzZWNvbmQgc2FtcGxlIFF1ZXN0aW9uIiwiQW5zd2VyIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBBbnN3ZXIiLCJGYWN0cyI6W3siZmFjdCI6InRoaXMgaXMgYW4gc2FtcGxlIGZhY3QgdGV4dCBvZiB0aGUgc2Vjb25kIHF1ZXN0aW9uIiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSBvZiB0aGUgc2Vjb25kIHF1ZXN0aW9uIn0seyJmYWN0IjoidGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBmYWN0IG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24iLCJsaW5rIjoiaHR0cHM6Ly9yZXF1ZXN0ZXJzYW5kYm94Lm10dXJrLmNvbS9iYXRjaGVzLzMxNzA5NSIsInRpdGxlIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHRpdGxlIG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24ifV19XQ==";
 		var data;
 		try
