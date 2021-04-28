@@ -1,0 +1,85 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+	<h3> What is this HIT about?</h3>
+	<p>We are trying to build a question-answering system which is able to retrieve
+		the
+		answer by reasoning over multiple facts. This is the way we human typically
+		use to
+		find an answer. For example, when this question is asked:</p>
+	<p><b>Has there always been a rivalry between Daffy Duck and Porky Pig?</b></p>
+	<p>We might find the answer by</p>
+	<ol>
+		<li>Searching Wikipedia for <a href="https://en.wikipedia.org/wiki/Daffy_Duck" target="_blank">Daffy Duck</a>.
+		</li>
+		<li>"Daffy first appeared in <a href="https://en.wikipedia.org/wiki/Porky%27s_Duck_Hunt" target="_blank">Porky's
+				Duck Hunt</a>, released on April 17, 1937."
+		</li>
+		<li>"Porky shoots the whiskey-filled barrel but Daffy escapes" or "Daffy
+			bites
+			Porky on the nose"</li>
+		<li>Conclude, <b>Yes, Daffy and Porky have been rivals since their first
+				appearance on screen.</b></li>
+	</ol>
+	<p>However, for now, if you search a question in a search engine like Google or
+		Bing,
+		you are mostly like to get the answer from only one snippet of text. They
+		don’t have
+		the ability to answer the above question because, as you can see, the answer
+		is
+		concluded by reasoning the facts from multiple resources. We believe that
+		this
+		reasoning ability can greatly improve the question-answering ability of
+		search
+		engines, so we create this Hitapp and asking help from you. Appreciate! </p>
+	<h3>The Format:</h3>
+	<p>In each hit, you will see a group of QnA pairs with supporting facts. Your duty is to determin if a the QnA pair
+		is good enough and <b>can be supported by ALL showing facts</b>. You need to answer the given question for each
+		QnA pair to describe the quality.</p>
+
+	<h3>A good QnA pair should be:</h3>
+	<ol>
+		<li>
+			Shouldn’t be answered by only one fact:
+			<p>Facts:</p>
+			<ol>
+				<li>Hawa was born on December 16th, 1937 in Umarwas.</li>
+				<li>Hawa enrolled in the Indian Army in 1956, and became the
+					champion of the
+					Western Command in 1960 by defeating the defending champion,
+					Mohabbat
+					Singh.</li>
+			</ol>
+			<p><span style="color:red">Bad question:</span>When is Hawa’s
+				birthday.(can be
+				answer by the first fact)</p>
+			<p><span style="color:green">Good question:</span> How old was Hawa when
+				he
+				enrolled in the Indian Army? (need both facts)</p>
+		</li>
+		<li>Has definitive answer: The answer to your query cannot be too subjective
+			or
+			change from time to time.
+			<ul>
+				<li>How good is the view of Chicage from Willis Tower skydeck? (Too
+					subjective)</li>
+				<li>What is the weather in Manhattan? (Time sensitive)</li>
+			</ul>
+		</li>
+		<li>
+			Not about simple facts: The query cannot be answered blindly based on
+			common
+			sense (i.e. without using any of the text snippets).
+			<ul>
+				<li>Can a boat float on the water?</li>
+				<li>How many wheels does a car have?</li>
+			</ul>
+		</li>
+	</ol>
+</body>
+
+</html>

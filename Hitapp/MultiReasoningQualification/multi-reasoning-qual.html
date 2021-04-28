@@ -21,74 +21,6 @@
 		var row_template = `
 		<tr class="item">
 			<td width="200">{1}</td>
-			<td width="490"><p>About this question:</p> 
-				Can you understand what is being asked without reading the facts?
-				<select class="form-control form-control-lg" id="validquestion{4}"
-					name="validquestion{4}" onchange="InvalidQ('{4}');" required="">
-					<option disabled="disabled" hidden="" selected="selected" value="">Select a
-						response</option>
-					<option value="True">True</option>
-					<option value="False">False</option>
-				</select>
-				<div class="form-group"><br />
-					<label for="Qjustification{4}" style="font-weight: 500;">The Question has the following issues (click on the pre-defined issue, or write the issue you see in the text box): </label>
-					<div class="predefined_Qjustification"
-						onclick="AddQjustification('{4}', 'Commonsense/Too trivial')">Commonsense/Too
-						trivial</div>
-
-					<div class="predefined_Qjustification"
-						onclick="AddQjustification('{4}', 'Spelling mistakes')">Spelling mistakes
-					</div>
-
-					<div class="tool-tip"><strong><i>i</i></strong> <span
-							class="QJtooltiptext">Underscores are allowed in names. </span></div>
-
-					<div class="predefined_Qjustification"
-						onclick="AddQjustification('{4}', 'Not specific enough/Ambiguous')">Not
-						specific enough/Ambiguous</div>
-
-					<div class="predefined_Qjustification"
-						onclick="AddQjustification('{4}', 'Wrong grammar')">Wrong grammar</div>
-
-					<div class="predefined_Qjustification"
-						onclick="AddQjustification('{4}', 'Opinionated/Too subjective')">
-						Opinionated/Too subjective</div>
-
-					<div class="predefined_Qjustification"
-						onclick="AddQjustification('{4}', 'Time sensitive')">Time sensitive</div>
-
-					<div class="predefined_Qjustification"
-						onclick="AddQjustification('{4}', 'Too easy for single fact')">Too easy, it can be answered by single fact</div>
-
-
-					<div class="predefined_Qjustification"
-						onclick="AddQjustification('{4}', 'Declarative rather than interrogative')">
-						Declarative rather than interrogative</div>
-
-					<div class="tool-tip"><strong><i>i</i></strong> <span
-							class="QJtooltiptext">Missing question mark is fine.</span></div>
-
-					<div class="predefined_Qjustification"
-						onclick="AddQjustification('{4}', 'Technically correct but no one likely to ask this question')">
-						Technically correct but no one likely to ask this question</div>
-					<div class="tool-tip"><strong><i>i</i></strong> <span
-							class="QJtooltiptext">The question like "Whose last name is longer" is unlikely be asked by real users.</span></div>
-
-					<div class="predefined_Qjustification"
-						onclick="AddQjustification('{4}', 'Date/Time related question')">
-						Date/Time related question</div>
-					<div class="tool-tip"><strong><i>i</i></strong> <span
-							class="QJtooltiptext">A Date/Time related question is something like "When was something released"</span></div>
-					<div class="predefined_Qjustification"
-						onclick="AddQjustification('{4}', 'Comparison related')">
-						Comparison related</div>
-						<div class="tool-tip"><strong><i>i</i></strong> <span
-							class="QJtooltiptext">A comparison related question is the question can be answered by one of the entity is "shorted/larger/older...."</span></div>
-					<textarea class="form-control" cols="300" id="Qjustification{4}"
-						name="Qjustification{4}" rows="4"></textarea>
-					
-				</div>
-			</td>
 			<td style="min-width:400px;">
 				<table rules="none">
 					<tbody class="facts" id="facts{4}">
@@ -98,24 +30,16 @@
 			</td>
 			<td width="300">{3}</td>
 			<td width="390">
-					<p>About this answer: </p>
-					Is this answer really a valid and correct answer? <select
-					class="form-control form-control-lg" id="validanswer{4}" name="validanswer{4}"
-					required="">
+				<p> Are they good question and answer?</p>
+				<select class="form-control form-control-lg" id="validanswer{4}" name="validanswer{4}" required="">
 					<option disabled="disabled" hidden="" selected="selected" value="">Select a
 						response</option>
-					<option value="True">True</option>
-					<option value="False">False</option>
-				</select><br />
-				Can this answer be inferred from the facts? <select
-					class="form-control form-control-lg" id="inferred{4}" name="inferred{4}"
-					required="">
-					<option disabled="disabled" hidden="" selected="selected" value="">Select a
-						response</option>
-					<option value="True">True</option>
-					<option value="False">False</option>
-				</select><br />
-				Are all facts necessary to answer the question? <select
+					<option value="True"><span style="color:green">Yes</span></option>
+					<option value="False"><span style="color:red">No</span></option>
+				</select>
+				<br />
+				<p> Are all facts necessary to answer the question?</p>
+				<select
 					class="form-control form-control-lg" id="multihop{4}" name="multihop{4}"
 					required="">
 					<option disabled="disabled" hidden="" selected="selected" value="">Select a
@@ -123,16 +47,6 @@
 					<option value="True">True</option>
 					<option value="False">False</option>
 				</select><br />
-				Is there any issue in the facts/Answer?
-				<select class="form-control form-control-lg" id="factprolm{4}" name="factprolm{4}" required="">
-					<option disabled="disabled" hidden="" selected="selected" value="">Select a
-						response</option>
-					<option value="True">True</option>
-					<option value="False">False</option>
-				</select><br />
-				If you select "True" in the previous question, write the issue here:
-				<textarea class="form-control" cols="300" id="Ajustification{4}"
-						name="Ajustification{4}" rows="4"></textarea>
 				
 			</td>
 		</tr>
@@ -334,10 +248,9 @@
 						<thead>
 							<tr>
 								<th scope="col">Question</th>
-								<th scope="col">*Tell us about this Question*</th>
 								<th scope="col">Facts</th>
 								<th scope="col">Answer</th>
-								<th scope="col">*Tell us about this Answer*</th>
+								<th scope="col">*Tell us about this Question and Answer*</th>
 							</tr>
 						</thead>
 						<tbody id="annotation-body">
