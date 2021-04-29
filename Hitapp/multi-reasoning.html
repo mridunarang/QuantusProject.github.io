@@ -357,16 +357,28 @@
 				reset_selection_options();
 
 				// reset the selections display
-				var all_annotations = document.querySelectorAll('[id^="Annotation_div_"]')
+				var all_annotations = document.querySelectorAll('[id^="Annotation_div_"]');
 				for (var i = 0; i < all_annotations.length; i++) {
 					reload_img_thumbnail(all_annotations[i].id);
 				}
 			}
 
 			function reset_selection_options() {
+				var all_annotations = document.querySelectorAll('[id^="Annotation_div_"]');
+				var all_checked = new Array(all_annotations.length);
+				for(var i=0; i<all_annotations.length; i++)
+				{
+					var checked = all_annotations[i].querySelectorAll('input[type="checkbox"]:checked');
+					var checked_name = new Array(checked.length);
+					for(var j=0; j<checked.length; j++)
+					{
+						checked_name[j] = checked[j].name;
+					}
+					all_checked[i] = checked_name;
+				}
 				var selection_template = `
 				<label class="text-selection">
-					<input class="image-selection-{1}" name="image-selection{1}" onclick="ResetConfirmation('confirmation_div_{2}', 'Annotation_div_{2}', '{1}');" type="checkbox" value="{2}" /> 
+					<input class="image-selection-{1} image-selection" name="image-selection{1}" onclick="ResetConfirmation('confirmation_div_{2}', 'Annotation_div_{2}', '{1}');" type="checkbox" value="{2}" /> 
 					{1} 
 				</label> 
 				`;
@@ -384,6 +396,16 @@
 
 					}
 					all_selection_placeholder[i].innerHTML = selections_HTML;
+				}
+
+				for(var i=0; i<all_annotations.length; i++)
+				{
+					var selections = all_annotations[i].getElementsByTagName("input");
+					for(var j=0; j<selections.length; j++)
+					{
+						if(all_checked[i].includes(selections[j].name))
+							selections[j].checked = true;
+					}
 				}
 
 			}
@@ -1282,19 +1304,19 @@
 												<font color="green">Text Selection</font>
 											</b></td>
 										<td style="text-align: center;" width="16%" class="image-select-placeholder">
-											<label class="text-selection"><input class="image-selection-1"
+											<label class="text-selection"><input class="image-selection-1 image-selection-div-1"
 													name="image-selection1"
 													onclick="ResetConfirmation('confirmation_div_1', 'Annotation_div_1', '1');"
 													type="checkbox" value="1" /> 1 </label>
-											<label class="text-selection"><input class="image-selection-2"
+											<label class="text-selection"><input class="image-selection-2  image-selection-div-1"
 													name="image-selection2"
 													onclick="ResetConfirmation('confirmation_div_1', 'Annotation_div_1', '2');"
 													type="checkbox" value="1" /> 2 </label>
-											<label class="text-selection"><input class="image-selection-3"
+											<label class="text-selection"><input class="image-selection-3  image-selection-div-1"
 													name="image-selection3"
 													onclick="ResetConfirmation('confirmation_div_1', 'Annotation_div_1', '3');"
 													type="checkbox" value="1" /> 3 </label>
-											<label class="text-selection"><input class="image-selection-4"
+											<label class="text-selection"><input class="image-selection-4  image-selection-div-1"
 													name="image-selection4"
 													onclick="ResetConfirmation('confirmation_div_1', 'Annotation_div_1', '4');"
 													type="checkbox" value="1" /> 4 </label>
@@ -1372,19 +1394,19 @@
 												<font color="green">Text Selection</font>
 											</b></td>
 										<td style="text-align: center; " class="image-select-placeholder" width="16%">
-											<label class="text-selection"><input class="image-selection-1"
+											<label class="text-selection"><input class="image-selection-1  image-selection-div-2"
 													name="image-selection1"
 													onclick="ResetConfirmation('confirmation_div_2', 'Annotation_div_2', '1');"
 													type="checkbox" value="2" /> 1 </label>
-											<label class="text-selection"><input class="image-selection-2"
+											<label class="text-selection"><input class="image-selection-2  image-selection-div-2"
 													name="image-selection2"
 													onclick="ResetConfirmation('confirmation_div_2', 'Annotation_div_2', '2');"
 													type="checkbox" value="2" /> 2 </label>
-											<label class="text-selection"><input class="image-selection-3"
+											<label class="text-selection"><input class="image-selection-3  image-selection-div-2"
 													name="image-selection3"
 													onclick="ResetConfirmation('confirmation_div_2', 'Annotation_div_2', '3');"
 													type="checkbox" value="2" /> 3 </label>
-											<label class="text-selection"><input class="image-selection-4"
+											<label class="text-selection"><input class="image-selection-4  image-selection-div-2"
 													name="image-selection4"
 													onclick="ResetConfirmation('confirmation_div_2', 'Annotation_div_2', '4');"
 													type="checkbox" value="2" /> 4 </label>
