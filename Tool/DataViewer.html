@@ -1,0 +1,223 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<style>
+		.qna {
+			margin: 20px;
+			padding: 5px;
+			border-bottom: 1px solid grey;
+		}
+
+		.query {
+			font-size: 15px;
+			color: rgb(104, 103, 103);
+		}
+
+		.answer {
+			text-indent: 15px;
+			font-size: 30px;
+		}
+
+		.fact_title {
+			color: grey;
+			font-size: 12px;
+		}
+
+		ol {
+			font-size: 15px;
+			color: rgb(0, 0, 0);
+		}
+
+		ol.distractor_facts {
+			color: rgb(100, 99, 99);
+			font-weight: lighter;
+		}
+	</style>
+	<script type="text/javascript">
+		var jsonData = null;
+		var data_per_page = 10;
+		var page_number = 1;
+		function checkSupport() {
+			if (!document.createElement("template").content) {
+				document.write("Your browser does not supports template!");
+			}
+		}
+		function showContent() {
+			checkSupport();
+			load_data();
+		}
+
+		function render_data() {
+			if (jsonData == null) {
+				return;
+			}
+			var start_index = (page_number - 1) * data_per_page;
+			var end_index = start_index + data_per_page;
+			if (jsonData == null) {
+				load_data();
+			}
+			end_index = Math.min(end_index, jsonData.length);
+			var template = document.getElementsByName("fact_template")[0].content;
+			while (template.nodeName != "DIV") {
+				template = template.firstElementChild;
+			}
+			var fact_template = document.getElementsByName("fact_content")[0].content;
+			while (fact_template.nodeName != "LI") {
+				fact_template = fact_template.firstElementChild;
+			}
+			var data_holder = document.getElementById("data");
+			data_holder.innerHTML = "";
+			for (var i = start_index; i < end_index; i++) {
+				var node = template.cloneNode(true);
+
+				var question = jsonData[i].Question;
+				node.getElementsByClassName("query")[0].innerText = question;
+
+				var answer = jsonData[i].Answer;
+				node.getElementsByClassName("answer")[0].innerText = answer;
+
+				var supporting_fact_elem = node.getElementsByClassName("supporting_facts")[0];
+				var distractor_fact_elem = node.getElementsByClassName("distractor_facts")[0];
+
+
+				var supportingFacts = jsonData[i].SupportingFacts;
+				var distractorFacts = jsonData[i].DistractorFacts;
+				for (var j = 0; j < supportingFacts.length; j++) {
+					var fact = fact_template.cloneNode(true);
+					fact.getElementsByTagName("span")[0].innerText = supportingFacts[j].fact;
+					fact.getElementsByTagName("a")[0].href = supportingFacts[j].url;
+					fact.getElementsByTagName("a")[0].innerText = "[" + (j + 1) + "]";
+					supporting_fact_elem.appendChild(fact);
+				}
+				for (var j = 0; j < distractorFacts.length; j++) {
+					var fact = fact_template.cloneNode(true);
+					fact.getElementsByTagName("span")[0].innerText = distractorFacts[j].fact;
+					fact.getElementsByTagName("a")[0].href = distractorFacts[j].url;
+					fact.getElementsByTagName("a")[0].innerText = "[" + (j + 1) + "]";
+					distractor_fact_elem.appendChild(fact);
+				}
+
+				data_holder.appendChild(node);
+			}
+		}
+
+		function load_data() {
+			const fileSelector = document.getElementById('file-selector');
+			fileSelector.addEventListener('change', function () {
+				var fr = new FileReader;
+				fr.onload = function () {
+					try {
+						jsonData = JSON.parse(fr.result);
+						page_number = 1;
+						render_data();
+						render_page_index();
+					}
+					catch (error) {
+						console.log(error);
+					}
+
+				}
+				fr.readAsText(this.files[0]);
+			})
+		}
+
+		function set_page(n) {
+			page_number = n;
+			render_data();
+			render_page_index();
+		}
+
+		function render_page_index() {
+			if (jsonData == null) {
+				return;
+			}
+			var index_count = Math.ceil(jsonData.length / data_per_page);
+			var start_index = Math.max(1, page_number - 2);
+			var end_index = Math.min(index_count, page_number + 2);
+
+			var page_index = document.getElementById("page_index");
+			page_index.innerHTML = "";
+			var inner_html = "<span>Pages: </span>";
+			if (start_index > 1) {
+				inner_html += '<a href="#" onclick="set_page(1)">&lt;&lt;</a>...';
+			}
+			for (var i = start_index; i < end_index + 1; i++) {
+				if (i == page_number) {
+					inner_html += '<a style="text-decoration:underline;" href="#" onclick="set_page(' + i + ')">' + i + '</a> ';
+				}
+				else {
+					inner_html += '<a href="#" onclick="set_page(' + i + ')">' + i + '</a> ';
+				}
+			}
+			if (end_index < index_count) {
+				inner_html += '...<a href="#" onclick="set_page(' + index_count + ')">&gt;&gt;</a>';
+			}
+			page_index.innerHTML = inner_html;
+		}
+
+		function set_data_per_page(n) {
+			document.getElementById("dropdownMenuButton").innerText = n;
+			data_per_page = n;
+			page_number = 1;
+			render_data();
+			render_page_index();
+		}
+	</script>
+</head>
+
+<body onload="showContent()">
+	<div class="container">
+		<h1>Multi-reasoning Data Viewer</h1>
+		<p>Select the json file: <input type="file" id="file-selector"></p>
+		<div class="dropdown">
+			Question Per Page:
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				10
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item" href="#" onclick="set_data_per_page(1)">1</a>
+				<a class="dropdown-item" href="#" onclick="set_data_per_page(2)">2</a>
+				<a class="dropdown-item" href="#" onclick="set_data_per_page(5)">5</a>
+				<a class="dropdown-item" href="#" onclick="set_data_per_page(10)">10</a>
+				<a class="dropdown-item" href="#" onclick="set_data_per_page(50)">50</a>
+				<a class="dropdown-item" href="#" onclick="set_data_per_page(100)">100</a>
+				<a class="dropdown-item" href="#" onclick="set_data_per_page(200)">200</a>
+			</div>
+		</div>
+		<p id="page_index" style="text-align:right;">
+		</p>
+		<div id="data">
+
+		</div>
+	</div>
+
+	<template name="fact_template">
+		<div class="qna">
+			<h5 class="query"></h5>
+			<p class="answer"></p>
+			<p class="fact_title" style="color:black;">Supporting facts:</p>
+			<ol class="supporting_facts">
+			</ol>
+			<p class="fact_title">Distractor Facts:</p>
+			<ol class="distractor_facts">
+			</ol>
+		</div>
+	</template>
+	<template name="fact_content">
+		<li class="fact"><span name="fact_text"></span><a href="" target="_blank" name="fact_link"></a></li>
+	</template>
+</body>
+
+</html>

@@ -1,0 +1,534 @@
+[
+	{
+		"Question": "1. Was pilot Jozsef Kiss killed before or after the use of Westland Scout helicopters began?",
+		"Answer": "before",
+		"SupportingFacts": [
+			{
+				"fact": "Several Austro-Hungarian aces used this aircraft, among them Kurt Gruber, Roman Schmidt, Karl Teichmann, Godwin Brumowski, Benno Fiala Ritter von Fernbrugg, Franz Gr\u00e4ser, Karl Nikitsch, Frank Linke-Crawford and J\u00f3zsef Kiss - who was killed while flying a D.II on May 24, 1918.",
+				"url": "https://en.wikipedia.org/wiki/Ph%C3%B6nix_D.I",
+				"title": "Ph\u00f6nix D.I - Wikipedia"
+			},
+			{
+				"fact": "About 150 Scouts were built through 1968, primarily at the Fairey Aviation Division factory at Hayes . The Scout formed the backbone of the Army Air Corps throughout the 1960s and well into the 1970s; the first Scout flew on 29 August 1960 and an initial order for 66 aircraft followed a month after its first flight.",
+				"url": "https://en.wikipedia.org/wiki/Westland_Scout",
+				"title": "Westland Scout - Wikipedia"
+			},
+			{
+				"fact": "The Westland Scout is a light helicopter developed by Westland Helicopters. Developed from the Saro P.531, it served as a land-based general purpose military helicopter, sharing a common ancestor and numerous components with the naval-orientated Westland Wasp helicopter.",
+				"url": "https://en.wikipedia.org/wiki/Westland_Scout",
+				"title": "Westland Scout - Wikipedia"
+			}
+		],
+		"DistractorFacts": [
+			{
+				"fact": "Developed from the Saro P.531, it served as a land-based general purpose military helicopter, sharing a common ancestor and numerous components with the naval-orientated Westland Wasp helicopter.",
+				"url": "https://en.wikipedia.org/wiki/Westland_Scout",
+				"title": "Westland Scout - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "The Westland Wasp is a small 1960s British turbine powered, shipboard anti-submarine helicopter. Produced by Westland Helicopters, it came from the same P.531 programme as the British Army Westland Scout, and is based on the earlier piston-engined Saunders-Roe Skeeter.",
+				"url": "https://en.wikipedia.org/wiki/Westland_Wasp",
+				"title": "Westland Wasp - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "With the Royal Netherlands Navy beginning in the late 1960s, after the fire onboard HNLMS Karel Doorman, NATO anti-submarine commitments were taken over by a squadron of Westland Wasp helicopters, operated from six Van Speijk -class anti-submarine frigates. The shore base was at De Kooy.",
+				"url": "https://en.wikipedia.org/wiki/Westland_Wasp",
+				"title": "Westland Wasp - Wikipedia",
+				"showed_to_judges": true
+			}
+		],
+		"Guid": "eb6a6ea6-ac93-4ab9-9fd3-544c54fb8e0e",
+		"SupportingImageIds": [],
+		"DistractorImageIds": []
+	},
+	{
+		"Question": "2. Did team(s) from Swan Districts participate in both the 1980 and 1982 WAFL seasons?",
+		"Answer": "Yes",
+		"SupportingFacts": [
+			{
+				"fact": "South Fremantle won the game by 58 points, 23.18 (156) to 15.8 (98), with Maurice Rioli of South Fremantle winning the Simpson Medal as best on ground. Swan Districts were the dominant team in the first half of the season, winning 13 games straight.",
+				"url": "https://en.wikipedia.org/wiki/1980_WAFL_Grand_Final",
+				"title": "1980 WAFL Grand Final - Wikipedia"
+			},
+			{
+				"fact": "Under the coaching of John Todd, Swans won the 1982, 1983 and 1984 premierships before the financial lure of the VFL deprived it one by one of the stars of this period.",
+				"url": "https://en.wikipedia.org/wiki/1982_WAFL_season",
+				"title": "1982 WAFL season - Wikipedia"
+			}
+		],
+		"DistractorFacts": [
+			{
+				"fact": "The 1982 VFL Grand Final was an Australian rules football game contested between the Carlton Football Club and Richmond Football Club, held at the Melbourne Cricket Ground in Melbourne on 25 September 1982. It was the 86th annual Grand Final of the Victorian Football League, staged to determine the premiers for the 1982 VFL season.",
+				"url": "https://en.wikipedia.org/wiki/1982_VFL_Grand_Final",
+				"title": "1982 VFL Grand Final - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "The tournament was won by the Swans N 1, who defeated North Melbourne in the Grand Final. The 1982 Escort Championships was the sixth season of the national night premiership competition. The size of the competition was reduced to 18 teams in 1982, after 34 teams had competed in each of 1980 and 1981.",
+				"url": "https://en.wikipedia.org/wiki/1982_Escort_Championships",
+				"title": "1982 Escort Championships - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "This season, NSWRFL teams also competed for the 1982 KB Cup which was won by Manly-Warringah. The first Charity Shield match was played before the 1982 season between St. George and South Sydney .",
+				"url": "https://en.wikipedia.org/wiki/1982_NSWRFL_season",
+				"title": "1982 NSWRFL season - Wikipedia",
+				"showed_to_judges": false
+			}
+		],
+		"Guid": "eae679e9-842e-4c11-bf95-fd72b506f637",
+		"SupportingImageIds": [],
+		"DistractorImageIds": []
+	},
+	{
+		"Question": "3. How many category levels higher was the storm designation given to Hurricane Rita than that of Hurricane Katrina on August 27th?",
+		"Answer": "2",
+		"SupportingFacts": [
+			{
+				"fact": "Immediately after the storm entered the Gulf of Mexico, the low wind shear, good upper-level outflow, and the warm sea surface temperatures of the Gulf Loop Current caused Katrina to intensify rapidly. On August 27, the storm was upgraded to Category 3 intensity, becoming the third major hurricane of the season.",
+				"url": "https://en.m.wikipedia.org/wiki/Meteorological_history_of_Hurricane_Katrina",
+				"title": "Meteorological history of Hurricane Katrina - Wikipedia"
+			},
+			{
+				"fact": "On that day, Hurricane Rita passed over the Loop current and intensified into a Category 5 storm with the help of the warm water. In the Gulf of Mexico, the deepest areas of warm water are associated with the Loop Current and the rings of current that have separated from the Loop Current are commonly called Loop Current eddies.",
+				"url": "https://texaspelagics.com/gom-info/gom-loop/",
+				"title": "Gulf of Mexico Loop Current"
+			}
+		],
+		"DistractorFacts": [
+			{
+				"fact": "#Able: 1951 Doria: 1967 Ginny: 1963 (double loops) Diana: 1984 Elena: 1985 Lilly: 1996 Dennis: 1999 Michelle: 2001 Edouard: 2002 Ophelia: 2005 (double loops)",
+				"url": "https://www.news-press.com/story/weather/hurricane/2016/10/07/loop-the-loop-hurricanes-in-florida-history/91729354/",
+				"title": "Hurricane loop-the-loops: Matthew wouldn't be the first",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Generally, we call Maxwell\u2019s Loop Current Method as Mesh Analysis. We very widely use this circuit analysis technique. In Maxwell\u2019s Loop Current Method, first, we identify all the meshes of the circuit. We imagine one loop current for every mesh. The direction of the loop currents may be arbitrary.",
+				"url": "https://www.aboutcircuit.com/maxwells-loop-current-method-mesh-analysis/",
+				"title": "Maxwell's Loop Current Method or Mesh Analysis - About Circuit",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Hurricanes feed off warm surface waters in the ocean, and the Loop Current is a huge energy source. \u201cThe Loop Current is one of the major factors affecting the strength of hurricanes in the Gulf of Mexico,\u201d said Kuehl. \u201cFor instance, with Hurricane Katrina, the models did a very poor job of estimating Katrina\u2019s strength.\u201d",
+				"url": "https://www.udel.edu/udaily/2020/july/joe-kuehl-loop-currents/",
+				"title": "In the loop | UDaily",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Loop Current Frontal Eddies are cold-core, counter-clockwise rotating (cyclonic) eddies that form on or near the boundary of the Loop Current. LCFEs range from about 80 km to 120 km in diameter. These cold features are smaller than the warm-core eddies shed from the Loop Current.",
+				"url": "https://en.wikipedia.org/wiki/Loop_Current",
+				"title": "Loop Current - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "The currents in the Gulf of Mexico are influenced by the Corriolis effect and the shape of the Gulf basin. The Corriolis effect causes the loop current to rotate clockwise, while the shape of the basin allows the loop current to flow into the Gulf Stream.",
+				"url": "http://classroom.sanibelseaschool.org/currents-in-the-gulf-of-mexico",
+				"title": "Currents in the Gulf of Mexico",
+				"showed_to_judges": true
+			}
+		],
+		"Guid": "8f05063b-832d-4097-8896-5b1ae169b555",
+		"SupportingImageIds": [],
+		"DistractorImageIds": []
+	},
+	{
+		"Question": "4. What year would the person that explained that the cure really worked be mentioned as a member of the group he was a part of?",
+		"Answer": "In November of 1986 when The Horsemen of Apocalyopse was first mentioned in X-factor #10.",
+		"SupportingFacts": [
+			{
+				"fact": "The Horsemen of Apocalypse are first mentioned in X-Factor #10 (Nov. 1986), and make their full appearance in X-Factor #15 (April 1987) where they were created by writer Louise Simonson and artist Walt Simonson .",
+				"url": "https://en.wikipedia.org/wiki/Horsemen_of_Apocalypse",
+				"title": "Horsemen of Apocalypse - Wikipedia"
+			},
+			{
+				"fact": "Suddenly, Warren walks in and explains that the cure really does work. Apocalypse, meanwhile, has already turned Warren into the Horseman of Death. Abraham, Plague, and Autumn all take the treatment, and become War, Pestilence, and Famine respectively. The X-Men, playing billiards, notice a peace conference when Apocalypse and his Horsemen attack.",
+				"url": "https://en.wikipedia.org/wiki/Come_the_Apocalypse",
+				"title": "Come the Apocalypse - Wikipedia"
+			}
+		],
+		"DistractorFacts": [
+			{
+				"fact": "Apocalypse was the principal adversary in the mid-1980s X-Men spin-off series X-Factor (1986\u20131991), until being apparently killed at the climax of issue #68 (July 1991). Since then, the character has died and been resurrected several times thanks to his power and advanced alien technology.",
+				"url": "https://en.wikipedia.org/wiki/Apocalypse_(comics)",
+				"title": "Apocalypse (comics) - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Professor X explains the cure to the X-Men, and Rogue in particular seems interested, as she longs for the feeling of companionship that Cyclops and Jean Grey have. The other X-Men seem to think that it would be betrayal to take the cure. Later that day, Jean shares her wariness with Cyclops over Rogue.",
+				"url": "https://en.wikipedia.org/wiki/The_Cure_(X-Men)",
+				"title": "The Cure (X-Men) - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Rogue (Anna Marie) (voiced by Lenore Zann) - In her green and yellow costume with a brown leather jacket, Rogue is virtually interchangeable with her early 1990s comic incarnation. She speaks in a sassy, Southern accent and generally has an attitude of good-humored irreverence.",
+				"url": "https://en.wikipedia.org/wiki/List_of_X-Men_(TV_series)_characters",
+				"title": "List of X-Men (TV series) characters - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Rogue appeared in the X-Men television series, where she was one of the main characters. Rogue was voiced by Lenore Zann. In this series, she had her absorption powers, Ms. Marvel powers, and a copy of Ms. Marvel's psyche trapped inside her own.",
+				"url": "https://en.wikipedia.org/wiki/Rogue_in_other_media",
+				"title": "Rogue in other media - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "The Cure is an episode in the animated TV series X-Men Animated Series. It introduced the villain Apocalypse to the series. In a cabin, Warren Worthington III and a woman sit by a fireplace.",
+				"url": "https://en.wikipedia.org/wiki/The_Cure_(X-Men)",
+				"title": "The Cure (X-Men) - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "This particular version of Rogue also appeared in the Animated Series' two tie in comics: X-Men Adventures and The Adventures of the X-Men, with the former being based on the animated series and the latter including the same characters but with original storylines.",
+				"url": "https://en.wikipedia.org/wiki/Rogue_in_other_media",
+				"title": "Rogue in other media - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "X-Men was Marvel Comics ' second attempt at an animated X-Men TV series after the pilot, X-Men: Pryde of the X-Men, was not picked up. In 1991, Margaret Loesch became head of Fox Children's Network. Having championed the Pryde of the X-Men pilot in 1989, she was quick to set up an order for 13 episodes of X-Men.",
+				"url": "https://en.wikipedia.org/wiki/X-Men_(TV_series)",
+				"title": "X-Men (TV series) - Wikipedia",
+				"showed_to_judges": false
+			}
+		],
+		"Guid": "dd11a7ae-164e-47ce-a68c-f43e877bc0eb",
+		"SupportingImageIds": [],
+		"DistractorImageIds": []
+	},
+	{
+		"Question": "5. Which bird's feet enable it to swim better; Pigeons and doves or Heliornithidae?",
+		"Answer": "Heliornithidae",
+		"SupportingFacts": [
+			{
+				"fact": "Heliornithidae is a small family of tropical birds with webbed lobes on their feet similar to those of grebes and coots. The family Charadriidae includes the plovers, dotterels, and lapwings. They are small to medium-sized birds with compact bodies, short thick necks, and long, usually pointed, wings.",
+				"url": "https://en.wikipedia.org/wiki/List_of_birds_of_Brazil",
+				"title": "List of birds of Brazil - Wikipedia"
+			},
+			{
+				"fact": "Pigeons and doves are stout-bodied birds with short necks and short slender bills with a fleshy cere . The family Cuculidae includes cuckoos, roadrunners, and anis. These birds are of variable size with slender bodies, long tails, and strong legs. Nightjars are medium-sized nocturnal birds that usually nest on the ground.",
+				"url": "https://en.wikipedia.org/wiki/List_of_birds_of_Jamaica",
+				"title": "List of birds of Jamaica - Wikipedia"
+			}
+		],
+		"DistractorFacts": [
+			{
+				"fact": "Genomic analysis provides strong evidence that parrots are the sister group of passerines, forming the clade Psittacopasserae, which is the sister group of the falcons. The first uncontroversial parrot fossils date to tropical Eocene Europe around 50 mya.",
+				"url": "https://en.wikipedia.org/wiki/Parrot",
+				"title": "Parrot - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Local names used in the West Indies include \"truphit\", \"trophic\", \"white bird\", \"paille-en-queue\", \"paille-en-cul\", \"fl\u00e8che-en-cul\", and \"f\u00e9tu\". In a 1945 paper, American ornithologist Waldo Lee McAtee proposed it be called the barred-backed tropicbird after its most distinguishing feature.",
+				"url": "https://en.wikipedia.org/wiki/Red-billed_Tropicbird",
+				"title": "Red-billed tropicbird - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "The Phaethontiformes / \u02ccfe\u026a.\u026a\u02c8\u03b8\u0252nt\u026af\u0254\u02d0rmi\u02d0z / are an order of birds. They contain one extant family, the tropicbirds (Phaethontidae), and one extinct family Prophaethontidae from the early Cenozoic. Several fossil genera have been described.",
+				"url": "https://en.wikipedia.org/wiki/Phaethontiformes",
+				"title": "Phaethontiformes - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "The split between the red-billed tropicbird and the other two tropicbirds is hypothesized to have taken place about six million years ago, with the split between the red-tailed and white-tailed tropicbird taking place about four million years ago. Phaethusavis and Heliadornis are prehistoric genera of tropicbirds described from fossils .",
+				"url": "https://en.wikipedia.org/wiki/Tropicbird",
+				"title": "Tropicbird - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "The tropical boubou is fairly large for its family ( bushshrikes ), measuring 23\u201325 cm in length. Its weight can vary between about 38-70 g, but typically adults weigh between 50 and 60 g. Females are on average a bit smaller than males, but individual variation is so large that for most practical purposes the sexes seem to be of identical size.",
+				"url": "https://en.wikipedia.org/wiki/West_African_Boubou",
+				"title": "Tropical boubou - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Tropicbirds are slender white birds of tropical oceans, with exceptionally long central tail feathers. Their heads and long wings have black markings. The albatrosses are among the largest of flying birds, and the great albatrosses from the genus Diomedea have the largest wingspans of any extant birds.",
+				"url": "https://en.wikipedia.org/wiki/List_of_birds_of_French_Polynesia",
+				"title": "List of birds of French Polynesia - Wikipedia",
+				"showed_to_judges": false
+			}
+		],
+		"Guid": "b62a6a1c-5c9e-46ae-badf-641d87ae6049",
+		"SupportingImageIds": [],
+		"DistractorImageIds": []
+	},
+	{
+		"Question": "6. In 1992 was George Bush's popular vote margin of victory over Bill Clinton larger in the state of Idaho or Arizona?",
+		"Answer": "Bush's margin of victory was larger in Idaho.",
+		"SupportingFacts": [
+			{
+				"fact": "Idaho was won by incumbent President George H.W. Bush ( R - Texas) with 42.03% of the popular vote over Governor Bill Clinton ( D - Arkansas) with 28.42%. Businessman Ross Perot ( I -Texas) finished in a close third, with 27.05% of the popular vote. Clinton ultimately won the national vote, defeating both incumbent President Bush and Perot.",
+				"url": "https://en.wikipedia.org/wiki/United_States_presidential_election_in_Idaho,_1992",
+				"title": "1992 United States presidential election in Idaho - Wikipedia"
+			},
+			{
+				"fact": "Arizona was won by incumbent President George H. W. Bush ( R - Texas) with 38.47% of the popular vote over Governor Bill Clinton ( D - Arkansas) with 36.52%. Businessman Ross Perot ( I -Texas) finished in third, with 23.79% of the popular vote. Clinton ultimately won the national vote, defeating incumbent President Bush.",
+				"url": "https://en.wikipedia.org/wiki/1992_United_States_presidential_election_in_Arizona",
+				"title": "1992 United States presidential election in Arizona - Wikipedia"
+			}
+		],
+		"DistractorFacts": [
+			{
+				"fact": "Bush won by about 100,000 votes, marking the first time Florida had backed the losing candidate since 1960, when it voted for Richard Nixon over John F. Kennedy. This was also the last time until the 2020 election that Florida would back the loser of the presidential election as well only the second time since 1924.",
+				"url": "https://en.wikipedia.org/wiki/United_States_presidential_election_in_Florida,_1992",
+				"title": "1992 United States presidential election in Florida - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "Clinton became the first Democrat since Franklin D. Roosevelt to win two straight presidential elections. Dole won 40.7% of the popular vote and 159 electoral votes, while Perot won 8.4% of the popular vote. Despite Dole's defeat, the Republican Party was able to maintain a majority in both the House of Representatives and the Senate.",
+				"url": "https://en.wikipedia.org/wiki/1996_United_States_Presidential_Election",
+				"title": "1996 United States presidential election - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Georgia was won by Governor Bill Clinton ( D - AR ). The presidential contest in the Peach State was the closest of any state that year with Clinton winning 43.47% to 42.88% over Incumbent President George H. W. Bush ( R) by a razor thin margin of 0.59%.",
+				"url": "https://en.wikipedia.org/wiki/United_States_presidential_election_in_Georgia,_1992",
+				"title": "1992 United States presidential election in Georgia - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Tennessee was won by Governor Bill Clinton ( D - Arkansas) with 47.08% of the popular vote over incumbent President George H. W. Bush ( R - Texas) with 42.43%. Businessman Ross Perot ( I -Texas) finished in third, with 10.09% of the popular vote.",
+				"url": "https://en.wikipedia.org/wiki/1992_United_States_presidential_election_in_Tennessee",
+				"title": "1992 United States presidential election in Tennessee - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "The United States presidential election of 1992 was on November 3, 1992 in the United States. The three main people running were: George H. W. Bush, a Republican from Texas and the President; Bill Clinton, who was a Democrat and Governor of Arkansas; and Ross Perot an Independent candidate. Bill Clinton was the winner of the election.",
+				"url": "https://simple.wikipedia.org/wiki/1992_United_States_presidential_election",
+				"title": "1992 United States presidential election - Simple English Wikipedia, the free encyclopedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "The race was extremely close \u2013 so close in fact that some news networks mistakenly reported that Democratic challenger Bill Clinton had won in the state, although incumbent President George H. W. Bush was eventually declared the winner. Bush received 40.89% of the vote to Clinton's 39.00%.",
+				"url": "https://en.wikipedia.org/wiki/United_States_presidential_election_in_Florida,_1992",
+				"title": "1992 United States presidential election in Florida - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Voters chose 21 representatives, or electors to the Electoral College, who voted for president and vice president . Ohio was won by Governor Bill Clinton ( D - Arkansas) with 40.18% of the popular vote over incumbent President George H. W. Bush ( R - Texas) with 38.35%.",
+				"url": "https://en.wikipedia.org/wiki/United_States_presidential_election_in_Ohio,_1992",
+				"title": "1992 United States presidential election in Ohio - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Tennessee was won by Governor Bill Clinton ( D - Arkansas) with 47.08% of the popular vote over incumbent President George H. W. Bush ( R - Texas) with 42.43%. Businessman Ross Perot ( I -Texas) finished in third, with 10.09% of the popular vote. Clinton ultimately won the national vote, defeating incumbent President Bush and Perot.",
+				"url": "https://en.wikipedia.org/wiki/1992_United_States_presidential_election_in_Tennessee",
+				"title": "1992 United States presidential election in Tennessee - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "The 1992 United States presidential election in Georgia took place on November 3, 1992, and was part of the 1992 United States presidential election. Voters chose 13 representatives, or electors to the Electoral College, who voted for president and vice president . Georgia was won by Governor Bill Clinton ( D - AR ).",
+				"url": "https://en.wikipedia.org/wiki/United_States_presidential_election_in_Georgia,_1992",
+				"title": "1992 United States presidential election in Georgia - Wikipedia",
+				"showed_to_judges": false
+			}
+		],
+		"Guid": "f8bb9f89-ae71-4bb3-990f-69820d7e2354",
+		"SupportingImageIds": [],
+		"DistractorImageIds": []
+	},
+	{
+		"Question": "7. Are the values of logarithmic units on a logarithmic scale usually very close in range?",
+		"Answer": "No, they often span a very wide range of values.",
+		"SupportingFacts": [
+			{
+				"fact": "A logarithmic scale (or log scale) is a way of displaying numerical data over a very wide range of values in a compact way\u2014typically the largest numbers in the data are hundreds or even thousands of times larger than the smallest numbers.",
+				"url": "https://en.wikipedia.org/wiki/Logarithmic_scale",
+				"title": "Logarithmic scale - Wikipedia"
+			},
+			{
+				"fact": "A logarithmic unit is a unit that can be used to express a quantity ( physical or mathematical) on a logarithmic scale, that is, as being proportional to the value of a logarithm function applied to the ratio of the quantity and a reference quantity of the same type.",
+				"url": "https://en.wikipedia.org/wiki/Logarithmic_scale",
+				"title": "Logarithmic scale - Wikipedia"
+			}
+		],
+		"DistractorFacts": [
+			{
+				"fact": "The degree Celsius is a unit of temperature on the Celsius scale, a temperature scale originally known as the centigrade scale. The degree Celsius (symbol: \u00b0C) can refer to a specific temperature on the Celsius scale or a unit to indicate a difference between two temperatures or an uncertainty.",
+				"url": "https://en.wikipedia.org/wiki/Celsius",
+				"title": "Celsius - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "The logarithm of x to base b is denoted as logb(x), or without parentheses, logb x, or even without the explicit base, log x, when no confusion is possible, or when the base does not matter such as in big O notation .",
+				"url": "https://en.wikipedia.org/wiki/Logarithm",
+				"title": "Logarithm - Wikipedia",
+				"showed_to_judges": true
+			}
+		],
+		"Guid": "6c9cc8db-ba38-4a17-93a1-67d83d780eeb",
+		"SupportingImageIds": [],
+		"DistractorImageIds": []
+	},
+	{
+		"Question": "8. Do both the Central Malayo-Polynesian languages Western Malayo-Polynesian languages relate to a cardinal direction?",
+		"Answer": "Only the Western Malayo-Polynesian languages do.",
+		"SupportingFacts": [
+			{
+				"fact": "The Western Malayo-Polynesian (WMP) languages, also known as the Hesperonesian languages, are a paraphyletic grouping of Austronesian languages that includes those Malayo-Polynesian languages that do not belong to the Central\u2013Eastern Malayo-Polynesian (CEMP) branch.",
+				"url": "https://en.wikipedia.org/wiki/Western_Malayo-Polynesian_languages",
+				"title": "Western Malayo-Polynesian languages - Wikipedia"
+			},
+			{
+				"fact": "(In black is the Wallace Line .) The Central Malayo-Polynesian languages ( CMP) are a proposed branch in the Malayo-Polynesian subgroup of the Austronesian language family.",
+				"url": "https://en.wikipedia.org/wiki/Central_Malayo-Polynesian_languages",
+				"title": "Central Malayo-Polynesian languages - Wikipedia"
+			}
+		],
+		"DistractorFacts": [
+			{
+				"fact": "Cocos Malay and English are the official languages. Cocos Malay is a dialect of Malay with some different features. The Cocos (Keeling) Islands are an Australian external territory",
+				"url": "https://en.wikipedia.org/wiki/List_of_territorial_entities_where_Malay_is_an_official_language",
+				"title": "List of countries and territories where Malay is an official language - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Moken is an Austronesian language spoken in southern Thailand and in the Mergui Archipelago of southern Myanmar. It is closely related to but distinct from Moklen . From north to south the known Moken dialects are:",
+				"url": "https://en.wikipedia.org/wiki/Moken_language",
+				"title": "Moken language - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Outside this Polynesian Triangle, in areas commonly designated Micronesia and Melanesia, lie about two dozen islands, most of them small and remote, whose inhabitants speak Polynesian languages. These islands are collectively termed the Polynesian \"outliers\".",
+				"url": "https://en.wikipedia.org/wiki/Polynesian_outlier",
+				"title": "Polynesian outlier - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "The Malayo-Polynesian languages are a subgroup of the Austronesian languages. There are about 385.5 million people who speak these languages. The Malayo-Polynesian languages are spoken by the Austronesian people of the island nations of Southeast Asia and the Pacific Ocean.",
+				"url": "https://simple.wikipedia.org/wiki/Malayo-Polynesian_languages",
+				"title": "Malayo-Polynesian languages - Simple English Wikipedia, the free encyclopedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "Western Malayo-Polynesian was originally proposed by Robert Blust as a sister branch within Malayo-Polynesian coordinate to the CEMP branch. Because there are no features that define the WMP languages positively as a subgroup, recent classifications have abandoned it. ^ Blust, Robert. 1980. Austronesian Etymologies.",
+				"url": "https://en.wikipedia.org/wiki/Western_Malayo-Polynesian_languages",
+				"title": "Western Malayo-Polynesian languages - Wikipedia",
+				"showed_to_judges": false
+			}
+		],
+		"Guid": "c47de2a0-e752-4cd1-9e2e-3e3a0b19519e",
+		"SupportingImageIds": [],
+		"DistractorImageIds": []
+	},
+	{
+		"Question": "9. Which artist would reveal the most about themselves to you if you had your eyes closed; Ingrid Bachmann or Pierre Lacocque?",
+		"Answer": "Pierre Lacocque",
+		"SupportingFacts": [
+			{
+				"fact": "Pierre Lacocque is an acclaimed and internationally renowned American blues harmonica player. His style has been influenced by the post-WWII Chicago blues tradition, and he was inducted into the Chicago Blues Hall of Fame in October 2017.",
+				"url": "https://en.wikipedia.org/wiki/Pierre_Lacocque",
+				"title": "Pierre Lacocque - Wikipedia"
+			},
+			{
+				"fact": "Ingrid Bachmann (born 1958) is a Canadian contemporary artist based in Montreal known mostly for her interactive kinetic sculptures that mix technology and ordinary everyday objects. Her work has been exhibited throughout Canada, and internationally in the United States, Peru, Brazil, Germany, Belgium, Scotland, Australia and Cuba.",
+				"url": "https://en.m.wikipedia.org/wiki/Ingrid_Bachmann",
+				"title": "Ingrid Bachmann - Wikipedia"
+			}
+		],
+		"DistractorFacts": [
+			{
+				"fact": "In late 1991, he and his brother, Michel Lacocque (the band manager) founded Mississippi Heat with three other musicians. It was originally a quartet composed of guitarist-singer Jon McDonald, bassist Bob Stroger, drummer-singer Robert Covington and Pierre Lacocque, harmonicist and bandleader.",
+				"url": "https://en.wikipedia.org/wiki/Pierre_Lacocque",
+				"title": "Pierre Lacocque - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "In-Grid in Warsaw, Poland, January 2006. Ingrid Alberini, known by her stage name In-Grid, is an Italian dancer and singer-songwriter.",
+				"url": "https://en.wikipedia.org/wiki/In-Grid",
+				"title": "In-Grid - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Ingrid's parents ran a movie theatre in a small city near Parma and Reggio Emilia, an area known as the cradle of Italian music. Ingrid grew up watching movies and listening to sound tracks which, as herself declares, fueled her ambition and desire to convey all her strong emotions to as many people as possible.",
+				"url": "https://en.wikipedia.org/wiki/In-Grid",
+				"title": "In-Grid - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "Saint Ingrid of Sk\u00e4nninge (died in Sk\u00e4nninge, 9 September 1282) was a Swedish abbess venerated as a saint in the Roman Catholic Church. She founded Sk\u00e4nninge Abbey, a nunnery belonging to the Dominicans, in 1272. Her feast day is on September 2.",
+				"url": "https://en.wikipedia.org/wiki/Saint_Ingrid_of_Sk%C3%A4nninge",
+				"title": "Saint Ingrid of Sk\u00e4nninge - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "She released her first album Petite mam\u2019zelle de chemin on May 24, 2011. The album sold relatively well in Quebec and it even won St-Pierre her first nomination for the Breakthrough Award at the ADISQ, the main awards for music in Quebec. Ingrid was called Francophone discovery by the Public Francophone Radio Association.",
+				"url": "https://en.wikipedia.org/wiki/Ingrid_St-Pierre",
+				"title": "Ingrid St-Pierre - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "Saint Ingrid of Sk\u00e4nninge (died in Sk\u00e4nninge, 9 September 1282) was a Swedish abbess venerated as a saint in the Roman Catholic Church. She founded Sk\u00e4nninge Abbey, a nunnery belonging to the Dominicans, in 1272.",
+				"url": "https://en.wikipedia.org/wiki/Saint_Ingrid_of_Sk%C3%A4nninge",
+				"title": "Saint Ingrid of Sk\u00e4nninge - Wikipedia",
+				"showed_to_judges": false
+			}
+		],
+		"Guid": "c022f66b-c3b6-481d-9969-25c8f16c4a68",
+		"SupportingImageIds": [],
+		"DistractorImageIds": []
+	},
+	{
+		"Question": "10. Does the state where the 1964 NBA All-Star game was held share a border with the state where the 1964 MLB All-Star game was held?",
+		"Answer": "yes",
+		"SupportingFacts": [
+			{
+				"fact": "The n \u00d7 n orthogonal matrices form a group under matrix multiplication, the orthogonal group denoted by O (n), which\u2014with its subgroups\u2014is widely used in mathematics and the physical sciences. For example, the point group of a molecule is a subgroup of O (3).",
+				"url": "https://www.worldatlas.com/articles/which-states-border-new-york-state.html",
+				"title": "www.worldatlas.com"
+			},
+			{
+				"fact": "The game was played on July 7, 1964, at Shea Stadium in New York City, New York, home of the New York Mets of the National League. The game was a 7\u20134 victory for the NL. Johnny Callison hit a walk-off home run, the most recent MLB All-Star game to end in such a fashion.",
+				"url": "https://en.wikipedia.org/wiki/1964_Major_League_Baseball_All-Star_Game",
+				"title": "1964 Major League Baseball All-Star Game - Wikipedia"
+			},
+			{
+				"fact": "Negotiations stalled with new NBA President Walter Kennedy and the NBP and the league entered a stalemate for most of 1964. At the 1964 NBA All-Star Game in Boston, the Heinsohn organised a wildcat strike to force the NBA owners to recognise the union's demands.",
+				"url": "https://en.m.wikipedia.org/wiki/National_Basketball_Players_Association",
+				"title": "National Basketball Players Association - Wikipedia"
+			}
+		],
+		"DistractorFacts": [
+			{
+				"fact": "The 10th National Basketball Association All-Star Game was played on January 22, 1960, in Philadelphia. The coaches were Red Auerbach for the East, and Ed Macauley for the West.",
+				"url": "https://en.wikipedia.org/wiki/1960_NBA_All-Star_Game",
+				"title": "1960 NBA All-Star Game - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "The 1963\u201364 NBA season was the 76ers 15th season in the NBA and 1st season in Philadelphia.",
+				"url": "https://en.wikipedia.org/wiki/1963%E2%80%9364_Philadelphia_76ers_season",
+				"title": "1963\u201364 Philadelphia 76ers season - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "The 1964 NBA draft was the 18th annual draft of the National Basketball Association (NBA). The draft was held on May 4, 1964, before the 1964\u201365 season. In this draft, nine NBA teams took turns selecting amateur U.S. college basketball players. A player who had finished his four-year college eligibility was eligible for selection.",
+				"url": "https://en.wikipedia.org/wiki/1964_NBA_Draft",
+				"title": "1964 NBA draft - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "The 1964\u201365 NBA season was the Lakers' 17th season in the NBA and fifth season in Los Angeles. The team reached the NBA Finals, only to fall against the Boston Celtics in five games. The Lakers had a division semifinal bye.",
+				"url": "https://en.wikipedia.org/wiki/1964%E2%80%9365_Los_Angeles_Lakers_season",
+				"title": "1964\u201365 Los Angeles Lakers season - Wikipedia",
+				"showed_to_judges": true
+			},
+			{
+				"fact": "The 1994 NBA All-Star Game was the 44th edition of the All-Star Game. The event was held in Minneapolis, Minnesota. The East All-Stars won the game with the score of 127\u2013118. Scottie Pippen of the Chicago Bulls was voted MVP of the game.",
+				"url": "https://en.wikipedia.org/wiki/1994_NBA_All-Star_Game",
+				"title": "1994 NBA All-Star Game - Wikipedia",
+				"showed_to_judges": false
+			},
+			{
+				"fact": "The best-of-seven series was played between the Western Conference champion San Francisco Warriors and the Eastern Conference champion Boston Celtics. This was the Celtics' eighth straight trip to the championship series, as they won the series over the Warriors, 4\u20131.",
+				"url": "https://en.wikipedia.org/wiki/1964_NBA_Finals",
+				"title": "1964 NBA Finals - Wikipedia",
+				"showed_to_judges": true
+			}
+		],
+		"Guid": "2379b718-7bad-4fe5-b4e3-b05aa8233cc8",
+		"SupportingImageIds": [],
+		"DistractorImageIds": []
+	}
+]
