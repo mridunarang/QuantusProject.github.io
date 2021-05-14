@@ -19,6 +19,13 @@
 		// 3: answer
 		// 4: index , 1 based
 		var row_template = `
+		<tr>
+			<th scope="col">Question</th>
+			<th scope="col">*Tell us about this Question*</th>
+			<th scope="col">Facts</th>
+			<th scope="col">Answer</th>
+			<th scope="col">*Tell us about this Answer*</th>
+		</tr>
 		<tr class="item">
 			<td width="200">{1}</td>
 			<td width="490"><p>About this question:</p> 
@@ -93,8 +100,20 @@
 				<table rules="none">
 					<tbody class="facts" id="facts{4}">
 						{2}
-					</tbody>
+					</tbody>					
 				</table>
+				<br>
+				<hr>
+				<br>
+				<h3>Tell us about the facts:</h3>
+				<div>
+					<crowd-input name="topic{4}" id="topic{4}" label="Adding a one-word Topic" required onfocusout="check_length({4})"></crowd-input>
+					<div id="topic_candidates{4}">Candidate Topics:
+						{5}
+					</div>
+					<crowd-checkbox style="margin:10px;"  id="unrealted{4}" name="unrealted{4}" value="unrelated" >
+					The facts provided are unrelated in terms of <b>Topic/Key words/Entity</b></crowd-checkbox>
+				</div>
 			</td>
 			<td width="300">{3}</td>
 			<td width="390">
@@ -148,26 +167,39 @@
 			</td>
 		</tr>
 		`;
+
+		var topic_template = `
+		<div class="predefined_Qjustification"
+						onclick="AddTopic('{2}', '{1}')">{1}</div>
+		`;
 		var input = "${base64}";
-		const sample_data = "W3siUXVlc3Rpb24iOiJUaGlzIGlzIGFuIHNhbXBsZSBRdWVzdGlvbiIsIkFuc3dlciI6IlRoaXMgaXMgYW4gc2FtcGxlIEFuc3dlciIsIkZhY3RzIjpbeyJmYWN0IjoidGhpcyBpcyBhbiBzYW1wbGUgZmFjdCB0ZXh0IiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSJ9LHsiZmFjdCI6InRoaXMgaXMgdGhlIHNlY29uZCBzYW1wbGUgZmFjdCIsImxpbmsiOiJodHRwczovL3JlcXVlc3RlcnNhbmRib3gubXR1cmsuY29tL2JhdGNoZXMvMzE3MDk1IiwidGl0bGUiOiJUaGlzIGlzIHRoZSBzZWNvbmQgdGl0bGUifV19LHsiUXVlc3Rpb24iOiJUaGlzIGlzIHRoZSBzZWNvbmQgc2FtcGxlIFF1ZXN0aW9uIiwiQW5zd2VyIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBBbnN3ZXIiLCJGYWN0cyI6W3siZmFjdCI6InRoaXMgaXMgYW4gc2FtcGxlIGZhY3QgdGV4dCBvZiB0aGUgc2Vjb25kIHF1ZXN0aW9uIiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSBvZiB0aGUgc2Vjb25kIHF1ZXN0aW9uIn0seyJmYWN0IjoidGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBmYWN0IG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24iLCJsaW5rIjoiaHR0cHM6Ly9yZXF1ZXN0ZXJzYW5kYm94Lm10dXJrLmNvbS9iYXRjaGVzLzMxNzA5NSIsInRpdGxlIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHRpdGxlIG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24ifV19XQ==";
+		//const sample_data = "W3siUXVlc3Rpb24iOiJUaGlzIGlzIGFuIHNhbXBsZSBRdWVzdGlvbiIsIkFuc3dlciI6IlRoaXMgaXMgYW4gc2FtcGxlIEFuc3dlciIsIkZhY3RzIjpbeyJmYWN0IjoidGhpcyBpcyBhbiBzYW1wbGUgZmFjdCB0ZXh0IiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSJ9LHsiZmFjdCI6InRoaXMgaXMgdGhlIHNlY29uZCBzYW1wbGUgZmFjdCIsImxpbmsiOiJodHRwczovL3JlcXVlc3RlcnNhbmRib3gubXR1cmsuY29tL2JhdGNoZXMvMzE3MDk1IiwidGl0bGUiOiJUaGlzIGlzIHRoZSBzZWNvbmQgdGl0bGUifV19LHsiUXVlc3Rpb24iOiJUaGlzIGlzIHRoZSBzZWNvbmQgc2FtcGxlIFF1ZXN0aW9uIiwiQW5zd2VyIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBBbnN3ZXIiLCJGYWN0cyI6W3siZmFjdCI6InRoaXMgaXMgYW4gc2FtcGxlIGZhY3QgdGV4dCBvZiB0aGUgc2Vjb25kIHF1ZXN0aW9uIiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSBvZiB0aGUgc2Vjb25kIHF1ZXN0aW9uIn0seyJmYWN0IjoidGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBmYWN0IG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24iLCJsaW5rIjoiaHR0cHM6Ly9yZXF1ZXN0ZXJzYW5kYm94Lm10dXJrLmNvbS9iYXRjaGVzLzMxNzA5NSIsInRpdGxlIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHRpdGxlIG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24ifV19XQ==";
+		const sample_data = "W3siUXVlc3Rpb24iOiJUaGlzIGlzIGFuIHNhbXBsZSBRdWVzdGlvbiIsIkFuc3dlciI6IlRoaXMgaXMgYW4gc2FtcGxlIEFuc3dlciIsIlRvcGljIjpbInRvcGljXzEiLCJ0b3BpY18yIl0sIkZhY3RzIjpbeyJmYWN0IjoidGhpcyBpcyBhbiBzYW1wbGUgZmFjdCB0ZXh0IiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSJ9LHsiZmFjdCI6InRoaXMgaXMgdGhlIHNlY29uZCBzYW1wbGUgZmFjdCIsImxpbmsiOiJodHRwczovL3JlcXVlc3RlcnNhbmRib3gubXR1cmsuY29tL2JhdGNoZXMvMzE3MDk1IiwidGl0bGUiOiJUaGlzIGlzIHRoZSBzZWNvbmQgdGl0bGUifV19LHsiUXVlc3Rpb24iOiJUaGlzIGlzIHRoZSBzZWNvbmQgc2FtcGxlIFF1ZXN0aW9uIiwiQW5zd2VyIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBBbnN3ZXIiLCJUb3BpYyI6W10sIkZhY3RzIjpbeyJmYWN0IjoidGhpcyBpcyBhbiBzYW1wbGUgZmFjdCB0ZXh0IG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24iLCJsaW5rIjoiaHR0cHM6Ly9qc29uZm9ybWF0dGVyLm9yZy8iLCJ0aXRsZSI6IlRoaXMgaXMgYW4gc2FtcGxlIHRpdGxlIG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24ifSx7ImZhY3QiOiJ0aGlzIGlzIHRoZSBzZWNvbmQgc2FtcGxlIGZhY3Qgb2YgdGhlIHNlY29uZCBxdWVzdGlvbiIsImxpbmsiOiJodHRwczovL3JlcXVlc3RlcnNhbmRib3gubXR1cmsuY29tL2JhdGNoZXMvMzE3MDk1IiwidGl0bGUiOiJUaGlzIGlzIHRoZSBzZWNvbmQgdGl0bGUgb2YgdGhlIHNlY29uZCBxdWVzdGlvbiJ9XX1d";
 		var data;
-		try
-		{
+		try {
 			data = JSON.parse(atob(input));
 		}
-		catch{
+		catch {
 			data = JSON.parse(atob(sample_data));
 		}
 		var all_annotations = "";
 		for (var i = 0; i < data.length; i++) {
 			var question = data[i]["Question"];
-			var answer = data[i]["Answer"]
+			var answer = data[i]["Answer"];
+			var topics = data[i]["Topic"];
 			var all_fact_html = "";
 			for (var j = 0; j < data[i]["Facts"].length; j++) {
 				var fact_html = replace(fact_row_template, data[i]["Facts"][j]["fact"], data[i]["Facts"][j]["link"], data[i]["Facts"][j]["title"], j + 1);
 				all_fact_html += fact_html;
 			}
-			all_annotations += replace(row_template, question, all_fact_html, answer, i + 1);
+			var topic_fact = "";
+			for (var j=0; j<topics.length; j++)
+			{
+				var topic_html = replace(topic_template, topics[j], i+1)
+				topic_fact += topic_html
+			}
+			topic_fact = topic_fact == "" ? "We don't have candidate for these facts.":topic_fact;
+			all_annotations += replace(row_template, question, all_fact_html, answer, i + 1, topic_fact);
 
 		}
 		document.getElementById("annotation-body").innerHTML = all_annotations;
@@ -185,14 +217,14 @@
 	}
 
 	function check_session() {
-				var count = sessionStorage.getItem("number_hits");
-				count = count == null ? 0 : parseInt(count);
-				console.log(count);
-				if (count < 3) {
-					$('#InstructionModel').modal('show');
-				}
-				sessionStorage.setItem("number_hits", count + 1);
-			}
+		var count = sessionStorage.getItem("number_hits");
+		count = count == null ? 0 : parseInt(count);
+		console.log(count);
+		if (count < 3) {
+			$('#InstructionModel').modal('show');
+		}
+		sessionStorage.setItem("number_hits", count + 1);
+	}
 </script>
 <crowd-form answer-format="flatten-objects">
 	<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -210,7 +242,8 @@
 						<button aria-label="Close" class="close" data-dismiss="alert" type="button">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<iframe frameborder="0" height="210" src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/Announcements.html"
+						<iframe frameborder="0" height="210"
+							src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/Announcements.html"
 							width="100%">Latest info also available
 							aturl</iframe>
 					</div>
@@ -331,15 +364,6 @@
 					&nbsp;
 
 					<table class="table table-fixed" id="tbl">
-						<thead>
-							<tr>
-								<th scope="col">Question</th>
-								<th scope="col">*Tell us about this Question*</th>
-								<th scope="col">Facts</th>
-								<th scope="col">Answer</th>
-								<th scope="col">*Tell us about this Answer*</th>
-							</tr>
-						</thead>
 						<tbody id="annotation-body">
 							<!--Data placeholder-->
 						</tbody>
@@ -514,19 +538,41 @@
 
 		function AddQjustification(idx, content) {
 			var cur_content = $("#Qjustification" + idx).val();
-			if (cur_content.includes(content))
-			{
-				if(cur_content.endsWith(content))
-				{
+			if (cur_content.includes(content)) {
+				if (cur_content.endsWith(content)) {
 					cur_content = cur_content.replace(content, "");
 				}
-				else
-				{
-					cur_content = cur_content.replace(content+"; ", "");
+				else {
+					cur_content = cur_content.replace(content + "; ", "");
 				}
 			}
-			if (cur_content.length > 0 && ! cur_content.trim().endsWith(";")) { cur_content += "; "; }
+			if (cur_content.length > 0 && !cur_content.trim().endsWith(";")) { cur_content += "; "; }
 			$("#Qjustification" + idx).val(cur_content + content);
+		}
+
+		function AddTopic(idx, content) {
+			$("#topic" + idx).val(content);
+		}
+
+		function check_length(idx){
+			var candidate_topics = []
+			var candidates_div = document.getElementById("topic_candidates"+idx).getElementsByTagName("DIV")
+			for(var i=0; i<candidates_div.length; i++)
+			{
+				candidate_topics.push(candidates_div[i].innerText.trim())
+			}
+			var input_topic = document.getElementById("topic"+idx).value;
+			if(candidate_topics.includes(input_topic)){
+				return
+			}
+
+			if (input_topic.split(" ").length > 1)
+			{
+				document.getElementById("topic"+idx).value = "";
+				alert("Only one word is allowed as Topic!");
+			}
+			
+
 		}
 
 		loading_data();
