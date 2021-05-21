@@ -193,12 +193,11 @@
 				all_fact_html += fact_html;
 			}
 			var topic_fact = "";
-			for (var j=0; j<topics.length; j++)
-			{
-				var topic_html = replace(topic_template, topics[j], i+1)
+			for (var j = 0; j < topics.length; j++) {
+				var topic_html = replace(topic_template, topics[j], i + 1)
 				topic_fact += topic_html
 			}
-			topic_fact = topic_fact == "" ? "We don't have candidate for these facts.":topic_fact;
+			topic_fact = topic_fact == "" ? "We don't have candidate for these facts." : topic_fact;
 			all_annotations += replace(row_template, question, all_fact_html, answer, i + 1, topic_fact);
 
 		}
@@ -554,24 +553,22 @@
 			$("#topic" + idx).val(content);
 		}
 
-		function check_length(idx){
+		function check_length(idx) {
 			var candidate_topics = []
-			var candidates_div = document.getElementById("topic_candidates"+idx).getElementsByTagName("DIV")
-			for(var i=0; i<candidates_div.length; i++)
-			{
+			var candidates_div = document.getElementById("topic_candidates" + idx).getElementsByTagName("DIV")
+			for (var i = 0; i < candidates_div.length; i++) {
 				candidate_topics.push(candidates_div[i].innerText.trim())
 			}
-			var input_topic = document.getElementById("topic"+idx).value;
-			if(candidate_topics.includes(input_topic)){
+			var input_topic = document.getElementById("topic" + idx).value;
+			if (candidate_topics.includes(input_topic)) {
 				return
 			}
 
-			if (input_topic.split(" ").length > 1)
-			{
-				document.getElementById("topic"+idx).value = "";
+			if (input_topic.split(" ").length > 1) {
+				document.getElementById("topic" + idx).value = "";
 				alert("Only one word is allowed as Topic!");
 			}
-			
+
 
 		}
 
