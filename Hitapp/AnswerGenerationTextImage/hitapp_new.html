@@ -117,9 +117,7 @@
 	<div>
 		<div class="container-fluid" style="height:95%">
 			<!-- Header -->
-			<h1 style="margin:5px;height:5vh;white-space: nowrap;">Writing textual queries whose answer can be derived
-				from
-				multiple distinct image/text facts</h1>
+			<h1 style="margin:5px;height:5vh;white-space: nowrap;">Writing answers to given question using only the provided supporting facts</h1>
 			<div class="row" style="height:100%">
 				<!-- Side Panel -->
 				<div class="col-2" style="padding:10px;">
@@ -152,13 +150,13 @@
 									</div>
 								</div>
 							</div>
-							<h5>A valid annotation should include:</h5>
+							<h5>A valid answer should include:</h5>
 							<ol>
 
 								<li><b>Answer in fully formed sentences are preferable.</b></li>
-								<li>Make sure the answer is derived from all facts/image provided. If extra fact is
-									given, then mark the question as "Can't answer this question due to missing or extra
-									facts"</li>
+								<li>Make sure the answer is derived from all facts/image provided. If additional fact is
+									needed to answer the question, then mark the question as "Can't answer this question
+									due to missing facts"</li>
 							</ol>
 						</nav>
 					</nav>
@@ -183,90 +181,90 @@
 					<div id="AnnotationContainer">
 
 					</div>
-					<input class="btn btn-primary btn-lg pull-right" id="submitButton" type="submit" value="Submit" /></div>
+					<input class="btn btn-primary btn-lg pull-right" id="submitButton" type="submit" value="Submit" />
 				</div>
+			</div>
 
 
+		</div>
+	</div>
+	<template name="template">
+		<div>
+			<div style="margin-top:50px; margin-bottom:10px;">
+				<font size="4"><b>Annotation </b><b class="annotation_index"></b></font>
+			</div>
+			<table class="table table-light table-responsive" style="width:100%;overflow: visible;">
+				<tbody>
+					<tr class="annotation_table">
+						<td width="10%"><b>
+								<font color="green" class="type"></font>
+							</b></td>
+
+						<td style="text-align: center;" width="100%">
+							<div class="facts_container row row-cols-md-3 g-4">
+
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><b>
+								<font color="blue">Question</font>
+							</b></td>
+						<td>
+							<p class="annotation-question"></p>
+						</td>
+					</tr>
+					<tr>
+						<td><b>
+								<font color="red">Answer:</font>
+							</b></td>
+						<td><textarea class="form-control annotation-answer" onclick="ResetAnswerCheck('confirmation');"
+								required="" rows="2" type="text"></textarea>
+							<crowd-checkbox style="margin-top:5px;" class="MissingFacts" onclick="disable(this)">
+								Can't answer this question due to missing/extra facts</crowd-checkbox>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<crowd-checkbox class="DoubleChecked" required="">I have doubled checked that my response
+								fullfill the requirements</crowd-checkbox>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</template>
+
+	<template name="text_template">
+		<div class="col" style="min-width:20%">
+			<div class="card mb-3" style="max-width: 30rem;">
+				<div class="card-header bg-transparent">
+				</div>
+				<div class="card-body">
+					<p class="card-text fact"></p>
+				</div>
+				<div class="card-footer">
+					<a class="text-muted url" href="" target="_blank"></a>
+				</div>
 			</div>
 		</div>
-		<template name="template">
-			<div>
-				<div style="margin-top:50px; margin-bottom:10px;">
-					<font size="4"><b>Annotation </b><b class="annotation_index"></b></font>
+	</template>
+
+	<template name="image_template">
+		<div class="col" style="min-width:20%">
+			<div class="card mb-3" style="width:520px;">
+				<div class="card-header bg-transparent">
 				</div>
-				<table class="table table-light table-responsive" style="width:100%;overflow: visible;">
-					<tbody>
-						<tr class="annotation_table">
-							<td width="10%"><b>
-									<font color="green" class="type"></font>
-								</b></td>
-
-							<td style="text-align: center;" width="100%">
-								<div class="facts_container row row-cols-md-3 g-4">
-
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td><b>
-									<font color="blue">Question</font>
-								</b></td>
-							<td>
-								<p class="annotation-question"></p>
-							</td>
-						</tr>
-						<tr>
-							<td><b>
-									<font color="red">Answer:</font>
-								</b></td>
-							<td><textarea class="form-control annotation-answer"
-									onclick="ResetAnswerCheck('confirmation');" required="" rows="2"
-									type="text"></textarea>
-								<crowd-checkbox style="margin-top:5px;" class="MissingFacts" onclick="disable(this)">
-									Can't answer this question due to missing/extra facts</crowd-checkbox>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<crowd-checkbox class="DoubleChecked" required="">I have doubled checked that my response
-									fullfill the requirements</crowd-checkbox>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</template>
-
-		<template name="text_template">
-			<div class="col" style="min-width:20%">
-				<div class="card mb-3" style="max-width: 30rem;">
-					<div class="card-header bg-transparent">
-					</div>
-					<div class="card-body">
-						<p class="card-text fact"></p>
-					</div>
-					<div class="card-footer">
-						<a class="text-muted url" href="" target="_blank"></a>
-					</div>
+				<div class="card-body" style="width:520px;">
+					<img class="image" width="480;">
+				</div>
+				<div class="card-footer">
+					<a class="title" href="" target="_blank"></a>
 				</div>
 			</div>
-		</template>
-
-		<template name="image_template">
-			<div class="col" style="min-width:20%">
-				<div class="card mb-3" style="width:520px;">
-					<div class="card-header bg-transparent">
-					</div>
-					<div class="card-body" style="width:520px;">
-						<img class="image" width="480;">
-					</div>
-					<div class="card-footer">
-						<a class="title" href="" target="_blank"></a>
-					</div>
-				</div>
-			</div>
-		</template>
-		<script type="text/javascript">
-			loading_data();
-		</script>
+		</div>
+	</template>
+	<script type="text/javascript">
+		loading_data();
+	</script>
 </crowd-form>
