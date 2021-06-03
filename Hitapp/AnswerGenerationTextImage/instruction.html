@@ -1,0 +1,194 @@
+<html>
+
+<head>
+	<style>
+		.example {
+			text-indent: 15px;
+			;
+		}
+
+		li.selected span {
+			background-color: lightgreen;
+			width: auto;
+		}
+	</style>
+
+	<script type="text/javascript">
+		function iframeLoaded() {
+			try {
+				var iframe = document.getElementById("faq_iframe");
+				if (iframe) {
+					iframe.height = "";
+					iframe.height == iframe.contentWindow.document.body.scrollHeight + "px";
+				}
+
+			}
+			catch (error) {
+				console.log(error);
+			}
+		}
+	</script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+<body>
+	<!-- <section id="FAQ">
+		<iframe src="./FAQ.html" width="100%" id="faq_iframe" onload="iframeLoaded()"></iframe>
+	</section> -->
+	<div id="FAQ">
+		<h4 style="background-color: yellow; color: red;">New FAQ!! Please read ..</h4>
+		<h3> FAQ</h3>
+		<ol>
+			<li>
+				<h4>Can the information from the URL link of text snippet be used in the question? </h4>
+				<p>Information from the link provided can be used in the question only if <b>the fact has that
+						information
+						fully contained</b>. If information is missing then please add fact with full information and
+					select
+					that fact in your annotation. </p>
+				<div style="text-indent: 10px;">e.g.
+					<p><b>FACT:</b> To that end, during his years on the farm and immediately after World War I, he
+						became
+						active
+						in several business ventures, including a lead and zinc mine near Commerce, Oklahoma.</p>
+					<p><b>Link:</b> <a href="https://en.wikipedia.org/wiki/Harry_S._Truman" target="_blank">Harry S.
+							Truman - Wikipedia</a></p>
+					<p><b>Explain:</b>The fact is not complete, it does not mention who <b style="color:red;">"he"</b>
+						is - hence <b style="color:red;">add new fact with
+							complete
+							information explicitly and his name 'Harry Truman'</b> and then use it in annotation.</p>
+				</div>
+			</li>
+			<li>
+				<h4>Does that information count when determining if the question can be answered by only one of the
+					facts?
+				</h4>
+				<p>
+					Ideally, we want to find questions that need reasoning over multiple facts - each fact providing
+					distinct information. If your question can be answered completely just from one fact then it is
+					<b style="color:red;">not a valid</b> question.
+				</p>
+			</li>
+		</ol>
+	</div>
+	<h3> What is this HIT about?</h3>
+	<p>We are trying to build a question-answering system which is able to retrieve
+		the
+		answer by reasoning over multiple facts/images. This is the way we human typically
+		use to
+		find an answer. For example, when this question is asked:</p>
+	<p><b>Has there always been a rivalry between Daffy Duck and Porky Pig?</b></p>
+	<p>We might find the answer by</p>
+	<ol>
+		<li>Searching Wikipedia for <a href="https://en.wikipedia.org/wiki/Daffy_Duck" target="_blank">Daffy Duck</a>.
+		</li>
+		<li>"Daffy first appeared in <a href="https://en.wikipedia.org/wiki/Porky%27s_Duck_Hunt" target="_blank">Porky's
+				Duck Hunt</a>, released on April 17, 1937."
+		</li>
+		<li>"Porky shoots the whiskey-filled barrel but Daffy escapes" or "Daffy
+			bites
+			Porky on the nose"</li>
+		<li>Conclude, <b>Yes, Daffy and Porky have been rivals since their first
+				appearance on screen.</b></li>
+	</ol>
+	<p>However, for now, if you search a question in a search engine like Google or
+		Bing, you are mostly like to get the answer from only one snippet of text. They
+		don’t have the ability to answer the above question because, as you can see, the answer
+		is concluded by reasoning the facts/images from multiple resources. We believe that
+		this reasoning ability can greatly improve the question-answering ability of
+		search engines, so we create this Hitapp and asking help from you. Appreciate! </p>
+
+	<h3>The Format:</h3>
+	<p>Each hit contains 4 annotations. In each of them, we provide multiple facts or images and a question. Your task
+		is answer the question by using all the provided facts or images.</p>
+
+
+	<h3>Some other requests:</h3>
+	<ol>
+		<li>
+			Shouldn’t be answered by only one fact:
+			<p>Facts:</p>
+			<ol>
+				<li>Hawa was born on December 16th, 1937 in Umarwas.</li>
+				<li>Hawa enrolled in the Indian Army in 1956, and became the
+					champion of the
+					Western Command in 1960 by defeating the defending champion,
+					Mohabbat
+					Singh.</li>
+			</ol>
+			<p><span style="color:red">Bad question:</span>When is Hawa’s
+				birthday.(can be
+				answer by the first fact)</p>
+			<p><span style="color:green">Good question:</span> How old was Hawa when
+				he
+				enrolled in the Indian Army? (need both facts)</p>
+		</li>
+		<li>Has definitive answer: The answer to your query cannot be too subjective
+			or
+			change from time to time.
+			<ul>
+				<li>How good is the view of Chicage from Willis Tower skydeck? (Too
+					subjective)</li>
+				<li>What is the weather in Manhattan? (Time sensitive)</li>
+			</ul>
+		</li>
+		<li>
+			Not about simple facts: The query cannot be answered blindly based on
+			common
+			sense (i.e. without using any of the text snippets).
+			<ul>
+				<li>Can a boat float on the water?</li>
+				<li>How many wheels does a car have?</li>
+			</ul>
+		</li>
+	</ol>
+	<section>
+		<h3>Examples:</h3>
+		<div class="good_example">
+			<div class="example">
+				<h5>Example 1:</h5>
+				<p>Facts:</p>
+				<ol>
+					<li class="selected">
+						<span>"Blue Moon of Kentucky" is a waltz written in 1945 by bluegrass musician Bill
+							Monroe.</span>
+					</li>
+					<li class="selected">
+						<span>The Bluegrass Album was released on September 24, 2013 by Alan Jackson. Jackson wrote
+							eight songs for the album including "Blue Moon of Kentucky".</span>
+					</li>
+					<li class="selected">
+						<span>Bill Monroe's well-known song "Blue Moon of Kentucky" has been covered not only by
+							bluegrass butalso rock and country artists, most notably Elvis Presley, Paul McCartney, and
+							Patsy Cline.</span>
+					</li>
+				</ol>
+				<p> <b style="color:green;">Selected facts</b>: 1,2,4</p>
+				<p><b style="color:blue;">Question:</b> Which bluegrass classic by Bill Monroe was covered by Elvis
+					Presley, and also on Alan Jackson's 2013 Bluegrass Album? </p>
+				<p><b style="color:darkgoldenrod;">Answer:</b> "Blue Moon of Kentucky" the bluegrass classic was covered
+					Elvis Presley, and also on Alan Jackson's 2013 Bluegrass Album. </p>
+			</div>
+
+			<div class="example">
+				<h5>Example 2:</h5>
+				<p>Facts:</p>
+				<ol>
+					<li class="selected">
+						<span> FedExForum opened in 2004.</span>
+					</li>
+					<li class="selected">
+						<span>Elvis died in 1977.</span>
+					</li>
+				</ol>
+				<p> <b style="color:green;">Selected facts</b>: 2,3</p>
+				<p><b style="color:blue;">Question:</b> Did Elvis ever perform in the Grizzlies stadium?</p>
+				<p><b style="color:darkgoldenrod;">Answer:</b>No, Elvis passed away 27 years prior to the stadium's
+					opening.</p>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

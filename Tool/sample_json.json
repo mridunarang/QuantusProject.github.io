@@ -2,6 +2,7 @@
 	{
 		"Question": "1. Was pilot Jozsef Kiss killed before or after the use of Westland Scout helicopters began?",
 		"Answer": "before",
+		"Topics": ["Aircraft"],
 		"SupportingFacts": [
 			{
 				"fact": "Several Austro-Hungarian aces used this aircraft, among them Kurt Gruber, Roman Schmidt, Karl Teichmann, Godwin Brumowski, Benno Fiala Ritter von Fernbrugg, Franz Gr\u00e4ser, Karl Nikitsch, Frank Linke-Crawford and J\u00f3zsef Kiss - who was killed while flying a D.II on May 24, 1918.",

@@ -1,0 +1,36 @@
+[
+	{
+		"Qtype": "text",
+		"Question": "This is an sample question",
+		"Supporting": [
+			{
+				"fact": "The fraction slash \u27e8 \u2044 \u27e9 is used between two numbers to indicate a fraction or ratio. Such formatting developed as a way to write the horizontal fraction bar on a single line of text.",
+				"url": "https://en.wikipedia.org/wiki/Slash_(punctuation)",
+				"title":"Slash (punctuation) - Wikipedia"
+			},
+			{
+				"fact": "It is called a solidus in Unicode, it is also known as an oblique stroke, and it has several other historical or technical names, including oblique and virgule . A slash in the reverse direction \\ is known as a backslash . Slashes may be found in early writing as a variant form of dashes, vertical strokes, etc.",
+				"url": "https://en.wikipedia.org/wiki/Slash_(punctuation)",
+				"title": "Slash (punctuation) - Wikipedia"
+			}
+		],
+		"Guid": "f4e1502a-e2f0-4942-b450-9752665d0a0b"
+	},
+	{
+		"Qtype": "img-Multihop",
+		"Question": "\"Do Southgate Hall and Wilson Hall at Duke University have the same number of floors?\"",
+		"Supporting":[
+			{
+				"id":"00000014",
+				"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Central-Park-18.jpg/800px-Central-Park-18.jpg",
+				"title":""
+			},
+			{
+				"id":"00000013",
+				"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Aerial_of_Yate%2C_South_Gloucestershire%2C_England_24May17_arp.jpg/693px-Aerial_of_Yate%2C_South_Gloucestershire%2C_England_24May17_arp.jpg",
+				"title":""
+			}
+		],
+		"Guid":""
+	}
+]

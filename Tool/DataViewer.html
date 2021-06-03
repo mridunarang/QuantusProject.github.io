@@ -43,6 +43,18 @@
 			color: rgb(100, 99, 99);
 			font-weight: lighter;
 		}
+
+		.topics {
+			display: inline-block;
+			border-radius: 15px;
+			padding: 1px 15px;
+			margin: 5px;
+			border: solid;
+			font-size: 14px;
+			background-color: #FEFEFE;
+			border-color: #bbb #ddd #eee #ccc;
+			border-width: 1px;
+		}
 	</style>
 	<script type="text/javascript">
 		var jsonData = null;
@@ -89,10 +101,16 @@
 
 				var supporting_fact_elem = node.getElementsByClassName("supporting_facts")[0];
 				var distractor_fact_elem = node.getElementsByClassName("distractor_facts")[0];
+				var topic = node.getElementsByClassName("topic")[0];
 
 
 				var supportingFacts = jsonData[i].SupportingFacts;
 				var distractorFacts = jsonData[i].DistractorFacts;
+				var topics = jsonData[i].Topics;
+				var topics = typeof(topics) != "undefined"? topics:[];
+				var major_topic = jsonData[i].Major_Topic;
+				var major_topic = typeof(major_topic) != "undefined"? major_topic:"";
+				var topic_html = "";
 				for (var j = 0; j < supportingFacts.length; j++) {
 					var fact = fact_template.cloneNode(true);
 					fact.getElementsByTagName("span")[0].innerText = supportingFacts[j].fact;
@@ -106,6 +124,29 @@
 					fact.getElementsByTagName("a")[0].href = distractorFacts[j].url;
 					fact.getElementsByTagName("a")[0].innerText = "[" + (j + 1) + "]";
 					distractor_fact_elem.appendChild(fact);
+				}
+				if(major_topic != "")
+				{
+					topic_html += "<div> Topic: <div class=\"topics\">" + major_topic + "</div></div>";
+				}
+
+				var minor_topic_html = ""
+				for (var j = 0; j < topics.length; j++) {
+					minor_topic_html += "<div class=\"topics\" style=\"color:grey;\">" + topics[j] + "</div>";
+				}
+				if (minor_topic_html != "")
+				{
+					minor_topic_html  = "<div> Minor Topics: " + minor_topic_html + "</div>";
+				}
+
+				topic_html += minor_topic_html;
+
+
+				if (topic_html == "") {
+					topic.style.display = "none";
+				}
+				else {
+					topic.innerHTML = topic_html;
 				}
 
 				data_holder.appendChild(node);
@@ -207,6 +248,7 @@
 		<div class="qna">
 			<h5 class="query"></h5>
 			<p class="answer"></p>
+			<p class="topic"></p>
 			<p class="fact_title" style="color:black;">Supporting facts:</p>
 			<ol class="supporting_facts">
 			</ol>
