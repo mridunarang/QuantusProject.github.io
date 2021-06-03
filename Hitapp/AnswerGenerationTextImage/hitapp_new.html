@@ -60,6 +60,7 @@
 					annotation.getElementsByClassName("annotation_index")[0].innerText = i + 1;
 					// assign name to the textarea
 					if (type.startsWith("img")) {
+						annotation.getElementsByClassName("type")[0].innerText = "Image(s)";
 						for (var j = 0; j < facts.length; j++) {
 							var template = image_template.cloneNode(true);
 							template.getElementsByClassName("card-header")[0].innerText = "Image " + (j + 1);
@@ -71,6 +72,7 @@
 						}
 					}
 					else {
+						annotation.getElementsByClassName("type")[0].innerText = "Text Facts";
 						for (var j = 0; j < facts.length; j++) {
 							var template = text_template.cloneNode(true);
 							template.getElementsByClassName("card-header")[0].innerText = "Fact " + (j + 1);
@@ -152,12 +154,8 @@
 							</div>
 							<h5>A valid annotation should include:</h5>
 							<ol>
-								<li>Information from the link provided can be used in the question only <b>if the fact has
-									that information fully contained</b>. If information is missing then Please mark the
-									question as "Can't answer this question due to missing or extra facts"</li>
+
 								<li><b>Answer in fully formed sentences are preferable.</b></li>
-								<li><b style="color:orange;">Make sure your questions are not just Yes/No variations or Comparison type of
-									questions.</b></li>
 								<li>Make sure the answer is derived from all facts/image provided. If extra fact is
 									given, then mark the question as "Can't answer this question due to missing or extra
 									facts"</li>
@@ -200,7 +198,7 @@
 					<tbody>
 						<tr class="annotation_table">
 							<td width="10%"><b>
-									<font color="green">Text facts</font>
+									<font color="green" class="type"></font>
 								</b></td>
 
 							<td style="text-align: center;" width="100%">
