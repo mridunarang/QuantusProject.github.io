@@ -363,23 +363,13 @@
 				}
 			}
 
-			function clean_up_options(){
-				var all_annotations = document.querySelectorAll('[id^="Annotation_div_"]');
-				for (var i =0; i<all_annotations.length; i++)
-				{
-					
-				}
-			}
-
 			function reset_selection_options() {
 				var all_annotations = document.querySelectorAll('[id^="Annotation_div_"]');
 				var all_checked = new Array(all_annotations.length);
-				for(var i=0; i<all_annotations.length; i++)
-				{
+				for (var i = 0; i < all_annotations.length; i++) {
 					var checked = all_annotations[i].querySelectorAll('input[type="checkbox"]:checked');
 					var checked_name = new Array(checked.length);
-					for(var j=0; j<checked.length; j++)
-					{
+					for (var j = 0; j < checked.length; j++) {
 						checked_name[j] = checked[j].name;
 					}
 					all_checked[i] = checked_name;
@@ -406,12 +396,10 @@
 					all_selection_placeholder[i].innerHTML = selections_HTML;
 				}
 
-				for(var i=0; i<all_annotations.length; i++)
-				{
+				for (var i = 0; i < all_annotations.length; i++) {
 					var selections = all_annotations[i].getElementsByTagName("input");
-					for(var j=0; j<selections.length; j++)
-					{
-						if(all_checked[i].includes(selections[j].name))
+					for (var j = 0; j < selections.length; j++) {
+						if (all_checked[i].includes(selections[j].name))
 							selections[j].checked = true;
 					}
 				}
@@ -420,6 +408,30 @@
 
 			function clean_str(s) {
 				return s.replace("_", " ");
+			}
+
+			function loading_data() {
+				var input = "${base64}";
+				var sample_data = "W3siUXR5cGUiOiJ0ZXh0IiwiUXVlc3Rpb24iOiJUaGlzIGlzIGFuIHNhbXBsZSBxdWVzdGlvbiIsIlN1cHBvcnRpbmciOlt7ImZhY3QiOiJUaGUgZnJhY3Rpb24gc2xhc2gg4p+oIOKBhCDin6kgaXMgdXNlZCBiZXR3ZWVuIHR3byBudW1iZXJzIHRvIGluZGljYXRlIGEgZnJhY3Rpb24gb3IgcmF0aW8uIFN1Y2ggZm9ybWF0dGluZyBkZXZlbG9wZWQgYXMgYSB3YXkgdG8gd3JpdGUgdGhlIGhvcml6b250YWwgZnJhY3Rpb24gYmFyIG9uIGEgc2luZ2xlIGxpbmUgb2YgdGV4dC4iLCJ1cmwiOiJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9TbGFzaF8ocHVuY3R1YXRpb24pIiwidGl0bGUiOiJTbGFzaCAocHVuY3R1YXRpb24pIC0gV2lraXBlZGlhIn0seyJmYWN0IjoiSXQgaXMgY2FsbGVkIGEgc29saWR1cyBpbiBVbmljb2RlLCBpdCBpcyBhbHNvIGtub3duIGFzIGFuIG9ibGlxdWUgc3Ryb2tlLCBhbmQgaXQgaGFzIHNldmVyYWwgb3RoZXIgaGlzdG9yaWNhbCBvciB0ZWNobmljYWwgbmFtZXMsIGluY2x1ZGluZyBvYmxpcXVlIGFuZCB2aXJndWxlIC4gQSBzbGFzaCBpbiB0aGUgcmV2ZXJzZSBkaXJlY3Rpb24gXFwgaXMga25vd24gYXMgYSBiYWNrc2xhc2ggLiBTbGFzaGVzIG1heSBiZSBmb3VuZCBpbiBlYXJseSB3cml0aW5nIGFzIGEgdmFyaWFudCBmb3JtIG9mIGRhc2hlcywgdmVydGljYWwgc3Ryb2tlcywgZXRjLiIsInVybCI6Imh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL1NsYXNoXyhwdW5jdHVhdGlvbikiLCJ0aXRsZSI6IlNsYXNoIChwdW5jdHVhdGlvbikgLSBXaWtpcGVkaWEifV0sIkd1aWQiOiJmNGUxNTAyYS1lMmYwLTQ5NDItYjQ1MC05NzUyNjY1ZDBhMGIifSx7IlF0eXBlIjoiaW1nLU11bHRpaG9wIiwiUXVlc3Rpb24iOiJcIkRvIFNvdXRoZ2F0ZSBIYWxsIGFuZCBXaWxzb24gSGFsbCBhdCBEdWtlIFVuaXZlcnNpdHkgaGF2ZSB0aGUgc2FtZSBudW1iZXIgb2YgZmxvb3JzP1wiIiwiU3VwcG9ydGluZyI6W3siaWQiOiIwMDAwMDAxNCIsInVybCI6IiIsInRpdGxlIjoiIn0seyJpZCI6IjAwMDAwMDEzIiwidXJsIjoiIiwidGl0bGUiOiIifV0sIkd1aWQiOiIifV0="
+				var data;
+				try {
+					data = JSON.parse(atob(input));
+				}
+				catch {
+					data = JSON.parse(atob(sample_data));
+				}
+
+
+			}
+
+			function replace(str) {
+				var args = arguments;
+				return str.replace(/{(\d+)}/g, function (match, number) {
+					return typeof args[number] != 'undefined'
+						? args[number]
+						: match
+						;
+				});
 			}
 
 
@@ -599,13 +611,12 @@
 				return domain.hostname;
 			}
 
-			function fix_tooltip(){
+			function fix_tooltip() {
 				var copy_buttons = document.getElementsByClassName("copy");
-				for(var i=0;i<copy_buttons.length; i++)
-				{
+				for (var i = 0; i < copy_buttons.length; i++) {
 					var title = copy_buttons[i].title ||
-								copy_buttons[i].dataset.originalTitle ||
-								copy_buttons[i].dataset.bsOriginalTitle;
+						copy_buttons[i].dataset.originalTitle ||
+						copy_buttons[i].dataset.bsOriginalTitle;
 					copy_buttons[i].title = title;
 					copy_buttons[i].dataset.originalTitle = title;
 					copy_buttons[i].dataset.bsOriginalTitle = title;
@@ -934,6 +945,11 @@
 			multiple distinct facts</h1>
 		<div class="row" style="height:100%">
 			<div class="col-2" style="padding:10px;">
+				<!-- Modal onmouseover="highlight();" -->
+				<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Instruction">
+					Instruction
+				</button>
+
 				
 				 -->
 				<nav id="navbar" class="avbar navbar-light bg-light">
@@ -1033,250 +1049,6 @@
 				<section class="row">
 					<!-- ================================================== Annotation  Section ============================================================== -->
 					<div class="col-12"><br />
-						<div>
-							<div id="promot" onclick="highlight_update()">
-
-
-
-								<center>
-									<div class="card" id="ori_set">
-										<h3>
-											<font color="blue"><b>Prompt: </b></font>
-											<span style="font-size:15px;">You can copy the text you highlighed by click
-												on the <span class="fa fa-copy"></span> before it.</span>
-										</h3>
-										<!-- TODO, do we have fixed number of Prompt:  onmousemove="highlight()"-->
-										<div class="row row-cols-md-3 g-4" id="facts_main" style="max-width: 100%;">
-											<!-- Text Snippet 1-->
-											<div class="col" style="min-width:20%">
-												<div class="card mb-3" style="max-width: 30rem;" id="main_fact_card_1">
-													<div class="card-header bg-transparent">
-														<span class="fa-stack copy" onclick="copy_fact(this)"
-															style="font-size:15px;" data-toggle="tooltip"
-															title="Copy the whole fact">
-															<i class="fa fa-square fa-stack-2x fa-inverse"></i>
-															<i class="fa fa-copy fa-stack-1x"></i>
-														</span>
-														Text Snippet 1:
-													</div>
-													<div class="card-body">
-														<p class="card-text fact" id="text1">${fact01}</p>
-													</div>
-													<div class="card-footer">
-														<a class="text-muted url" href="${url01}" id="url1"
-															target="_blank">${title01}</a>
-													</div>
-												</div>
-											</div>
-
-											<!-- Text Snippet 2-->
-											<div class="col" style="min-width:23%">
-												<div class="card mb-3" style="max-width: 30rem;" id="main_fact_card_2">
-													<div class="card-header bg-transparent">
-														<span class="fa-stack copy" onclick="copy_fact(this)"
-															style="font-size:15px;" data-toggle="tooltip"
-															title="Copy the whole fact">
-															<i class="fa fa-square fa-stack-2x fa-inverse"></i>
-															<i class="fa fa-copy fa-stack-1x"></i>
-														</span>
-														Text Snippet 2:
-													</div>
-													<div class="card-body">
-														<p class="card-text fact" id="text2">${fact02}</p>
-													</div>
-													<div class="card-footer">
-														<a class="text-muted url" href="${url02}" id="url2"
-															target="_blank">
-															${title02}</a>
-													</div>
-												</div>
-											</div>
-
-											<!-- Text Snippet 3-->
-											<div class="col" style="min-width:23%">
-												<div class="card mb-3" style="max-width: 30rem;" id="main_fact_card_3">
-													<div class="card-header bg-transparent">
-														<span class="fa-stack copy" onclick="copy_fact(this)"
-															style="font-size:15px;" data-toggle="tooltip"
-															title="Copy the whole fact">
-															<i class="fa fa-square fa-stack-2x fa-inverse"></i>
-															<i class="fa fa-copy fa-stack-1x"></i>
-														</span>
-														Text Snippet 3:
-													</div>
-													<div class="card-body">
-														<p class="card-text fact" id="text3">${fact03}</p>
-													</div>
-													<div class="card-footer">
-														<a class="text-muted url" href="${url03}" id="url3"
-															target="_blank">${title03}</a>
-													</div>
-												</div>
-											</div>
-
-											<!-- Text Snippet 4-->
-											<div class="col" style="min-width:23%">
-												<div class="card mb-3" style="max-width: 30rem;" id="main_fact_card_4">
-													<div class="card-header bg-transparent">
-														<span class="fa-stack copy" onclick="copy_fact(this)"
-															style="font-size:15px;" data-toggle="tooltip"
-															title="Copy the whole fact">
-															<i class="fa fa-square fa-stack-2x fa-inverse"></i>
-															<i class="fa fa-copy fa-stack-1x"></i>
-														</span>
-														Text Snippet 4:
-													</div>
-													<div class="card-body">
-														<p class="card-text fact" id="text4">${fact04}</p>
-													</div>
-													<div class="card-footer">
-														<a class="text-muted url" href="${url04}" id="url4"
-															target="_blank">${title04}</a>
-													</div>
-												</div>
-											</div>
-
-										</div>
-									</div>
-								</center>
-
-								<center>
-									<div class="card" id="backup_set" style="display: none;">
-										<h3>
-											<font color="blue"><b>Prompt:</b></font>
-											<span style="font-size:15px;">You can copy the text you highlighed by click
-												on the <span class="fa fa-copy"></span> before it.</span>
-										</h3>
-
-										<center>
-											<div class="row row-cols-md-3 g-4" id="facts_backup"
-												style="max-width: 100%;">
-												<!-- Text Snippet 1-->
-												<div class="col" style="min-width:23%">
-													<div class="card mb-3" style="max-width: 30rem;"
-														id="backup_fact_card_1">
-														<div class="card-header bg-transparent">
-															<span class="fa-stack copy" onclick="copy_fact(this)"
-																style="font-size:15px;" data-toggle="tooltip"
-																title="Copy the whole fact">
-																<i class="fa fa-square fa-stack-2x fa-inverse"></i>
-																<i class="fa fa-copy fa-stack-1x"></i>
-															</span>
-															Text Snippet 1:
-														</div>
-														<div class="card-body">
-															<p class="card-text fact" id="text5">${fact05}</p>
-														</div>
-														<div class="card-footer">
-															<a class="text-muted url" href="${url05}" id="url5"
-																target="_blank">${title05}</a>
-														</div>
-													</div>
-												</div>
-
-												<!-- Text Snippet 2-->
-												<div class="col" style="min-width:23%">
-													<div class="card mb-3" style="max-width: 30rem;"
-														id="backup_fact_card_2">
-														<div class="card-header bg-transparent">
-															<span class="fa-stack copy" onclick="copy_fact(this)"
-																style="font-size:15px;" data-toggle="tooltip"
-																title="Copy the whole fact">
-																<i class="fa fa-square fa-stack-2x fa-inverse"></i>
-																<i class="fa fa-copy fa-stack-1x"></i>
-															</span>
-															Text Snippet 2:
-														</div>
-														<div class="card-body">
-															<p class="card-text fact" id="text6">${fact06}</p>
-														</div>
-														<div class="card-footer">
-															<a class="text-muted url" href="${url06}" id="url6"
-																target="_blank">${title06}</a>
-														</div>
-													</div>
-												</div>
-
-												<!-- Text Snippet 3-->
-												<div class="col" style="min-width:23%">
-													<div class="card mb-3" style="max-width: 30rem;"
-														id="backup_fact_card_3">
-														<div class="card-header bg-transparent">
-															<span class="fa-stack copy" onclick="copy_fact(this)"
-																style="font-size:15px;" data-toggle="tooltip"
-																title="Copy the whole fact">
-																<i class="fa fa-square fa-stack-2x fa-inverse"></i>
-																<i class="fa fa-copy fa-stack-1x"></i>
-															</span>
-															Text Snippet 3:
-														</div>
-														<div class="card-body">
-															<p class="card-text fact" id="text7">${fact07}</p>
-														</div>
-														<div class="card-footer">
-															<a class="text-muted url" href="${url07}" id="url7"
-																target="_blank">${title07}</a>
-														</div>
-													</div>
-												</div>
-
-												<!-- Text Snippet 4-->
-												<div class="col" style="min-width:23%">
-													<div class="card mb-3" style="max-width: 30rem;"
-														id="backup_fact_card_4">
-														<div class="card-header bg-transparent">
-															<span class="fa-stack copy" onclick="copy_fact(this)"
-																style="font-size:15px;" data-toggle="tooltip"
-																title="Copy the whole fact">
-																<i class="fa fa-square fa-stack-2x fa-inverse"></i>
-																<i class="fa fa-copy fa-stack-1x"></i>
-															</span>
-															Text Snippet 4:
-														</div>
-														<div class="card-body">
-															<p class="card-text fact" id="text8">${fact08}</p>
-														</div>
-														<div class="card-footer">
-															<a class="text-muted url" href="${url08}" id="url8"
-																target="_blank">${title08}</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</center>
-									</div>
-								</center>
-							</div>
-							<br />
-							<label><input id="use_backup" name="use_backup" onclick="toggle_set(false);"
-									type="checkbox" />
-								I'm using the backup set
-							</label>
-							<p>
-
-								<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-									data-bs-target="#newFactCollapse" aria-expanded="false"
-									aria-controls="newFactCollapse">
-									Insert new fact
-								</button>
-							</p>
-							<div class="collapse" id="newFactCollapse">
-								<div class="card card-body">
-									<div class="form-group">
-										<label>Fact</label>
-										<textarea type="text" class="form-control" id="newFact"
-											placeholder="please copy and paste the new fact here"></textarea>
-									</div>
-									<div class="form-group">
-										<label for="new Url">Url</label>
-										<input type="text" class="form-control" id="newUrl"
-											placeholder="please paste the corrspoding url here">
-									</div>
-									<button type="button" class="btn btn-primary" style="width:200px"
-										onclick="insertNewFact()">Add</button>
-								</div>
-							</div>
-						</div>
 						<div id="Annotations">
 							<div style="margin-top:30px; margin-bottom:10px;">
 								<font size="4"><b>Steps</b></font>
@@ -1307,19 +1079,23 @@
 												<font color="green">Text Selection</font>
 											</b></td>
 										<td style="text-align: center;" width="16%" class="image-select-placeholder">
-											<label class="text-selection"><input class="image-selection-1 image-selection-div-1"
+											<label class="text-selection"><input
+													class="image-selection-1 image-selection-div-1"
 													name="image-selection1"
 													onclick="ResetConfirmation('confirmation_div_1', 'Annotation_div_1', '1');"
 													type="checkbox" value="1" /> 1 </label>
-											<label class="text-selection"><input class="image-selection-2  image-selection-div-1"
+											<label class="text-selection"><input
+													class="image-selection-2  image-selection-div-1"
 													name="image-selection2"
 													onclick="ResetConfirmation('confirmation_div_1', 'Annotation_div_1', '2');"
 													type="checkbox" value="1" /> 2 </label>
-											<label class="text-selection"><input class="image-selection-3  image-selection-div-1"
+											<label class="text-selection"><input
+													class="image-selection-3  image-selection-div-1"
 													name="image-selection3"
 													onclick="ResetConfirmation('confirmation_div_1', 'Annotation_div_1', '3');"
 													type="checkbox" value="1" /> 3 </label>
-											<label class="text-selection"><input class="image-selection-4  image-selection-div-1"
+											<label class="text-selection"><input
+													class="image-selection-4  image-selection-div-1"
 													name="image-selection4"
 													onclick="ResetConfirmation('confirmation_div_1', 'Annotation_div_1', '4');"
 													type="checkbox" value="1" /> 4 </label>
@@ -1397,19 +1173,23 @@
 												<font color="green">Text Selection</font>
 											</b></td>
 										<td style="text-align: center; " class="image-select-placeholder" width="16%">
-											<label class="text-selection"><input class="image-selection-1  image-selection-div-2"
+											<label class="text-selection"><input
+													class="image-selection-1  image-selection-div-2"
 													name="image-selection1"
 													onclick="ResetConfirmation('confirmation_div_2', 'Annotation_div_2', '1');"
 													type="checkbox" value="2" /> 1 </label>
-											<label class="text-selection"><input class="image-selection-2  image-selection-div-2"
+											<label class="text-selection"><input
+													class="image-selection-2  image-selection-div-2"
 													name="image-selection2"
 													onclick="ResetConfirmation('confirmation_div_2', 'Annotation_div_2', '2');"
 													type="checkbox" value="2" /> 2 </label>
-											<label class="text-selection"><input class="image-selection-3  image-selection-div-2"
+											<label class="text-selection"><input
+													class="image-selection-3  image-selection-div-2"
 													name="image-selection3"
 													onclick="ResetConfirmation('confirmation_div_2', 'Annotation_div_2', '3');"
 													type="checkbox" value="2" /> 3 </label>
-											<label class="text-selection"><input class="image-selection-4  image-selection-div-2"
+											<label class="text-selection"><input
+													class="image-selection-4  image-selection-div-2"
 													name="image-selection4"
 													onclick="ResetConfirmation('confirmation_div_2', 'Annotation_div_2', '4');"
 													type="checkbox" value="2" /> 4 </label>
