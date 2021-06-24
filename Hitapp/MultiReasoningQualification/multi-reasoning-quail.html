@@ -19,35 +19,76 @@
 		// 3: answer
 		// 4: index , 1 based
 		var row_template = `
+		<tr>
+			<th scope="col">Question</th>
+			<th scope="col">*Tell us about this Question*</th>
+			<th scope="col">Answer</th>
+			<th scope="col">Facts</th>
+			<th scope="col">*Tell us about this Answer*</th>
+		</tr>
 		<tr class="item">
 			<td width="200">{1}</td>
+			<td width="490"><p>About this question:</p> 
+				Can you understand what is being asked without reading the facts? </br>
+				<crowd-radio-group>
+				<input type="radio" name="validquestion{4}" id="validquestion{4}-Yes" value="Yes" required>
+				<label for="validquestion{4}-Yes">Yes</label>
+
+				<input type="radio" name="validquestion{4}" id="validquestion{4}-No" value="No" required>
+				<label for="validquestion{4}-No">No</label>
+				</crowd-radio-group>
+
+			</td>
+			<td width="300">{3}</td>
 			<td style="min-width:400px;">
 				<table rules="none">
 					<tbody class="facts" id="facts{4}">
 						{2}
-					</tbody>
+					</tbody>					
 				</table>
+
 			</td>
-			<td width="300">{3}</td>
 			<td width="390">
-				<p> Are they good question and answer?</p>
-				<select class="form-control form-control-lg" id="validanswer{4}" name="validanswer{4}" required="">
-					<option disabled="disabled" hidden="" selected="selected" value="">Select a
-						response</option>
-					<option value="True"><span style="color:green">Yes</span></option>
-					<option value="False"><span style="color:red">No</span></option>
-				</select>
-				<br />
-				<p> Are all facts necessary to answer the question?</p>
-				<select
-					class="form-control form-control-lg" id="multihop{4}" name="multihop{4}"
-					required="">
-					<option disabled="disabled" hidden="" selected="selected" value="">Select a
-						response</option>
-					<option value="True">True</option>
-					<option value="False">False</option>
-				</select><br />
-				
+					<p>About this answer: </p>
+					Is this answer really a valid and correct answer? <br>
+					<crowd-radio-group>
+						<input type="radio" name="validanswer{4}" id="validanswer{4}-Yes" value="Yes" required>
+						<label for="validanswer{4}-Yes">Yes</label>
+
+						<input type="radio" name="validanswer{4}" id="validanswer{4}-No" value="No" required>
+						<label for="validanswer{4}-No">No</label>
+					</crowd-radio-group>
+					</br>
+					Can this answer be inferred from the facts? <br>
+					<crowd-radio-group>
+						<input type="radio" name="inferred{4}" id="inferred{4}-Yes" value="Yes" required>
+						<label for="inferred{4}-Yes">Yes</label>
+
+						<input type="radio" name="inferred{4}" id="inferred{4}-No" value="No" required>
+						<label for="inferred{4}-No">No</label>
+					</crowd-radio-group>
+					</br>
+
+					Are all facts necessary to answer the question? <br>
+					<crowd-radio-group>
+						<input type="radio" name="multihop{4}" id="multihop{4}-Yes" value="Yes" required>
+						<label for="multihop{4}-Yes">Yes</label>
+
+						<input type="radio" name="multihop{4}" id="multihop{4}-No" value="No" required>
+						<label for="multihop{4}-No">No</label>
+					</crowd-radio-group>
+					</br>
+					
+					<!--Is there any issue in the facts/Answer?<br>
+					<crowd-radio-group>
+						<input type="radio" name="factprolm{4}" id="factprolm{4}-Yes" value="Yes" required>
+						<label for="factprolm{4}-Yes">Yes</label>
+
+						<input type="radio" name="factprolm{4}" id="factprolm{4}-No" value="No" required>
+						<label for="factprolm{4}-No">No</label>
+					</crowd-radio-group>
+					</br>-->
+			
 			</td>
 		</tr>
 		`;
@@ -62,26 +103,38 @@
 			</td>
 		</tr>
 		`;
+
+		var topic_template = `
+		<div class="predefined_Qjustification"
+						onclick="AddTopic('{2}', '{1}')">{1}</div>
+		`;
 		var input = "${base64}";
-		const sample_data = "W3siUXVlc3Rpb24iOiJUaGlzIGlzIGFuIHNhbXBsZSBRdWVzdGlvbiIsIkFuc3dlciI6IlRoaXMgaXMgYW4gc2FtcGxlIEFuc3dlciIsIkZhY3RzIjpbeyJmYWN0IjoidGhpcyBpcyBhbiBzYW1wbGUgZmFjdCB0ZXh0IiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSJ9LHsiZmFjdCI6InRoaXMgaXMgdGhlIHNlY29uZCBzYW1wbGUgZmFjdCIsImxpbmsiOiJodHRwczovL3JlcXVlc3RlcnNhbmRib3gubXR1cmsuY29tL2JhdGNoZXMvMzE3MDk1IiwidGl0bGUiOiJUaGlzIGlzIHRoZSBzZWNvbmQgdGl0bGUifV19LHsiUXVlc3Rpb24iOiJUaGlzIGlzIHRoZSBzZWNvbmQgc2FtcGxlIFF1ZXN0aW9uIiwiQW5zd2VyIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBBbnN3ZXIiLCJGYWN0cyI6W3siZmFjdCI6InRoaXMgaXMgYW4gc2FtcGxlIGZhY3QgdGV4dCBvZiB0aGUgc2Vjb25kIHF1ZXN0aW9uIiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSBvZiB0aGUgc2Vjb25kIHF1ZXN0aW9uIn0seyJmYWN0IjoidGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBmYWN0IG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24iLCJsaW5rIjoiaHR0cHM6Ly9yZXF1ZXN0ZXJzYW5kYm94Lm10dXJrLmNvbS9iYXRjaGVzLzMxNzA5NSIsInRpdGxlIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHRpdGxlIG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24ifV19XQ==";
+		//const sample_data = "W3siUXVlc3Rpb24iOiJUaGlzIGlzIGFuIHNhbXBsZSBRdWVzdGlvbiIsIkFuc3dlciI6IlRoaXMgaXMgYW4gc2FtcGxlIEFuc3dlciIsIkZhY3RzIjpbeyJmYWN0IjoidGhpcyBpcyBhbiBzYW1wbGUgZmFjdCB0ZXh0IiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSJ9LHsiZmFjdCI6InRoaXMgaXMgdGhlIHNlY29uZCBzYW1wbGUgZmFjdCIsImxpbmsiOiJodHRwczovL3JlcXVlc3RlcnNhbmRib3gubXR1cmsuY29tL2JhdGNoZXMvMzE3MDk1IiwidGl0bGUiOiJUaGlzIGlzIHRoZSBzZWNvbmQgdGl0bGUifV19LHsiUXVlc3Rpb24iOiJUaGlzIGlzIHRoZSBzZWNvbmQgc2FtcGxlIFF1ZXN0aW9uIiwiQW5zd2VyIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBBbnN3ZXIiLCJGYWN0cyI6W3siZmFjdCI6InRoaXMgaXMgYW4gc2FtcGxlIGZhY3QgdGV4dCBvZiB0aGUgc2Vjb25kIHF1ZXN0aW9uIiwibGluayI6Imh0dHBzOi8vanNvbmZvcm1hdHRlci5vcmcvIiwidGl0bGUiOiJUaGlzIGlzIGFuIHNhbXBsZSB0aXRsZSBvZiB0aGUgc2Vjb25kIHF1ZXN0aW9uIn0seyJmYWN0IjoidGhpcyBpcyB0aGUgc2Vjb25kIHNhbXBsZSBmYWN0IG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24iLCJsaW5rIjoiaHR0cHM6Ly9yZXF1ZXN0ZXJzYW5kYm94Lm10dXJrLmNvbS9iYXRjaGVzLzMxNzA5NSIsInRpdGxlIjoiVGhpcyBpcyB0aGUgc2Vjb25kIHRpdGxlIG9mIHRoZSBzZWNvbmQgcXVlc3Rpb24ifV19XQ==";
+		const sample_data = "W3siUXVlc3Rpb24iOiJXaGljaCBvY2N1cnJlZCBmaXJzdDogdGhlIERlYnJhIERlYW4gY2hhcmFjdGVyIGFwcGVhcmluZyBvbiBFYXN0IEVuZGVycyBvciB0aGUgYWlyaW5nIG9mIHRoZSBmaXJzdCBlcGlzb2RlIGZyb20gdGhlIDIybmQgc2Vhc29uIG9mIEhvbWUgYW5kIEF3YXk/IiwiQW5zd2VyIjoiVGhlIERlYnJhIERlYW4gY2hhcmFjdGVyIGFwcGVhcmVkIG9uIEVhc3QgRW5kZXIgZmlyc3QuIiwiVG9waWMiOlsiTW92aWVfQW5kX1R2X0NoYXJhY3RlcnMiLCJFbnRlcnRhaW5tZW50IiwiQWN0b3JzX0FuZF9BY3RyZXNzZXMiXSwiRmFjdHMiOlt7ImZhY3QiOiJUaGUgMjJuZCBzZWFzb24gb2YgSG9tZSBhbmQgQXdheSBiZWdhbiBhaXJpbmcgZnJvbSAxOSBKYW51YXJ5IDIwMDkgYW5kIGNvbmNsdWRlZCBvbiAyNyBOb3ZlbWJlciAyMDA5LiBUaGUgZmlyc3QgaW50cm9kdWN0aW9ucyBvZiB0aGUgeWVhciB3ZXJlIEdpbmEgYW5kIEh1Z28gQXVzdGluIHdobyBhcnJpdmVkIGluIEphbnVhcnkuIEZlYnJ1YXJ5IHNhdyB0aGUgZGVidXRzIG9mIFJvYmVydCBDcnV6ZSwgVHJleSBQYWxtZXIsIEZyZXlhIER1cmljIGFuZCBKb2V5IENvbGxpbnMuIiwidXJsIjoiaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTGlzdF9vZl9Ib21lX2FuZF9Bd2F5X2NoYXJhY3RlcnNfKDIwMDkpIiwidGl0bGUiOiJMaXN0IG9mIEhvbWUgYW5kIEF3YXkgY2hhcmFjdGVycyAoMjAwOSkgLSBXaWtpcGVkaWEifSx7ImZhY3QiOiJEZWJyYSBEZWFuLCBwbGF5ZWQgYnkgYWN0cmVzcyBSdXRoIEdlbW1lbGwsIGZpcnN0IGFwcGVhcnMgb24gNSBKYW51YXJ5IDIwMDkuIFNoZSBpcyB0aGUgbW90aGVyIG9mIGVzdGFibGlzaGVkIGNoYXJhY3RlciBXaGl0bmV5IERlYW4gKCBTaG9uYSBNY0dhcnR5ICksIHdobyBzaGUgbGVmdCBhbG9uZyB3aXRoIFdoaXRuZXkncyBmYXRoZXIsIE5hdGhhbiBEZWFuLCB3aGVuIFdoaXRuZXkgd2FzIHZlcnkgeW91bmcuIiwidXJsIjoiaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTGlzdF9vZl9FYXN0RW5kZXJzX2NoYXJhY3RlcnNfKDIwMDkpIiwidGl0bGUiOiJMaXN0IG9mIEVhc3RFbmRlcnMgY2hhcmFjdGVycyAoMjAwOSkgLSBXaWtpcGVkaWEifV19XQ==";
 		var data;
-		try
-		{
+		try {
 			data = JSON.parse(atob(input));
 		}
-		catch{
+		catch {
 			data = JSON.parse(atob(sample_data));
 		}
 		var all_annotations = "";
 		for (var i = 0; i < data.length; i++) {
 			var question = data[i]["Question"];
-			var answer = data[i]["Answer"]
+			var answer = data[i]["Answer"];
+			var topics = data[i]["Topic"];
 			var all_fact_html = "";
 			for (var j = 0; j < data[i]["Facts"].length; j++) {
 				var fact_html = replace(fact_row_template, data[i]["Facts"][j]["fact"], data[i]["Facts"][j]["link"], data[i]["Facts"][j]["title"], j + 1);
 				all_fact_html += fact_html;
 			}
-			all_annotations += replace(row_template, question, all_fact_html, answer, i + 1);
+			var topic_fact = "";
+			for (var j = 0; j < topics.length; j++) {
+				var topic_html = replace(topic_template, topics[j], i + 1)
+				topic_fact += topic_html
+			}
+			topic_fact = topic_fact == "" ? "We don't have candidate for these facts." : topic_fact;
+			all_annotations += replace(row_template, question, all_fact_html, answer, i + 1, topic_fact);
 
 		}
 		document.getElementById("annotation-body").innerHTML = all_annotations;
@@ -99,14 +152,14 @@
 	}
 
 	function check_session() {
-				var count = sessionStorage.getItem("number_hits");
-				count = count == null ? 0 : parseInt(count);
-				console.log(count);
-				if (count < 3) {
-					$('#InstructionModel').modal('show');
-				}
-				sessionStorage.setItem("number_hits", count + 1);
-			}
+		var count = sessionStorage.getItem("number_hits");
+		count = count == null ? 0 : parseInt(count);
+		console.log(count);
+		if (count < 3) {
+			$('#InstructionModel').modal('show');
+		}
+		sessionStorage.setItem("number_hits", count + 1);
+	}
 </script>
 <crowd-form answer-format="flatten-objects">
 	<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -124,7 +177,8 @@
 						<button aria-label="Close" class="close" data-dismiss="alert" type="button">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<iframe frameborder="0" height="210" src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/Announcements.html"
+						<iframe frameborder="0" height="210"
+							src="https://quantusproject.github.io/Hitapp/MultiReasoningQualification/Announcements.html"
 							width="100%">Latest info also available
 							aturl</iframe>
 					</div>
@@ -149,7 +203,7 @@
 											</div>
 
 											<div class="modal-body" height="100%"><iframe frameborder="0" height="100%"
-													src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/Instruction.html"
+													src="https://quantusproject.github.io/Hitapp/MultiReasoningQualification/Instruction.html"
 													width="100%"></iframe></div>
 
 											<div class="modal-footer"><button class="btn btn-secondary"
@@ -175,7 +229,7 @@
 											</div>
 
 											<div class="modal-body" height="100%"><iframe frameborder="0" height="100%"
-													src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/Examples.html"
+													src="https://quantusproject.github.io/Hitapp/MultiReasoningQualification/Examples.html"
 													width="100%"></iframe></div>
 
 											<div class="modal-footer"><button class="btn btn-secondary"
@@ -199,7 +253,7 @@
 											</div>
 
 											<div class="modal-body" height="100%"><iframe frameborder="0" height="100%"
-													src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/FAQ.html"
+													src="https://quantusproject.github.io/Hitapp/MultiReasoningQualification/FAQ.html"
 													width="100%"></iframe></div>
 
 											<div class="modal-footer"><button class="btn btn-secondary"
@@ -224,7 +278,7 @@
 											</div>
 
 											<div class="modal-body" height="100%"><iframe frameborder="0" height="100%"
-													src="https://quantusproject.github.io/Hitapp/MultiReasoningValid/Announcements.html"
+													src="https://quantusproject.github.io/Hitapp/MultiReasoningQualification/Announcements.html"
 													width="100%"></iframe></div>
 
 											<div class="modal-footer"><button class="btn btn-secondary"
@@ -245,14 +299,6 @@
 					&nbsp;
 
 					<table class="table table-fixed" id="tbl">
-						<thead>
-							<tr>
-								<th scope="col">Question</th>
-								<th scope="col">Facts</th>
-								<th scope="col">Answer</th>
-								<th scope="col">*Tell us about this Question and Answer*</th>
-							</tr>
-						</thead>
 						<tbody id="annotation-body">
 							<!--Data placeholder-->
 						</tbody>
@@ -427,19 +473,39 @@
 
 		function AddQjustification(idx, content) {
 			var cur_content = $("#Qjustification" + idx).val();
-			if (cur_content.includes(content))
-			{
-				if(cur_content.endsWith(content))
-				{
+			if (cur_content.includes(content)) {
+				if (cur_content.endsWith(content)) {
 					cur_content = cur_content.replace(content, "");
 				}
-				else
-				{
-					cur_content = cur_content.replace(content+"; ", "");
+				else {
+					cur_content = cur_content.replace(content + "; ", "");
 				}
 			}
-			if (cur_content.length > 0 && ! cur_content.trim().endsWith(";")) { cur_content += "; "; }
+			if (cur_content.length > 0 && !cur_content.trim().endsWith(";")) { cur_content += "; "; }
 			$("#Qjustification" + idx).val(cur_content + content);
+		}
+
+		function AddTopic(idx, content) {
+			$("#topic" + idx).val(content);
+		}
+
+		function check_length(idx) {
+			var candidate_topics = []
+			var candidates_div = document.getElementById("topic_candidates" + idx).getElementsByTagName("DIV")
+			for (var i = 0; i < candidates_div.length; i++) {
+				candidate_topics.push(candidates_div[i].innerText.trim())
+			}
+			var input_topic = document.getElementById("topic" + idx).value;
+			if (candidate_topics.includes(input_topic)) {
+				return
+			}
+
+			if (input_topic.split(" ").length > 1) {
+				document.getElementById("topic" + idx).value = "";
+				alert("Only one word is allowed as Topic!");
+			}
+
+
 		}
 
 		loading_data();
