@@ -4,329 +4,378 @@
       please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
 <!-- You must include crowd-form so that your task submits answers to MTurk -->
 <crowd-form answer-format="flatten-objects" style="height:100%">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<section class="container">
-		<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'>
-		</script>
-		<!--/******************* Bootstrap *******************/-->
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-			crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-			integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-			crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-			integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-			crossorigin="anonymous"></script>
-		<link rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<script type="text/javascript">
-			function loading_data() {
-				var input = "${base64}";
-				var sample_data = "W3siUXR5cGUiOiJpbWciLCJRdWVzdGlvbiI6IldoYXQgaXMgcHl0aGFnb3JhcyB0aGVvcmVtPyIsIkFuc3dlciI6IkNvbnNpZGVyIHRoZSB0cmlhbmdsZTogV2hlcmUgP2E/IGlzIHRoZSBwZXJwZW5kaWN1bGFyLCA/Yj8gaXMgdGhlIGJhc2UsID9jPyBpcyB0aGUgaHlwb3RlbnVzZS4gQWNjb3JkaW5nIHRvIHRoZSBkZWZpbml0aW9uLCB0aGUgUHl0aGFnb3JhcyBUaGVvcmVtIGZvcm11bGEgaXMgZ2l2ZW4gYXM6IEh5cG90ZW51c2UyID0gUGVycGVuZGljdWxhcjIgKyBCYXNlMiBvciBjMiA9IGEyICsgYjIgICIsIlN1cHBvcnRpbmciOlt7ImlkIjoiMjk5MyIsInVybCI6Imh0dHBzOi8vdGguYmluZy5jb20vdGgvaWQvUmQ5ODAxMTlhM2ZhNTVhMTY1ZDFiZGY0ZjI5MDg4ZDZhP3Jpaz1hMmJJMUZqRGpyVGZNUSZyaXU9aHR0cCUzYSUyZiUyZnN0dWR5LmNvbSUyZmNpbWFnZXMlMmZtdWx0aW1hZ2VzJTJmMTYlMmZweXRoYWdvcmVhbl90aGVvcmVtX3Byb29mXzMucG5nJmVoaz1VZTlwbmNZd0lxQkpGT0I3ZXhNaEcxNVdyZ2NoZkRtbWFURE5zMThiSEtBJTNkJnJpc2w9JnBpZD1JbWdSYXciLCJ0aXRsZSI6IlB5dGhhZ29yYXMgdmlzdWFsaXphdGlvbiIsInBhZ2UiOiJodHRwczovL3NvY3JhdGljLm9yZy9xdWVzdGlvbnMvYS1jb21wdXRlci1zeXN0ZW0taXMtYWR2ZXJ0aXNlZC13aXRoLWEtMTQtaW5jaC1tb25pdG9yLXRoZS1tZWFzdXJlbWVudC1vZi10aGUtbW8ifV19LHsiUXR5cGUiOiJ0ZXh0IiwiUXVlc3Rpb24iOiJXaGF0IGlzIHB5dGhhZ29yYXMgdGhlb3JlbT8iLCJBbnN3ZXIiOiJDb25zaWRlciB0aGUgdHJpYW5nbGU6IFdoZXJlID9hPyBpcyB0aGUgcGVycGVuZGljdWxhciwgP2I/IGlzIHRoZSBiYXNlLCA/Yz8gaXMgdGhlIGh5cG90ZW51c2UuIEFjY29yZGluZyB0byB0aGUgZGVmaW5pdGlvbiwgdGhlIFB5dGhhZ29yYXMgVGhlb3JlbSBmb3JtdWxhIGlzIGdpdmVuIGFzOiBIeXBvdGVudXNlMiA9IFBlcnBlbmRpY3VsYXIyICsgQmFzZTIgb3IgYzIgPSBhMiArIGIyICAiLCJTdXBwb3J0aW5nIjpbeyJmYWN0IjoiQSByaWdodCB0cmlhbmdsZSAob3IgcmlnaHQtYW5nbGVkIHRyaWFuZ2xlLCBmb3JtZXJseSBjYWxsZWQgYSByZWN0YW5nbGVkIHRyaWFuZ2xlKSBoYXMgb25lIG9mIGl0cyBpbnRlcmlvciBhbmdsZXMgbWVhc3VyaW5nIDkwPyAoYSByaWdodCBhbmdsZSkuIiwidXJsIjoiaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvVHJpYW5nbGUjQnlfaW50ZXJuYWxfYW5nbGVzIiwidGl0bGUiOiJSaWdodCB0cmlhbmdsZSJ9XX0seyJRdHlwZSI6ImltZyIsIlF1ZXN0aW9uIjoiV2hhdCBpcyBweXRoYWdvcmFzIHRoZW9yZW0/IiwiQW5zd2VyIjoiQ29uc2lkZXIgdGhlIHRyaWFuZ2xlOiBXaGVyZSA/YT8gaXMgdGhlIHBlcnBlbmRpY3VsYXIsID9iPyBpcyB0aGUgYmFzZSwgP2M/IGlzIHRoZSBoeXBvdGVudXNlLiBBY2NvcmRpbmcgdG8gdGhlIGRlZmluaXRpb24sIHRoZSBQeXRoYWdvcmFzIFRoZW9yZW0gZm9ybXVsYSBpcyBnaXZlbiBhczogSHlwb3RlbnVzZTIgPSBQZXJwZW5kaWN1bGFyMiArIEJhc2UyIG9yIGMyID0gYTIgKyBiMiAgIiwiU3VwcG9ydGluZyI6W3siaWQiOiIyOTkzIiwidXJsIjoiaHR0cHM6Ly91cGxvYWQud2lraW1lZGlhLm9yZy93aWtpcGVkaWEvY29tbW9ucy90aHVtYi81LzVlL1RyaWFuZ2xlLkNlbnRyb2lkLnN2Zy85NTFweC1UcmlhbmdsZS5DZW50cm9pZC5zdmcucG5nIiwidGl0bGUiOiJUcmlhbmdsZSBDZW50cm9pZCIsInBhZ2UiOiJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9NZWRpYW5fKGdlb21ldHJ5KSJ9XX1d";
-				var data;
-				try {
-					data = JSON.parse(atob(input));
-				}
-				catch {
-					data = JSON.parse(atob(sample_data));
-				}
-				var annotation_template = document.getElementsByName("template")[0].content;
-				while (annotation_template.nodeName != "DIV") {
-					annotation_template = annotation_template.firstElementChild;
-				}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <section class="container">
+        <script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'>
+        </script>
+        <!--/******************* Bootstrap *******************/-->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script type="text/javascript">
+            function loading_data() {
+                var input = "${base64}";
+                var sample_data = "ew0KICAiUXVlc3Rpb24iOiAiV2hpY2ggcGVvcGxlIHdpdGggYSBtZWRpZXZhbCBzYXlpbmcgIFwidW50aWwgdGhlIGRvbmtleSBhc2NlbmRzIHRoZSBsYWRkZXJcIiBhcmUgdHlwaWNhbGx5IHRob3VnaHQgb2YgYnkgR2VybWFucyBhcyBiZWluZyBwdW5jdHVhbCBhbmQgYXR0ZW50aXZlIHRvIGRldGFpbD8iLA0KICAiQW5zd2VyIjogIlRoZSBKZXdzIiwNCiAgIlN1cHBvcnRpbmdGYWN0cyI6IFsNCiAgICB7DQogICAgICAiZmFjdCI6ICJUaGUgdGVybSBjYXJyaWVzIHRoZSBjb25ub3RhdGlvbiB0aGF0IEdlcm1hbiBKZXdzIGFyZSBub3RhYmxlIGZvciBhdHRlbnRpb24gdG8gZGV0YWlsIGFuZCBwdW5jdHVhbGl0eS4gVGhlcmUgYXJlIGEgbnVtYmVyIG9mIHRoZW9yaWVzIHJlZ2FyZGluZyB0aGUgZXR5bW9sb2d5IG9mIHRoZSB3b3JkLiIsDQogICAgICAidXJsIjogImh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL1lla2tlIiwNCiAgICAgICJ0aXRsZSI6ICJZZWtrZSAtIFdpa2lwZWRpYSIsDQogICAgICAiU2hhcmVkVG9MZXZlbDJKdWRnZXMiOiB0cnVlDQogICAgfSwNCiAgICB7DQogICAgICAiZmFjdCI6ICJJbiBtZWRpZXZhbCBIZWJyZXcgbWFudXNjcmlwdHMsIHRoZSBleHByZXNzaW9uIFwidW50aWwgdGhlIGRvbmtleSBhc2NlbmRzIHRoZSBsYWRkZXJcIiBpcyBhdHRlc3RlZC4gVGhlIGlkaW9tIGlzIGFwcGFyZW50bHkgZGVyaXZlZCBmcm9tIGEgY2VudHVyaWVzLW9sZCBTY290dGlzaCBwcm92ZXJiLCB0aG91Z2ggc29tZSBvdGhlciByZWZlcmVuY2VzIHRvIHBpZ3MgZmx5aW5nIG9yIHBpZ3Mgd2l0aCB3aW5ncyBhcmUgbW9yZSBmYW1vdXMuIiwNCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvV2hlbl9waWdzX2ZseSIsDQogICAgICAidGl0bGUiOiAiV2hlbiBwaWdzIGZseSAtIFdpa2lwZWRpYSIsDQogICAgICAiU2hhcmVkVG9MZXZlbDJKdWRnZXMiOiB0cnVlDQogICAgfQ0KICBdLA0KICAiRGlzdHJhY3RvckZhY3RzIjogWw0KICAgIHsNCiAgICAgICJmYWN0IjogIlNpbmNlIFlpZGRpc2ggd2FzIG9yaWdpbmFsbHkgd3JpdHRlbiB1c2luZyB0aGUgSGVicmV3IGFscGhhYmV0LCBzb21lIHdvcmRzIGhhdmUgc2V2ZXJhbCBzcGVsbGluZ3MgaW4gdGhlIExhdGluIGFscGhhYmV0LiBUaGUgdHJhbnNsaXRlcmF0ZWQgc3BlbGxpbmdzIG9mIFlpZGRpc2ggd29yZHMgYW5kIGNvbnZlbnRpb25hbCBHZXJtYW4gc3BlbGxpbmdzIGFyZSBkaWZmZXJlbnQsIGJ1dCB0aGUgcHJvbnVuY2lhdGlvbnMgYXJlIGZyZXF1ZW50bHkgdGhlIHNhbWUgKGUuZy4sID8/Pz8/Pz8gPywgc2h2YXJ0cyBpbiBZaWRkaXNoIGlzIHByb25vdW5jZWQgdGhlIHNhbWUgd2F5IGFzIHNjaHdhcnogaW4gR2VybWFuKS4iLA0KICAgICAgInVybCI6ICJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9MaXN0X29mX0VuZ2xpc2hfd29yZHNfb2ZfWWlkZGlzaF9vcmlnaW4iLA0KICAgICAgInRpdGxlIjogIkxpc3Qgb2YgRW5nbGlzaCB3b3JkcyBvZiBZaWRkaXNoIG9yaWdpbiAtIFdpa2lwZWRpYSIsDQogICAgICAic2hvd2VkX3RvX2p1ZGdlcyI6IGZhbHNlLA0KICAgICAgIlNoYXJlZFRvTGV2ZWwySnVkZ2VzIjogdHJ1ZQ0KICAgIH0sDQogICAgew0KICAgICAgImZhY3QiOiAiVGhlIHRlcm0gXCJZaWRkaXNoXCIgaXMgYWxzbyB1c2VkIGluIHRoZSBhZGplY3RpdmFsIHNlbnNlLCBzeW5vbnltb3VzbHkgd2l0aCBcIkpld2lzaFwiLCB0byBkZXNpZ25hdGUgYXR0cmlidXRlcyBvZiBZaWRkaXNoa2VpdCAoXCJBc2hrZW5hemkgY3VsdHVyZVwiOyBmb3IgZXhhbXBsZSwgWWlkZGlzaCBjb29raW5nIGFuZCBcIllpZGRpc2ggbXVzaWNcIiA/IGtsZXptZXIgKS4iLA0KICAgICAgInVybCI6ICJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9ZaWRkaXNoIiwNCiAgICAgICJ0aXRsZSI6ICJZaWRkaXNoIC0gV2lraXBlZGlhIiwNCiAgICAgICJzaG93ZWRfdG9fanVkZ2VzIjogdHJ1ZSwNCiAgICAgICJTaGFyZWRUb0xldmVsMkp1ZGdlcyI6IHRydWUNCiAgICB9LA0KICAgIHsNCiAgICAgICJmYWN0IjogIkluIEpld2lzaCBmb2xrbG9yZSwgYSBnb2xlbSAoIC8gPz9vP2w/bSAvIEdPSC1sP207IEhlYnJldzogPz8/PyA/KSBpcyBhbiBhbmltYXRlZCBhbnRocm9wb21vcnBoaWMgYmVpbmcgdGhhdCBpcyBjcmVhdGVkIGVudGlyZWx5IGZyb20gaW5hbmltYXRlIG1hdHRlciAodXN1YWxseSBjbGF5IG9yIG11ZCApLiBUaGUgd29yZCB3YXMgdXNlZCB0byBtZWFuIGFuIGFtb3JwaG91cywgdW5mb3JtZWQgbWF0ZXJpYWwgaW4gUHNhbG1zIGFuZCBtZWRpZXZhbCB3cml0aW5nLiIsDQogICAgICAidXJsIjogImh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0dvbGVtIiwNCiAgICAgICJ0aXRsZSI6ICJHb2xlbSAtIFdpa2lwZWRpYSIsDQogICAgICAic2hvd2VkX3RvX2p1ZGdlcyI6IGZhbHNlLA0KICAgICAgIlNoYXJlZFRvTGV2ZWwySnVkZ2VzIjogdHJ1ZQ0KICAgIH0sDQogICAgew0KICAgICAgImZhY3QiOiAiQWxsIG90aGVyIFlpZGRpc2ggd29yZHMgYXJlIHJlcHJlc2VudGVkIHdpdGggcGhvbmVtaWMgb3J0aG9ncmFwaHkuIEJvdGggZm9ybXMgY2FuIGFwcGVhciBpbiBhIHNpbmdsZSB3b3JkLWZvciBleGFtcGxlLCB3aGVyZSBhIFlpZGRpc2ggYWZmaXggaXMgYXBwbGllZCB0byBhIEhlYnJldyBzdGVtLiBZaWRkaXNoIGRpYWNyaXRpY3MgbWF5IGFsc28gYmUgYXBwbGllZCB0byB3b3JkcyB0aGF0IGFyZSBvdGhlcndpc2Ugd3JpdHRlbiBlbnRpcmVseSB3aXRoIHRyYWRpdGlvbmFsIG9ydGhvZ3JhcGh5LiIsDQogICAgICAidXJsIjogImh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL1lpZGRpc2hfb3J0aG9ncmFwaHkiLA0KICAgICAgInRpdGxlIjogIllpZGRpc2ggb3J0aG9ncmFwaHkgLSBXaWtpcGVkaWEiLA0KICAgICAgInNob3dlZF90b19qdWRnZXMiOiB0cnVlLA0KICAgICAgIlNoYXJlZFRvTGV2ZWwySnVkZ2VzIjogdHJ1ZQ0KICAgIH0NCiAgXSwNCiAgIkdlbmVyYXRlZEJ5IjogIkFLUUFJNzhKVFhYQzkiLA0KICAiQnVja2V0SWQiOiAtODYxODQ4MTM0LA0KICAiVG9waWNzQ2FuZGlkYXRlcyI6IFtdLA0KICAiVmFsaWRhdGVkQnkiOiBbDQogICAgIkEyVUlHRE9MWDVSVjk1IiwNCiAgICAiQVBSWjdCUjhDMFpNUSIsDQogICAgIkEyTk1BT1lCQkpUTzBSIg0KICBdLA0KICAiVG9waWNzIjogWw0KICAgICJnZXJtYW5zIiwNCiAgICAiaGVicmV3IiwNCiAgICAiZXRobmljaXR5Ig0KICBdLA0KICAiR3VpZCI6ICJkMGRhNjI3YS0xYzY3LTRhNmMtOTUzMy0wOGZhYjdmMjhkOGEiLA0KICAiU3VwcG9ydGluZ0ltYWdlSWRzIjogW10sDQogICJEaXN0cmFjdG9ySW1hZ2VJZHMiOiBbXSwNCiAgIk1ham9yX1RvcGljIjogInJlZ2lvbiIsDQogICJTcGxpdCI6ICJ0cmFpbiIsDQogICJ0eXBlIjogOSwNCiAgIkN1cmF0ZWRBbnN3ZXIiOiBbXSwNCiAgIlFUeXBlIjogInRleHQiDQp9";
+                var data;
+                try {
+                    data = JSON.parse(atob(input));
+                }
+                catch {
+                    data = JSON.parse(atob(sample_data));
+                }
+                var annotation_template = document.getElementsByName("template")[0].content;
+                while (annotation_template.nodeName != "DIV") {
+                    annotation_template = annotation_template.firstElementChild;
+                }
 
-				var text_template = document.getElementsByName("text_template")[0].content.firstElementChild;
-				while (text_template.nodeName != "DIV") {
-					text_template = text_template.firstElementChild;
-				}
+                var text_template = document.getElementsByName("text_template")[0].content.firstElementChild;
+                while (text_template.nodeName != "DIV") {
+                    text_template = text_template.firstElementChild;
+                }
 
-				var image_template = document.getElementsByName("image_template")[0].content.firstElementChild;
-				while (image_template.nodeName != "DIV") {
-					image_template = image_template.firstElementChild;
-				}
+                var image_template = document.getElementsByName("image_template")[0].content.firstElementChild;
+                while (image_template.nodeName != "DIV") {
+                    image_template = image_template.firstElementChild;
+                }
 
-				var annotation_container = document.getElementById("AnnotationContainer");
-				for (var i = 0; i < data.length; i++) {
-					var annotation = annotation_template.cloneNode(true);
-					var type = data[i].Qtype;
-					var question = data[i].Question;
-					var answer = data[i].Answer
-					var facts = data[i].Supporting;
-					annotation.getElementsByClassName("annotation-answer")[0].innerText = answer;
-					annotation.getElementsByClassName("annotation-question")[0].innerText = question;
-					//annotation.getElementsByClassName("MissingFacts")[0].name = "MissingFacts" + (i + 1);
-					annotation.getElementsByClassName("HelpfulCheckBox")[0].name = "HelpfulCheckBox" + (i + 1);
-					annotation.getElementsByClassName("NotHelpfulCheckBox")[0].name = "NotHelpfulCheckBox" + (i + 1);
-					annotation.getElementsByClassName("NotRelatedCheckBox")[0].name = "NotRelatedCheckBox" + (i + 1);
-					annotation.getElementsByClassName("annotation_index")[0].innerText = i + 1;
-					// assign name to the textarea
-					if (type.startsWith("img")) {
-						annotation.getElementsByClassName("type")[0].innerText = "Image(s)";
-						for (var j = 0; j < facts.length; j++) {
-							var template = image_template.cloneNode(true);
-							template.getElementsByClassName("card-header")[0].innerText = "Image " + (j + 1);
-							template.getElementsByClassName("image")[0].src = facts[j].url;
-							template.getElementsByClassName("image")[0].alt = facts[j].title;
-							template.getElementsByClassName("title")[0].innerText = facts[j].title;
-							template.getElementsByClassName("title")[0].href = facts[j].page;
-							annotation.getElementsByClassName("facts_container")[0].appendChild(template)
-						}
-					}
-					else {
-						annotation.getElementsByClassName("type")[0].innerText = "Text Facts";
-						for (var j = 0; j < facts.length; j++) {
-							var template = text_template.cloneNode(true);
-							template.getElementsByClassName("card-header")[0].innerText = "Fact " + (j + 1);
-							template.getElementsByClassName("fact")[0].innerText = facts[j].fact;
-							var link = template.getElementsByClassName("url")[0];
-							link.href = facts[j].url;
-							link.innerText = facts[j].title;
-							annotation.getElementsByClassName("facts_container")[0].appendChild(template)
-						}
-					}
-					annotation_container.appendChild(annotation);
-				}
+                var annotation_container = document.getElementById("AnnotationContainer");
+                //for (var i = 0; i < data.length; i++) {
+                var type = data.QType;
+                var question = data.Question;
+                var answer = data.Answer;
+                var supportingFacts = data.SupportingFacts;
+                var distractorFacts = data.DistractorFacts;
+                var concatanatedFacts = supportingFacts.concat(distractorFacts);
+                var facts = concatanatedFacts.sort(() => Math.random() - 0.5)
 
+                // assign name to the textarea
+                if (type.startsWith("img")) {
+                    //annotation.getElementsByClassName("type")[0].innerText = "Image(s)";
+                    for (var j = 0; j < facts.length; j++) {
+                        var annotation = annotation_template.cloneNode(true);
+                        annotation.getElementsByClassName("annotation-answer")[0].innerText = answer;
+                        annotation.getElementsByClassName("annotation-question")[0].innerText = question;
+                        //annotation.getElementsByClassName("MissingFacts")[0].name = "MissingFacts" + (i + 1);
+                        annotation.getElementsByClassName("FullyHelpfulCheckBox")[0].name = "FullyHelpfulCheckBox" + (j + 1);
+                        annotation.getElementsByClassName("PartialHelpfulCheckBox")[0].name = "PartialHelpfulCheckBox" + (j + 1);
+                        annotation.getElementsByClassName("NotHelpfulCheckBox")[0].name = "NotHelpfulCheckBox" + (j + 1);
+                        annotation.getElementsByClassName("NotRelatedCheckBox")[0].name = "NotRelatedCheckBox" + (j + 1);
+                        annotation.getElementsByClassName("annotation_index")[0].innerText = j + 1;
+                        var template = image_template.cloneNode(true);
+                        template.getElementsByClassName("card-header")[0].innerText = "Image " + (j + 1);
+                        template.getElementsByClassName("image")[0].src = facts[j].url;
+                        template.getElementsByClassName("image")[0].alt = facts[j].title;
+                        template.getElementsByClassName("title")[0].innerText = facts[j].title;
+                        template.getElementsByClassName("title")[0].href = facts[j].page;
+                        annotation.getElementsByClassName("facts_container")[0].appendChild(template)
+                        annotation_container.appendChild(annotation);
+                    }
+                }
+                else {
+                    //annotation.getElementsByClassName("type")[0].innerText = "Text Facts";
+                    for (var j = 0; j < facts.length; j++) {
+                        var annotation = annotation_template.cloneNode(true);
+                        annotation.getElementsByClassName("annotation-answer")[0].innerText = answer;
+                        annotation.getElementsByClassName("annotation-question")[0].innerText = question;
+                        //annotation.getElementsByClassName("MissingFacts")[0].name = "MissingFacts" + (i + 1);
+                        annotation.getElementsByClassName("FullyHelpfulCheckBox")[0].name = "FullyHelpfulCheckBox" + (j + 1);
+                        annotation.getElementsByClassName("PartialHelpfulCheckBox")[0].name = "PartialHelpfulCheckBox" + (j + 1);
+                        annotation.getElementsByClassName("NotHelpfulCheckBox")[0].name = "NotHelpfulCheckBox" + (j + 1);
+                        annotation.getElementsByClassName("NotRelatedCheckBox")[0].name = "NotRelatedCheckBox" + (j + 1);
+                        annotation.getElementsByClassName("annotation_index")[0].innerText = j + 1;
+                        var template = text_template.cloneNode(true);
+                        template.getElementsByClassName("card-header")[0].innerText = "Fact " + (j + 1);
+                        template.getElementsByClassName("fact")[0].innerText = facts[j].fact;
+                        var link = template.getElementsByClassName("url")[0];
+                        link.href = facts[j].url;
+                        link.innerText = facts[j].title;
+                        annotation.getElementsByClassName("facts_container")[0].appendChild(template)
+                        annotation_container.appendChild(annotation);
+                    }
+                }
 
-			}
-
-			function replace(str) {
-				var args = arguments;
-				return str.replace(/{(\d+)}/g, function (match, number) {
-					return typeof args[number] != 'undefined'
-						? args[number]
-						: match
-						;
-				});
-			}
-
-			function disable(element) {
-				var text_area = element.previousElementSibling;
-				if (!element.checked == true) {
-					text_area.removeAttribute("required");
-					text_area.setAttribute("disabled", "");
-					element.checked = false;
-				}
-				else {
-					text_area.setAttribute("required", "");
-					text_area.removeAttribute("disabled");
-					element.checked = true;
-				}
-			}
-
-			function HelpfulCheckBoxChecked(element) {
-				if (element.checked == true) {
-					var id = element.name.substring(element.className.length);
-					document.getElementsByClassName("NotHelpfulCheckBox")[id - 1].checked = false;
-					document.getElementsByClassName("NotRelatedCheckBox")[id - 1].checked = false;
-				}
-
-			}
-			function NotHelpfulCheckBoxChecked(element) {
-				if (element.checked == true) {
-					var id = element.name.substring(element.className.length);
-					document.getElementsByClassName("HelpfulCheckBox")[id - 1].checked = false;
-					document.getElementsByClassName("NotRelatedCheckBox")[id - 1].checked = false;
-				}
-
-			}
-			function NotRelatedCheckBoxChecked(element) {
-				if (element.checked == true) {
-					var id = element.name.substring(element.className.length);
-					document.getElementsByClassName("HelpfulCheckBox")[id - 1].checked = false;
-					document.getElementsByClassName("NotHelpfulCheckBox")[id - 1].checked = false;
-				}
-
-			}
-		</script>
-	</section>
-	<div>
-		<div class="container-fluid" style="height:95%">
-			<!-- Header -->
-			<h1 style="margin:5px;height:5vh;white-space: nowrap;">Evaluating if the image/fact helps to derive the
-				answer of the question </h1>
-			<br />
-			<div class="row" style="height:100%">
-				<!-- Side Panel -->
-				<div class="col-2" style="padding:10px;">
-					<nav id="navbar" class="avbar navbar-light bg-light">
-						<a class="navbar-brand" href="#"></a>
-						<nav class="nav nav-pills flex-column" style="padding:10px;">
-							<a class="nav-link btn btn-outline-secondary" data-toggle="modal"
-								data-target="#InstructionModel" id="id-navbar-instruction"
-								style="margin:10px;">Instructions</a>
-							<div class="modal fade" id="InstructionModel" tabindex="-1" role="dialog"
-								aria-labelledby="exampleModalCenterTitle" aria-hidden="true" height="1200">
-								<div class="modal-dialog modal-xl" height="100%">
-									<div class="modal-content" style="height:90%;">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLongTitle">Instructions</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body" height="100%">
-											<!-- Instruction hyperlink-->
-											<iframe frameborder="0" height="100%" width="100%"
-												src="https://quantusproject.github.io/Hitapp/AnswerDerivingHelpByFactOrImage/Instructions.html"></iframe>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-dismiss="modal">Close</button>
-
-										</div>
-									</div>
-								</div>
-							</div>
-							<p>
-								If someone asked for the
-								<strong>question</strong>
-								, would the
-								<strong>image/fact be helpful to derive answer?</strong>
-							</p>
-							<div>
-								<h4>Definition of relevance:</h4>
-
-								<ul>
-									<li>
-										1. Does the image/fact
-										<strong>help in deriving</strong>
-										the answer
-										<br />
-										I.e. supported by the image
-									</li>
-									<li>
-										2. Is the image/fact
-										<strong>related but not needed</strong>
-										to derive the answer
-									</li>
-									<li>
-										3. Image/fact is
-										<strong>completely unrelated</strong>
-									</li>
-								</ul>
-							</div>
-						</nav>
-					</nav>
-
-				</div>
-				<!-- Main Panel -->
-				<div class="col-10" data-spy="scroll" data-target="#navbar" data-offset="10" tabindex="0"
-					style="overflow-x: hidden; overflow-y: scroll; height:90%; padding:10;" <section class="row"
-					id="Anncoucement">
-					<iframe frameborder="0" style="width:100%;height:150;"
-						src="https://quantusproject.github.io/Hitapp/AnswerDerivingHelpByFactOrImage/announcement.html"></iframe>
-					</section>
-					<section class="row">
-						<div class="col-12"><br />
-							<div id="AnnotationContainer">
-
-							</div>
-						</div>
-					</section>
-					<div id="AnnotationContainer">
-
-					</div>
-					<input class="btn btn-primary btn-lg pull-right" id="submitButton" type="submit" value="Submit" />
-				</div>
-			</div>
+                //}
 
 
-		</div>
-	</div>
-	<template name="template">
-		<div>
-			<div style="margin-top:50px; margin-bottom:10px;">
-				<font size="4"><b>Annotation </b><b class="annotation_index"></b></font>
-			</div>
-			<table class="table table-light table-responsive" style="width:100%;overflow: visible;">
-				<tbody>
-					<tr class="annotation_table">
-						<td width="10%"><b>
-								<font color="green" class="type"></font>
-							</b></td>
+            }
 
-						<td style="text-align: center;" width="100%">
-							<div class="facts_container row row-cols-md-3 g-4">
+            function replace(str) {
+                var args = arguments;
+                return str.replace(/{(\d+)}/g, function (match, number) {
+                    return typeof args[number] != 'undefined'
+                        ? args[number]
+                        : match
+                        ;
+                });
+            }
 
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td><b>
-								<font color="blue">Question</font>
-							</b></td>
-						<td>
-							<p class="annotation-question"></p>
-						</td>
-					</tr>
-					<tr>
-						<td><b>
-								<font color="red">Answer:</font>
-							</b></td>
-						<td>
-							<p class="annotation-answer"></p>
-							<!-- <crowd-checkbox style="margin-top:5px;" class="MissingFacts" onclick="disable(this)">
+
+            function disable(elementName, id) {
+                var element = document.getElementsByClassName(elementName)[id - 1];
+                element.checked = false;
+                element.removeAttribute("required");
+            }
+            function setCheckboxesRequired(id) {
+                document.getElementsByClassName("FullyHelpfulCheckBox")[id - 1].setAttribute("required", "");
+                document.getElementsByClassName("PartialHelpfulCheckBox")[id - 1].setAttribute("required", "");
+                document.getElementsByClassName("NotHelpfulCheckBox")[id - 1].setAttribute("required", "");
+                document.getElementsByClassName("NotRelatedCheckBox")[id - 1].setAttribute("required", "");
+            }
+
+            function FullyHelpfulCheckBoxChecked(element) {
+                var id = element.name.substring(element.className.length);
+                if (element.checked == true) {
+                    disable("NotHelpfulCheckBox", id);
+                    disable("NotRelatedCheckBox", id);
+                    disable("PartialHelpfulCheckBox", id);
+                } else {
+                    setCheckboxesRequired(id);
+                }
+            }
+            function PartialHelpfulCheckBoxChecked(element) {
+                var id = element.name.substring(element.className.length);
+                if (element.checked == true) {
+                    disable("NotHelpfulCheckBox", id);
+                    disable("NotRelatedCheckBox", id);
+                    disable("FullyHelpfulCheckBox", id);
+                } else {
+                    setCheckboxesRequired(id);
+                }
+            }
+            function NotHelpfulCheckBoxChecked(element) {
+                var id = element.name.substring(element.className.length);
+                if (element.checked == true) {
+                    disable("PartialHelpfulCheckBox", id);
+                    disable("NotRelatedCheckBox", id);
+                    disable("FullyHelpfulCheckBox", id);
+                } else {
+                    setCheckboxesRequired(id);
+                }
+            }
+            function NotRelatedCheckBoxChecked(element) {
+                var id = element.name.substring(element.className.length);
+                if (element.checked == true) {
+                    disable("PartialHelpfulCheckBox", id);
+                    disable("NotHelpfulCheckBox", id);
+                    disable("FullyHelpfulCheckBox", id);
+                } else {
+                    setCheckboxesRequired(id);
+                }
+            }
+        </script>
+    </section>
+    <div>
+        <div class="container-fluid" style="height:95%">
+            <!-- Header -->
+            <h1 style="margin:5px;height:5vh;white-space: nowrap;">Evaluating if the image/fact helps to derive the
+                answer of the question </h1>
+            <br />
+            <div class="row" style="height:100%">
+                <!-- Side Panel -->
+                <div class="col-2" style="padding:10px;">
+                    <nav id="navbar" class="avbar navbar-light bg-light">
+                        <a class="navbar-brand" href="#"></a>
+                        <nav class="nav nav-pills flex-column" style="padding:10px;">
+                            <a class="nav-link btn btn-outline-secondary" data-toggle="modal"
+                                data-target="#InstructionModel" id="id-navbar-instruction"
+                                style="margin:10px;">Instructions</a>
+                            <div class="modal fade" id="InstructionModel" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true" height="1200">
+                                <div class="modal-dialog modal-xl" height="100%">
+                                    <div class="modal-content" style="height:90%;">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Instructions</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" height="100%">
+                                            <!-- Instruction hyperlink-->
+                                            <iframe frameborder="0" height="100%" width="100%"
+                                                src="https://quantusproject.github.io/Hitapp/AnswerDerivingHelpByFactOrImage/Instructions.html"></iframe>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>
+                                If someone asked for the
+                                <strong>question</strong>
+                                , would the
+                                <strong>image/fact be helpful to derive answer?</strong>
+                            </p>
+                            <div>
+                                <h4>Definition of relevance:</h4>
+
+                                <ul>
+                                    <li>
+                                        1. Does the image/fact
+                                        <strong>help in deriving</strong>
+                                        the answer <strong>completely</strong>
+                                        <br />
+                                        I.e. Answer fully explained by the fact
+                                    </li>
+                                    <li>
+                                        2. Does the image/fact
+                                        <strong>help in deriving</strong>
+                                        the answer <strong>partially</strong>
+                                        <br />
+                                        I.e. Some parts of the answer explained by the fact
+                                    </li>
+                                    <li>
+                                        3. Is the image/fact
+                                        <strong>related but not needed</strong>
+                                        to derive the answer
+                                    </li>
+                                    <li>
+                                        4. Image/fact is
+                                        <strong>completely unrelated</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </nav>
+
+                </div>
+                <!-- Main Panel -->
+                <div class="col-10" data-spy="scroll" data-target="#navbar" data-offset="10" tabindex="0"
+                    style="overflow-x: hidden; overflow-y: scroll; height:90%; padding:10;" <section class="row"
+                    id="Anncoucement">
+                    <iframe frameborder="0" style="width:100%;height:150;"
+                        src="https://quantusproject.github.io/Hitapp/AnswerDerivingHelpByFactOrImage/announcement.html"></iframe>
+                    </section>
+                    <section class="row">
+                        <div class="col-12"><br />
+                            <div id="AnnotationContainer">
+
+                            </div>
+                        </div>
+                    </section>
+                    <div id="AnnotationContainer">
+
+                    </div>
+                    <input class="btn btn-primary btn-lg pull-right" id="submitButton" type="submit" value="Submit" />
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <template name="template">
+        <div>
+            <div style="margin-top:50px; margin-bottom:10px;">
+                <font size="4"><b>Annotation </b><b class="annotation_index"></b></font>
+            </div>
+            <table class="table table-light table-responsive" style="width:100%;overflow: visible;">
+                <tbody>
+                    <tr class="annotation_table">
+                        <td width="10%"><b>
+                                <font color="green" class="type"></font>
+                            </b></td>
+
+                        <td style="text-align: center;" width="100%">
+                            <div class="facts_container row row-cols-md-3 g-4">
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>
+                                <font color="blue">Question</font>
+                            </b></td>
+                        <td>
+                            <p class="annotation-question"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>
+                                <font color="red">Answer:</font>
+                            </b></td>
+                        <td>
+                            <p class="annotation-answer"></p>
+                            <!-- <crowd-checkbox style="margin-top:5px;" class="MissingFacts" onclick="disable(this)">
 								Can't answer this question due to missing/extra facts</crowd-checkbox> -->
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<crowd-checkbox class="HelpfulCheckBox" onchange="HelpfulCheckBoxChecked(this)">Yes,
-								image/fact helps to derive the answer.</crowd-checkbox>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<crowd-checkbox class="NotHelpfulCheckBox" onchange="NotHelpfulCheckBoxChecked(this)">
-								Image/fact is related to the question but
-								not helpful to derive the answer.</crowd-checkbox>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<crowd-checkbox class="NotRelatedCheckBox" onchange="NotRelatedCheckBoxChecked(this)">
-								Image/fact is not related.
-							</crowd-checkbox>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</template>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <crowd-checkbox class="FullyHelpfulCheckBox" required
+                                onchange="FullyHelpfulCheckBoxChecked(this)">
+                                Yes,
+                                image/fact helps to derive the answer completely.</crowd-checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <crowd-checkbox class="PartialHelpfulCheckBox" required
+                                onchange="PartialHelpfulCheckBoxChecked(this)">
+                                Yes, image/fact helps to derive the answer partially.</crowd-checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <crowd-checkbox class="NotHelpfulCheckBox" required
+                                onchange="NotHelpfulCheckBoxChecked(this)">
+                                Image/fact is related to the question but
+                                not helpful to derive the answer.</crowd-checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <crowd-checkbox class="NotRelatedCheckBox" required
+                                onchange="NotRelatedCheckBoxChecked(this)">
+                                Image/fact is not related.
+                            </crowd-checkbox>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
 
-	<template name="text_template">
-		<div class="col" style="min-width:20%">
-			<div class="card mb-3" style="max-width: 30rem;">
-				<div class="card-header bg-transparent">
-				</div>
-				<div class="card-body">
-					<p class="card-text fact"></p>
-				</div>
-				<div class="card-footer">
-					<a class="text-muted url" href="" target="_blank"></a>
-				</div>
-			</div>
-		</div>
-	</template>
+    <template name="text_template">
+        <div class="col" style="min-width:20%">
+            <div class="card mb-3" style="max-width: 600px;">
+                <div class="card-header bg-transparent">
+                </div>
+                <div class="card-body">
+                    <p class="card-text fact" style="width: 520px;"></p>
+                </div>
+                <div class="card-footer">
+                    <a class="text-muted url" href="" target="_blank"></a>
+                </div>
+            </div>
+        </div>
+    </template>
 
-	<template name="image_template">
-		<div class="col" style="min-width:20%">
-			<div class="card mb-3" style="width:520px;">
-				<div class="card-header bg-transparent">
-				</div>
-				<div class="card-body" style="width:520px;">
-					<img class="image" width="480;">
-				</div>
-				<div class="card-footer">
-					<a class="title" href="" target="_blank"></a>
-				</div>
-			</div>
-		</div>
-	</template>
-	<script type="text/javascript">
-		loading_data();
-	</script>
+    <template name="image_template">
+        <div class="col" style="min-width:20%">
+            <div class="card mb-3" style="width:520px;">
+                <div class="card-header bg-transparent">
+                </div>
+                <div class="card-body" style="width:520px;">
+                    <img class="image" width="480;">
+                </div>
+                <div class="card-footer">
+                    <a class="title" href="" target="_blank"></a>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script type="text/javascript">
+        loading_data();
+    </script>
 </crowd-form>
